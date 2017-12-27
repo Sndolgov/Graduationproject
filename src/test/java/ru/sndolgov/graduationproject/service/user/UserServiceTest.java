@@ -27,12 +27,12 @@ public  class UserServiceTest extends AbstractServiceTest {
     @Autowired
     private JpaUtil jpaUtil;
 
-   // @Autowired
-  //  private CacheManager cacheManager;
+    @Autowired
+    private CacheManager cacheManager;
 
     @Before
     public void setUp() throws Exception {
-   //     cacheManager.getCache("users").clear();
+        cacheManager.getCache("users").clear();
         jpaUtil.clear2ndLevelHibernateCache();
     }
 
