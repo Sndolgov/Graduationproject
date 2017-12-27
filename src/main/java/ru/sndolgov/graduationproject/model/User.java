@@ -14,7 +14,7 @@ import javax.validation.constraints.Size;
 import java.util.*;
 
 
-@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+//@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @NamedQueries({
         @NamedQuery(name = User.DELETE, query = "DELETE FROM User u WHERE u.id=:id"),
         @NamedQuery(name = User.BY_EMAIL, query = "SELECT DISTINCT u FROM User u LEFT JOIN FETCH u.roles WHERE u.email=?1"),
@@ -49,7 +49,7 @@ public class User extends AbstractNamedEntity {
     @NotNull
     private Date registered = new Date();
 
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+ //   @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Enumerated(EnumType.STRING)
     @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
     @Column(name = "role")
@@ -66,7 +66,7 @@ public class User extends AbstractNamedEntity {
     }
 
     public User(Integer id, String name, String email, String password, Role role, Role... roles) {
-        this(id, name, email, password,  true, new Date(), EnumSet.of(role, roles));
+        this(id, name, email, password, true, new Date(), EnumSet.of(role, roles));
     }
 
     public User(Integer id, String name, String email, String password, boolean enabled, Date registered, Collection<Role> roles) {

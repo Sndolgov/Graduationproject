@@ -7,6 +7,7 @@ import org.springframework.cache.CacheManager;
 import org.springframework.dao.DataAccessException;
 import ru.sndolgov.graduationproject.model.Role;
 import ru.sndolgov.graduationproject.model.User;
+import ru.sndolgov.graduationproject.repository.JpaUtil;
 import ru.sndolgov.graduationproject.util.exception.NotFoundException;
 
 
@@ -22,6 +23,18 @@ public  class UserServiceTest extends AbstractServiceTest {
 
     @Autowired
     protected UserService service;
+
+    @Autowired
+    private JpaUtil jpaUtil;
+
+   // @Autowired
+  //  private CacheManager cacheManager;
+
+    @Before
+    public void setUp() throws Exception {
+   //     cacheManager.getCache("users").clear();
+        jpaUtil.clear2ndLevelHibernateCache();
+    }
 
     @Test
     public void create() throws Exception {
@@ -81,10 +94,10 @@ public  class UserServiceTest extends AbstractServiceTest {
 
     @Test
     public void testValidation() throws Exception {
-    //    validateRootCause(() -> service.create(new User(null, "  ", "mail@yandex.ru", "password", Role.ROLE_USER)), ConstraintViolationException.class);
-      //  validateRootCause(() -> service.create(new User(null, "User", "  ", "password", Role.ROLE_USER)), ConstraintViolationException.class);
+        validateRootCause(() -> service.create(new User(null, "  ", "mail@yandex.ru", "password", Role.ROLE_USER)), ConstraintViolationException.class);
+        validateRootCause(() -> service.create(new User(null, "User", "  ", "password", Role.ROLE_USER)), ConstraintViolationException.class);
         validateRootCause(() -> service.create(new User(null, "User", "mail@yandex.ru", "  ", Role.ROLE_USER)), ConstraintViolationException.class);
-      //  validateRootCause(() -> service.create(new User(null, "User", "mail@yandex.ru", "password",  true, new Date(), Collections.emptySet())), ConstraintViolationException.class);
-     //   validateRootCause(() -> service.create(new User(null, "User", "mail@yandex.ru", "password",  true, new Date(), Collections.emptySet())), ConstraintViolationException.class);
+        //  validateRootCause(() -> service.create(new User(null, "User", "mail@yandex.ru", "password",  true, new Date(), Collections.emptySet())), ConstraintViolationException.class);
+        //   validateRootCause(() -> service.create(new User(null, "User", "mail@yandex.ru", "password",  true, new Date(), Collections.emptySet())), ConstraintViolationException.class);
     }
 }
