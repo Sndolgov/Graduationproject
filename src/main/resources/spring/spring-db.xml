@@ -77,6 +77,6 @@
 
 
 
-        <context:component-scan base-package="ru.sndolgov.**.repository.user"/>
-        <jpa:repositories base-package="ru.sndolgov.**.repository.user"/>
+        <context:component-scan base-package="ru.sndolgov.**.repository"/>
+        <jpa:repositories base-package="ru.sndolgov.**.repository"/>
 </beans>

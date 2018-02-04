@@ -21,8 +21,7 @@ CREATE TABLE users
   registered TIMESTAMP DEFAULT now() NOT NULL,
   enabled    BOOL DEFAULT TRUE       NOT NULL
 );
-CREATE UNIQUE INDEX users_unique_email_idx
-  ON users (email);
+CREATE UNIQUE INDEX users_unique_email_idx  ON users (email);
 
 CREATE TABLE user_roles
 (
@@ -38,8 +37,7 @@ CREATE TABLE restaurants
   name    VARCHAR                  NOT NULL,
   enabled BOOL DEFAULT TRUE        NOT NULL
 );
-CREATE UNIQUE INDEX restaurant_unique_name_idx
-  ON restaurants (name);
+CREATE UNIQUE INDEX restaurant_unique_name_idx  ON restaurants (name);
 
 
 CREATE TABLE dishes

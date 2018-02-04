@@ -1,4 +1,4 @@
-package ru.sndolgov.graduationproject.service.user;
+package ru.sndolgov.graduationproject.service;
 
 import org.junit.Assert;
 import org.junit.ClassRule;
