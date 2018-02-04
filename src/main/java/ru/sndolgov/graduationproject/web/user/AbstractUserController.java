@@ -3,6 +3,8 @@ package ru.sndolgov.graduationproject.web.user;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
+import ru.sndolgov.graduationproject.Profiles;
 import ru.sndolgov.graduationproject.model.User;
 import ru.sndolgov.graduationproject.service.user.UserService;
 
@@ -17,6 +19,13 @@ public abstract class AbstractUserController {
 
     @Autowired
     private UserService service;
+
+    private boolean modificationRestriction;
+
+    @Autowired
+    public void setEnvironment(Environment environment) {
+        modificationRestriction = environment.acceptsProfiles(Profiles.HEROKU);
+    }
 
     public List<User> getAll() {
         log.info("getAll");
