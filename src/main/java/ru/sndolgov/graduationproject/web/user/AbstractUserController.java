@@ -7,6 +7,7 @@ import org.springframework.core.env.Environment;
 import ru.sndolgov.graduationproject.Profiles;
 import ru.sndolgov.graduationproject.model.User;
 import ru.sndolgov.graduationproject.service.user.UserService;
+import ru.sndolgov.graduationproject.to.UserTo;
 
 import java.util.List;
 
@@ -19,13 +20,6 @@ public abstract class AbstractUserController {
 
     @Autowired
     private UserService service;
-
-    private boolean modificationRestriction;
-
-    @Autowired
-    public void setEnvironment(Environment environment) {
-        modificationRestriction = environment.acceptsProfiles(Profiles.HEROKU);
-    }
 
     public List<User> getAll() {
         log.info("getAll");
@@ -54,8 +48,19 @@ public abstract class AbstractUserController {
         service.update(user);
     }
 
+    public void update(UserTo userTo, int id) {
+        log.info("update {} with id={}", userTo, id);
+        assureIdConsistent(userTo, id);
+        service.update(userTo);
+    }
+
     public User getByMail(String email) {
         log.info("getByEmail {}", email);
         return service.getByEmail(email);
+    }
+
+    public void enable(int id, boolean enabled) {
+        log.info((enabled ? "enable " : "disable ") + id);
+        service.enable(id, enabled);
     }
 }
