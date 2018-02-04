@@ -6,8 +6,6 @@
 
     <display-name>Topjava</display-name>
 
-
-
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>
