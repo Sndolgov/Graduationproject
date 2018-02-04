@@ -32,10 +32,6 @@
               p:username="${database.username}"
               p:password="${database.password}"/>
 
-
-
-
-
         <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
               p:dataSource-ref="dataSource"
               p:packagesToScan="ru.sndolgov.**.model">
