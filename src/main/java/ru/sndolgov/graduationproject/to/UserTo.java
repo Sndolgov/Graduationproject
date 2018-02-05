@@ -2,11 +2,9 @@ package ru.sndolgov.graduationproject.to;
 
 import org.hibernate.validator.constraints.Range;
 import org.hibernate.validator.constraints.SafeHtml;
-import ru.sndolgov.graduationproject.util.UserUtil;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 
@@ -61,8 +59,6 @@ public class UserTo extends BaseTo implements Serializable {
     public void setEmail(String email) {
         this.email = email;
     }
-
-
 
     @Override
     public String toString() {

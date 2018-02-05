@@ -26,9 +26,6 @@
             <spring:message code="user.password" var="userPassword"/>
             <topjava:inputField label='${userPassword}' name="password" inputType="password"/>
 
-            <spring:message code="user.caloriesPerDay" var="caloriesPerDay"/>
-            <topjava:inputField label='${caloriesPerDay}' name="caloriesPerDay" inputType="number"/>
-
             <div class="form-group">
                 <div class="col-xs-offset-2 col-xs-10">
                     <button type="submit" class="btn btn-primary">
