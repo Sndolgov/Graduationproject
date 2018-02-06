@@ -11,11 +11,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import static ru.sndolgov.graduationproject.web.json.JacksonObjectMapper.getMapper;
+
+//TODO delete
 
 public class JsonUtil {
 
-    public static <T> List<T> readValues(String json, Class<T> clazz) {
+ /*   public static <T> List<T> readValues(String json, Class<T> clazz) {
         ObjectReader reader = getMapper().readerFor(clazz);
         try {
             return reader.<T>readValues(json).readAll();
@@ -68,5 +69,5 @@ public class JsonUtil {
         Map<String, Object> map = getMapper().convertValue(obj, new TypeReference<Map<String, Object>>() {});
         map.putAll(addProps);
         return writeValue(map);
-    }
+    }*/
 }
