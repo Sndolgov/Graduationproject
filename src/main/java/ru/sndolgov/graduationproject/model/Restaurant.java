@@ -17,6 +17,7 @@ public class Restaurant extends AbstractNamedEntity {
     @Column(name = "enabled", nullable = false, columnDefinition = "bool default true")
     private boolean enabled = true;
 
+    //TODO need?
     public Restaurant(){}
 
     public Restaurant(Integer id, String name, boolean enabled){
