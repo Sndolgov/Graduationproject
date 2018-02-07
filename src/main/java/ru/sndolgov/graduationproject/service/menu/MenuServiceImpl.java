@@ -1,6 +1,7 @@
 package ru.sndolgov.graduationproject.service.menu;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import ru.sndolgov.graduationproject.model.Menu;
 import ru.sndolgov.graduationproject.repository.menu.DataJpaMenuRepositoryImpl;
@@ -13,6 +14,7 @@ import static ru.sndolgov.graduationproject.util.ValidationUtil.checkNotFoundWit
 /**
  * Created by Сергей on 07.02.2018.
  */
+@Service
 public class MenuServiceImpl implements MenuService{
 
     @Autowired

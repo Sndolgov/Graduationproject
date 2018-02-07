@@ -1,6 +1,8 @@
 package ru.sndolgov.graduationproject.repository.menu;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.sndolgov.graduationproject.model.Menu;
 import ru.sndolgov.graduationproject.repository.restaurant.CrudRestaurantRepository;
@@ -10,6 +12,7 @@ import java.util.List;
 /**
  * Created by Сергей on 07.02.2018.
  */
+@Repository
 public class DataJpaMenuRepositoryImpl {
 
     @Autowired

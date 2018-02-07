@@ -6,10 +6,7 @@ import org.hibernate.validator.constraints.SafeHtml;
 import org.springframework.format.annotation.DateTimeFormat;
 import ru.sndolgov.graduationproject.View;
 
-import javax.persistence.Column;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -19,6 +16,9 @@ import java.util.Date;
 /**
  * Created by Сергей on 07.02.2018.
  */
+
+@Entity
+@Table(name = "menu", uniqueConstraints = {@UniqueConstraint(columnNames = {"restaurant_id","date"}, name = "restaurant_date_idx")})
 public class Menu extends AbstractBaseEntity{
 
     @Column(name = "description", nullable = false)
