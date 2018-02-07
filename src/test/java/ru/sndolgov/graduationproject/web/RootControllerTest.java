@@ -31,11 +31,11 @@ public class RootControllerTest extends AbstractControllerTest {
     }
 
     @Test
-    public void testMeals() throws Exception {
-        mockMvc.perform(get("/meals")
+    public void testRestaurants() throws Exception {
+        mockMvc.perform(get("/restaurants")
                 .with(userAuth(USER)))
                 .andDo(print())
-                .andExpect(view().name("meals"))
-                .andExpect(forwardedUrl("/WEB-INF/jsp/meals.jsp"));
+                .andExpect(view().name("restaurants"))
+                .andExpect(forwardedUrl("/WEB-INF/jsp/restaurants.jsp"));
     }
 }

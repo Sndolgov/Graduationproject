@@ -23,7 +23,7 @@ public class RootController extends AbstractUserController {
 
     @GetMapping("/")
     public String root() {
-        return "redirect:meals";
+        return "redirect:restaurants";
     }
 
     //    @Secured("ROLE_ADMIN")
@@ -38,9 +38,9 @@ public class RootController extends AbstractUserController {
         return "login";
     }
 
-    @GetMapping("/meals")
-    public String meals() {
-        return "meals";
+    @GetMapping("/restaurants")
+    public String restaurants() {
+        return "restaurants";
     }
 
     @GetMapping("/profile")
@@ -58,7 +58,7 @@ public class RootController extends AbstractUserController {
             super.update(userTo, authorizedUser.getId());
             authorizedUser.update(userTo);
             status.setComplete();
-            return "redirect:meals";
+            return "redirect:restaurants";
         } catch (DataIntegrityViolationException ex) {
             result.rejectValue("email", EXCEPTION_DUPLICATE_EMAIL);
             return "profile";

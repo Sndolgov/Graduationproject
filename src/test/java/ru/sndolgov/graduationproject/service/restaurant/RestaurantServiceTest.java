@@ -13,12 +13,16 @@ import ru.sndolgov.graduationproject.util.exception.NotFoundException;
 
 import javax.validation.ConstraintViolationException;
 import java.util.Collections;
+import java.util.List;
 
 import static ru.sndolgov.graduationproject.RestaurantTestData.*;
+import static ru.sndolgov.graduationproject.UserTestData.USER_ID;
 
 public class RestaurantServiceTest extends AbstractServiceTest {
     @Autowired
     protected RestaurantService service;
+
+    //TODO cache
 
 /*    @Autowired
     private JpaUtil jpaUtil;
@@ -31,6 +35,12 @@ public class RestaurantServiceTest extends AbstractServiceTest {
         cacheManager.getCache("restaurants").clear();
         jpaUtil.clear2ndLevelHibernateCache();
     }*/
+
+    @Test
+    public void getAll() throws Exception {
+        List<Restaurant> all = service.getAll();
+        assertMatch(all, RESTAURANT1, RESTAURANT2);
+    }
 
     @Test
     public void create() throws Exception {
@@ -52,21 +62,32 @@ public class RestaurantServiceTest extends AbstractServiceTest {
     }
 
     @Test(expected = NotFoundException.class)
-    public void notFoundDelete() throws Exception {
-        service.delete(1);
+    public void deleteNotFound() throws Exception {
+        service.delete(USER_ID);
     }
 
-/*    @Test
+    @Test
     public void get() throws Exception {
-        User user = service.get(ADMIN_ID);
-        assertMatch(user, ADMIN);
+        Restaurant restaurant = service.get(RESTAURANT1_ID);
+        assertMatch(restaurant, RESTAURANT1);
     }
 
     @Test(expected = NotFoundException.class)
     public void getNotFound() throws Exception {
-        service.get(1);
+        service.get(USER_ID);
     }
 
+    @Test
+    public void getByEmail() throws Exception {
+        Restaurant restaurant = service.getByName("Restaurant1");
+        assertMatch(restaurant, RESTAURANT1);
+    }
+
+    @Test(expected = NotFoundException.class)
+    public void getByNameNotFound() throws Exception {
+        Restaurant restaurant = service.getByName("Restaurant3");
+    }
+/*
     @Test
     public void getByEmail() throws Exception {
         User user = service.getByEmail("admin@gmail.com");
@@ -82,11 +103,7 @@ public class RestaurantServiceTest extends AbstractServiceTest {
         assertMatch(service.get(USER_ID), updated);
     }
 
-    @Test
-    public void getAll() throws Exception {
-        List<User> all = service.getAll();
-        assertMatch(all, ADMIN, USER);
-    }
+
 
     @Test
     public void testValidation() throws Exception {
