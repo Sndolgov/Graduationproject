@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 import ru.sndolgov.graduationproject.AuthorizedUser;
 import ru.sndolgov.graduationproject.model.User;
-import ru.sndolgov.graduationproject.repository.user.UserRepository;
+import ru.sndolgov.graduationproject.repository.user.DataJpaUserRepositoryImpl;
 import ru.sndolgov.graduationproject.to.UserTo;
 import ru.sndolgov.graduationproject.util.exception.NotFoundException;
 
@@ -25,11 +25,11 @@ import static ru.sndolgov.graduationproject.util.ValidationUtil.*;
 @Service("userService")
 public class UserServiceImpl implements UserService, UserDetailsService {
 
-    private final UserRepository repository;
+    private final DataJpaUserRepositoryImpl repository;
     private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserServiceImpl(UserRepository repository, PasswordEncoder passwordEncoder) {
+    public UserServiceImpl(DataJpaUserRepositoryImpl repository, PasswordEncoder passwordEncoder) {
         this.repository = repository;
         this.passwordEncoder = passwordEncoder;
     }

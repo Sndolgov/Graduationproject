@@ -6,7 +6,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import ru.sndolgov.graduationproject.model.Restaurant;
-import ru.sndolgov.graduationproject.repository.restaurant.RestaurantRepository;
+import ru.sndolgov.graduationproject.repository.restaurant.DataJpaRestaurantRepositoryImpl;
 import ru.sndolgov.graduationproject.util.exception.NotFoundException;
 
 import java.util.List;
@@ -16,10 +16,10 @@ import static ru.sndolgov.graduationproject.util.ValidationUtil.checkNotFoundWit
 
 @Service
 public class RestaurantServiceImpl implements RestaurantService{
-    private final RestaurantRepository repository;
+    private final DataJpaRestaurantRepositoryImpl repository;
 
     @Autowired
-    public RestaurantServiceImpl(RestaurantRepository repository) {
+    public RestaurantServiceImpl(DataJpaRestaurantRepositoryImpl repository) {
         this.repository = repository;
     }
 

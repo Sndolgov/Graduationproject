@@ -55,10 +55,9 @@ CREATE TABLE dishes
 CREATE TABLE menu
 (
   id            INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),
-  restaurant_id INTEGER                  NOT NULL,
   description   VARCHAR NOT NULL,
   date          DATE    NOT NULL,
-  enabled       BOOL DEFAULT TRUE        NOT NULL,
+  restaurant_id INTEGER                  NOT NULL,
   CONSTRAINT restaurant_date_idx UNIQUE (restaurant_id, date),
   FOREIGN KEY (restaurant_id) REFERENCES restaurants (id) ON DELETE CASCADE
 );
