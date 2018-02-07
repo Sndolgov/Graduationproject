@@ -33,17 +33,12 @@ abstract public class AbstractServiceTest {
     @Rule
     public Stopwatch stopwatch = TimingRules.STOPWATCH;
 
-    @Autowired
-    public Environment env;
-
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
     static {
         SLF4JBridgeHandler.install();
     }
-
-
 
     public <T extends Throwable> void validateRootCause(Runnable runnable, Class<T> exceptionClass) {
         try {
