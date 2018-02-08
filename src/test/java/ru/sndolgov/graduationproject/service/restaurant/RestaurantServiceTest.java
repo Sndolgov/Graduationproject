@@ -44,10 +44,17 @@ public class RestaurantServiceTest extends AbstractServiceTest {
 
     @Test
     public void create() throws Exception {
-        Restaurant newRestaurant = new Restaurant(null, "New", false);
+        Restaurant newRestaurant = getCreated();
         Restaurant created = service.create(newRestaurant);
         newRestaurant.setId(created.getId());
         assertMatch(service.getAll(), newRestaurant, RESTAURANT1, RESTAURANT2);
+    }
+
+    @Test
+    public void update() throws Exception {
+        Restaurant updated = getUpdated();
+        service.update(updated);
+        assertMatch(service.get(RESTAURANT1_ID), updated);
     }
 
     @Test(expected = DataAccessException.class)

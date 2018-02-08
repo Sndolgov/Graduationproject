@@ -17,6 +17,15 @@ public class RestaurantTestData {
     public static final Restaurant RESTAURANT1 = new Restaurant(RESTAURANT1_ID, "Restaurant1", true);
     public static final Restaurant RESTAURANT2 = new Restaurant(RESTAURANT2_ID, "Restaurant2", true);
 
+    public static Restaurant getCreated(){
+        return new Restaurant(null, "NewRestaurant", false);
+    }
+
+    public static Restaurant getUpdated(){
+        return new Restaurant(RESTAURANT1_ID, "UpdatedRestaurant", false);
+    }
+
+
     public static void assertMatch(Restaurant actual, Restaurant expected) {
         assertThat(actual).isEqualToComparingFieldByField(expected);
     }
