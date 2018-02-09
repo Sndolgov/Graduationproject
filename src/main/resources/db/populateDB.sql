@@ -40,10 +40,10 @@ INSERT INTO menu (restaurant_id, description, date) VALUES
 
     (100002, 'Menu of First restaurant', '2017-12-26'),
     (100002, 'Menu of First restaurant', '2017-12-27'),
-    (100002, 'Menu of First restaurant', '2017-12-28'),
+    (100002, 'Menu of First restaurant', now()),
     (100003, 'Menu of Second restaurant', '2017-12-26'),
     (100003, 'Menu of Second restaurant', '2017-12-27'),
-    (100003, 'Menu of Second restaurant', '2017-12-28');
+    (100003, 'Menu of Second restaurant', now());
 
 
 

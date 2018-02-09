@@ -1,7 +1,9 @@
 var ajaxUrl = "ajax/profile/restaurants/";
 var datatableApi;
 
-
+function updateTable() {
+    $.get(ajaxUrl, updateTableByData);
+}
 $(function () {
     datatableApi = $("#datatable").DataTable({
         "ajax": {
@@ -15,12 +17,12 @@ $(function () {
                 "data": "name"
             },
             {
-                "render": renderEditBtn,
+                "render": renderEditBtnAdmin,
                 "defaultContent": "",
                 "orderable": false
             },
             {
-                "render": renderDeleteBtn,
+                "render": renderDeleteBtnAdmin,
                 "defaultContent": "",
                 "orderable": false
             }

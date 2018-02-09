@@ -5,6 +5,7 @@ import ru.sndolgov.graduationproject.util.DateUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -23,16 +24,16 @@ public class MenuTestData {
 
     public static final Menu MENU1 = new Menu(MENU1_ID, "Menu of First restaurant", DateUtil.of(2017, 12, 26));
     public static final Menu MENU2 = new Menu(MENU2_ID, "Menu of First restaurant", DateUtil.of(2017, 12, 27));
-    public static final Menu MENU3 = new Menu(MENU3_ID, "Menu of First restaurant", DateUtil.of(2017, 12, 28));
+    public static final Menu MENU3 = new Menu(MENU3_ID, "Menu of First restaurant", new Date());
     public static final Menu MENU4 = new Menu(MENU4_ID, "Menu of Second restaurant", DateUtil.of(2017, 12, 26));
     public static final Menu MENU5 = new Menu(MENU5_ID, "Menu of Second restaurant", DateUtil.of(2017, 12, 27));
-    public static final Menu MENU6 = new Menu(MENU6_ID, "Menu of Second restaurant", DateUtil.of(2017, 12, 28));
+    public static final Menu MENU6 = new Menu(MENU6_ID, "Menu of Second restaurant", new Date());
 
-    public static Menu getCreated(){
+    public static Menu getCreated() {
         return new Menu(null, "NewMenu", DateUtil.of(2018, 02, 12));
     }
 
-    public static Menu getUpdated(){
+    public static Menu getUpdated() {
         return new Menu(MENU1_ID, "UpdatedMenu", DateUtil.of(2018, 02, 12));
     }
 
@@ -45,6 +46,7 @@ public class MenuTestData {
     }
 
     public static void assertMatch(Iterable<Menu> actual, Iterable<Menu> expected) {
-        assertThat(actual).isEqualTo(expected);
+        //  assertThat(actual).isEqualTo(expected);
+        assertThat(actual).usingElementComparatorIgnoringFields("restaurant", "date").isEqualTo(expected);
     }
 }

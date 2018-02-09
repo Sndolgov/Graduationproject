@@ -5,6 +5,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.CacheManager;
 import org.springframework.dao.DataAccessException;
+import ru.sndolgov.graduationproject.MenuTestData;
 import ru.sndolgov.graduationproject.model.Restaurant;
 import ru.sndolgov.graduationproject.model.Role;
 import ru.sndolgov.graduationproject.repository.JpaUtil;
@@ -15,6 +16,9 @@ import javax.validation.ConstraintViolationException;
 import java.util.Collections;
 import java.util.List;
 
+import static ru.sndolgov.graduationproject.MenuTestData.MENU1;
+import static ru.sndolgov.graduationproject.MenuTestData.MENU2;
+import static ru.sndolgov.graduationproject.MenuTestData.MENU3;
 import static ru.sndolgov.graduationproject.RestaurantTestData.*;
 import static ru.sndolgov.graduationproject.UserTestData.USER_ID;
 
@@ -96,7 +100,14 @@ public class RestaurantServiceTest extends AbstractServiceTest {
     }
 
     @Test
+    public void getWithMenus() throws Exception {
+        Restaurant restaurant = service.getWithMenus(RESTAURANT1_ID);
+        MenuTestData.assertMatch(restaurant.getMenus(), MENU3, MENU2, MENU1);
+    }
+
+    @Test
     public void testValidation() throws Exception {
         validateRootCause(() -> service.create(new Restaurant(null, "  ", true)), ConstraintViolationException.class);
     }
+
 }

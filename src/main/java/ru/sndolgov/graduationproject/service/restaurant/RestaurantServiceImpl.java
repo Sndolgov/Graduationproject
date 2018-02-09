@@ -54,7 +54,12 @@ public class RestaurantServiceImpl implements RestaurantService{
         return repository.getAll();
     }
 
-   // @CacheEvict(value = "restaurants", allEntries = true)
+    @Override
+    public Restaurant getWithMenus(int id) {
+        return checkNotFoundWithId(repository.getWithMenus(id), id);
+    }
+
+    // @CacheEvict(value = "restaurants", allEntries = true)
     @Override
     public void update(Restaurant restaurant) {
         Assert.notNull(restaurant, "restaurant must not be null");

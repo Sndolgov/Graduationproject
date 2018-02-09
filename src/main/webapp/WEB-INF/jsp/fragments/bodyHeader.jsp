@@ -14,7 +14,8 @@
                             <sec:authorize access="hasRole('ROLE_ADMIN')">
                                 <a class="btn btn-info" href="users"><spring:message code="user.title"/></a>
                             </sec:authorize>
-                            <a class="btn btn-info" href="profile"><sec:authentication property="principal.userTo.name"/> <spring:message code="app.profile"/></a>
+                            <a class="btn btn-info" href="profile"><sec:authentication
+                                    property="principal.userTo.name"/> <spring:message code="app.profile"/></a>
                             <button class="btn btn-primary" type="submit">
                                 <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
                             </button>
@@ -46,6 +47,23 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+    function renderDeleteBtnAdmin(data, type, row) {
+        if (type === "display") {
+            return "<sec:authorize access="hasRole('ROLE_ADMIN')">"+"<a onclick='deleteRow(" + row.id + ");'>" +
+            "<span class='glyphicon glyphicon-remove' aria-hidden='true'></span></a>"+"</sec:authorize>";
+        }
+    }
+    function renderEditBtnAdmin(data, type, row) {
+        if (type === "display") {
+            return "<sec:authorize access="hasRole('ROLE_ADMIN')">"+"<a onclick='updateRow(" + row.id + ");'>" +
+                "<span class='glyphicon glyphicon-pencil' aria-hidden='true'></span></a>"+"</sec:authorize>";
+        }
+    }
+</script>
+
+
 <script type="text/javascript">
     var localeCode = "${pageContext.response.locale}";
 </script>

@@ -37,4 +37,8 @@ public class DataJpaRestaurantRepositoryImpl{
     public List<Restaurant> getAll() {
         return crudRepository.findAll(SORT_NAME);
     }
+
+    public Restaurant getWithMenus(int id){
+        return crudRepository.getWithMenu(id);
+    }
 }

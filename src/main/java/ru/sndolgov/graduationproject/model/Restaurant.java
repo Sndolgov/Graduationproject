@@ -2,10 +2,8 @@ package ru.sndolgov.graduationproject.model;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+import javax.persistence.*;
+import java.util.List;
 
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 
@@ -16,6 +14,11 @@ public class Restaurant extends AbstractNamedEntity {
 
     @Column(name = "enabled", nullable = false, columnDefinition = "bool default true")
     private boolean enabled = true;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "restaurant")
+    @OrderBy("date DESC")
+//    @JsonIgnore
+    protected List<Menu> menus;
 
     //TODO need?
     public Restaurant(){}
@@ -31,6 +34,10 @@ public class Restaurant extends AbstractNamedEntity {
 
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public List<Menu> getMenus() {
+        return menus;
     }
 
     @Override
