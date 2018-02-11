@@ -1,5 +1,6 @@
 package ru.sndolgov.graduationproject.util;
 
+import ru.sndolgov.graduationproject.model.Menu;
 import ru.sndolgov.graduationproject.model.Restaurant;
 import ru.sndolgov.graduationproject.to.RestaurantTo;
 
@@ -8,7 +9,7 @@ import ru.sndolgov.graduationproject.to.RestaurantTo;
  */
 public class RestaurantUtil {
 
-    public static RestaurantTo asTo (Restaurant restaurant){
-        return new RestaurantTo(restaurant.getId(), restaurant.getName());
+    public static RestaurantTo asTo (Menu menu){
+        return new RestaurantTo(menu.getRestaurant().getId(), menu.getRestaurant().getName(), menu.getDescription());
     }
 }

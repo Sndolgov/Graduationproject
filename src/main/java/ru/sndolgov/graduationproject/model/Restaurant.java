@@ -20,7 +20,7 @@ public class Restaurant extends AbstractNamedEntity {
 //    @JsonIgnore
     protected List<Menu> menus;
 
-    //TODO need?
+     //TODO need?
     public Restaurant(){}
 
     public Restaurant(Integer id, String name, boolean enabled){

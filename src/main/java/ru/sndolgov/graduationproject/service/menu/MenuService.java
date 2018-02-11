@@ -4,6 +4,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.sndolgov.graduationproject.model.Menu;
 import ru.sndolgov.graduationproject.util.exception.NotFoundException;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -22,4 +23,7 @@ public interface MenuService {
      List<Menu> getAll(int restaurantId);
 
      Menu getWithRestaurant(int id, int restaurantId);
+
+    List<Menu> getAllTodayWithRestaraunt(Date date);
+
 }

@@ -14,7 +14,10 @@ $(function () {
         "info": true,
         "columns": [
             {
-                "data": "name"
+                "data": "restaurantName"
+            },
+            {
+                "data": "menuDescription"
             },
             {
                 "render": renderEditBtnAdmin,

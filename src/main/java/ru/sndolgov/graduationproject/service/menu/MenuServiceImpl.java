@@ -7,6 +7,7 @@ import ru.sndolgov.graduationproject.model.Menu;
 import ru.sndolgov.graduationproject.repository.menu.DataJpaMenuRepositoryImpl;
 import ru.sndolgov.graduationproject.util.exception.NotFoundException;
 
+import java.util.Date;
 import java.util.List;
 
 import static ru.sndolgov.graduationproject.util.ValidationUtil.checkNotFoundWithId;
@@ -47,4 +48,9 @@ public class MenuServiceImpl implements MenuService{
     @Override
     public Menu getWithRestaurant(int id, int restaurantId) {
         return checkNotFoundWithId(repository.getWithRestaurant(id, restaurantId), id);    }
+
+    @Override
+    public List<Menu> getAllTodayWithRestaraunt(Date date) {
+        return repository.getAllTodayWithRestaraunt(date);
+    }
 }

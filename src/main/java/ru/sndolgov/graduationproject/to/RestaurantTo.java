@@ -1,6 +1,7 @@
 package ru.sndolgov.graduationproject.to;
 
 import org.hibernate.validator.constraints.SafeHtml;
+import ru.sndolgov.graduationproject.model.Menu;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -15,29 +16,40 @@ public class RestaurantTo extends BaseTo implements Serializable {
     @NotBlank
     @Size(min = 2, max = 100)
     @SafeHtml
-    private String name;
+    private String restaurantName;
+
+    private String menuDescription;
 
     public RestaurantTo() {
     }
 
-    public RestaurantTo(Integer id, String name) {
+    public RestaurantTo(Integer id, String restaurantName, String menuDescription) {
         super(id);
-        this.name = name;
+        this.restaurantName = restaurantName;
+        this.menuDescription =menuDescription;
     }
 
-    public String getName() {
-        return name;
+    public String getRestaurantName() {
+        return restaurantName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setRestaurantName(String restaurantName) {
+        this.restaurantName = restaurantName;
+    }
+
+    public String getMenuDescription() {
+        return menuDescription;
+    }
+
+    public void setMenuDescription(String menuDescription) {
+        this.menuDescription = menuDescription;
     }
 
     @Override
     public String toString() {
         return "RestaurantTo{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
+                ", restaurantName='" + restaurantName + '\'' +
                 '}';
     }
 }
