@@ -24,10 +24,10 @@ public interface CrudMenuRepository extends JpaRepository<Menu, Integer> {
     @Override
     Menu save(Menu menu);
 
-
     @Query("SELECT m FROM Menu m WHERE m.restaurant.id=:restaurantId ORDER BY m.date DESC")
     List<Menu> getAll(@Param("restaurantId") int restaurantId);
 
+    @EntityGraph(attributePaths = {"restaurant"}, type = EntityGraph.EntityGraphType.LOAD)
     @Query("SELECT m FROM Menu m JOIN FETCH m.restaurant WHERE m.id = ?1 and m.restaurant.id = ?2")
     Menu getWithRestaurant(int id, int restaurantId);
 

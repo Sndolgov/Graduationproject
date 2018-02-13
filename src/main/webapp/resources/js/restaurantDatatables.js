@@ -20,6 +20,15 @@ $(function () {
                 "data": "menuDescription"
             },
             {
+                "data": "dishDescription"
+            },
+            {
+                "data": "dishPrice"
+            },
+            {
+                "data": "totalValue"
+            },
+            {
                 "render": renderEditBtnAdmin,
                 "defaultContent": "",
                 "orderable": false

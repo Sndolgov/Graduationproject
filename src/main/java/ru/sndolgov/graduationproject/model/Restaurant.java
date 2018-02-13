@@ -17,8 +17,11 @@ public class Restaurant extends AbstractNamedEntity {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "restaurant")
     @OrderBy("date DESC")
-//    @JsonIgnore
     protected List<Menu> menus;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "restaurant")
+    @OrderBy("description ASC")
+    protected List<Dish> dishes;
 
      //TODO need?
     public Restaurant(){}
@@ -38,6 +41,10 @@ public class Restaurant extends AbstractNamedEntity {
 
     public List<Menu> getMenus() {
         return menus;
+    }
+
+    public List<Dish> getDishes() {
+        return dishes;
     }
 
     @Override

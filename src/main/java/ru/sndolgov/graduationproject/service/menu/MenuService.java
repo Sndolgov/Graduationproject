@@ -26,4 +26,5 @@ public interface MenuService {
 
     List<Menu> getAllTodayWithRestaraunt(Date date);
 
+//    Integer getVoices(int id, int restaurantId);
 }

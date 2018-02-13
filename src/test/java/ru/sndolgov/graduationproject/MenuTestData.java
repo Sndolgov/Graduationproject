@@ -3,10 +3,8 @@ package ru.sndolgov.graduationproject;
 import ru.sndolgov.graduationproject.model.Menu;
 import ru.sndolgov.graduationproject.util.DateUtil;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static ru.sndolgov.graduationproject.model.AbstractBaseEntity.START_SEQ;
@@ -38,7 +36,7 @@ public class MenuTestData {
     }
 
     public static void assertMatch(Menu actual, Menu expected) {
-        assertThat(actual).isEqualToIgnoringGivenFields(expected, "restaurant", "date");
+        assertThat(actual).isEqualToIgnoringGivenFields(expected, "restaurant", "date", "dishes");
     }
 
     public static void assertMatch(Iterable<Menu> actual, Menu... expected) {

@@ -16,7 +16,11 @@
             <thead>
             <tr>
                 <th><spring:message code="restaurant.name"/></th>
-                <th>Название меню</th>
+                <th><spring:message code="menu.description"/></th>
+                <th><spring:message code="dish.description"/></th>
+                <th><spring:message code="dish.price"/></th>
+                <th><spring:message code="menu.totalValue"/></th>
+
                 <th></th>
                 <th></th>
             </tr>

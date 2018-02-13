@@ -27,7 +27,7 @@ public class RestaurantTestData {
 
 
     public static void assertMatch(Restaurant actual, Restaurant expected) {
-        assertThat(actual).isEqualToIgnoringGivenFields(expected,"menus");
+        assertThat(actual).isEqualToIgnoringGivenFields(expected,"menus", "dishes");
     }
 
     public static void assertMatch(Iterable<Restaurant> actual, Restaurant... expected) {

@@ -53,4 +53,9 @@ public class MenuServiceImpl implements MenuService{
     public List<Menu> getAllTodayWithRestaraunt(Date date) {
         return repository.getAllTodayWithRestaraunt(date);
     }
+
+    /*@Override
+    public Integer getVoices(int id, int restaurantId) {
+        return repository.getVoices(id, restaurantId);
+    }*/
 }

@@ -2,25 +2,22 @@ package ru.sndolgov.graduationproject.model;
 
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import org.hibernate.validator.constraints.Range;
 import org.hibernate.validator.constraints.SafeHtml;
-import org.springframework.format.annotation.DateTimeFormat;
 import ru.sndolgov.graduationproject.View;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.time.LocalDateTime;
-import java.util.Date;
-import java.util.List;
 
 /**
- * Created by Сергей on 07.02.2018.
+ * Created by Сергей on 11.02.2018.
  */
 
 @Entity
-@Table(name = "menu", uniqueConstraints = {@UniqueConstraint(columnNames = {"restaurant_id","date"}, name = "restaurant_date_idx")})
-public class Menu extends AbstractBaseEntity{
+@Table(name = "dishes", uniqueConstraints = {@UniqueConstraint(columnNames = {"description", "restaurant_id"}, name = "restaurant_description_idx")})
+public class Dish extends AbstractBaseEntity{
 
     @Column(name = "description", nullable = false)
     @NotBlank
@@ -28,9 +25,14 @@ public class Menu extends AbstractBaseEntity{
     @SafeHtml(groups = {View.Web.class})
     private String description;
 
-    @Column(name = "date", nullable = false)
+
+    @Column(name = "price", nullable = false)
+    @Range(min = 10, max = 10000)
     @NotNull
-    private Date date;
+    private Integer price;
+
+    @Column(name = "enabled", nullable = false, columnDefinition = "bool default true")
+    private boolean enabled = true;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "restaurant_id", nullable = false)
@@ -38,23 +40,15 @@ public class Menu extends AbstractBaseEntity{
     @NotNull(groups = View.Persist.class)
     private Restaurant restaurant;
 
-
-    @OneToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
-    @JoinTable(name="menuconsist", joinColumns={@JoinColumn(name ="menu_id", referencedColumnName ="id")},
-            inverseJoinColumns={@JoinColumn(name ="dish_id", referencedColumnName ="id")})
-    @OrderBy("id ASC")
-    protected List<Dish> dishes;
-
-    public Menu(){}
-
-    public Menu (String description, Date date){
-        this(null, description, date);
+    public Dish() {
     }
 
-    public Menu(Integer id, String description, Date date) {
+
+    public Dish(Integer id, String description, Integer price, boolean enabled) {
         super(id);
         this.description = description;
-        this.date = date;
+        this.price = price;
+        this.enabled = enabled;
     }
 
     public String getDescription() {
@@ -65,12 +59,20 @@ public class Menu extends AbstractBaseEntity{
         this.description = description;
     }
 
-    public Date getDate() {
-        return date;
+    public Integer getPrice() {
+        return price;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setPrice(Integer price) {
+        this.price = price;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
     public Restaurant getRestaurant() {
@@ -81,16 +83,13 @@ public class Menu extends AbstractBaseEntity{
         this.restaurant = restaurant;
     }
 
-    public List<Dish> getDishes() {
-        return dishes;
-    }
-
     @Override
     public String toString() {
-        return "Menu{" +
+        return "Dish{" +
                 "id=" + id +
                 ", description='" + description + '\'' +
-                ", date=" + date +
+                ", price=" + price +
+                ", enabled=" + enabled +
                 '}';
     }
 }
