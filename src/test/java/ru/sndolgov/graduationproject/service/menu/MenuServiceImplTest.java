@@ -33,7 +33,7 @@ public class MenuServiceImplTest extends AbstractServiceTest {
         Menu newMenu = MenuTestData.getCreated();
         Menu created = service.creat(newMenu, RESTAURANT1_ID);
         newMenu.setId(created.getId());
-        assertMatch(service.getAll(RESTAURANT1_ID), newMenu, MENU3, MENU2, MENU1);
+        assertMatch(service.getAll(RESTAURANT1_ID), MENU3, newMenu, MENU2, MENU1);
     }
 
     @Test(expected = DataAccessException.class)
@@ -47,7 +47,7 @@ public class MenuServiceImplTest extends AbstractServiceTest {
     public void update() throws Exception {
         Menu updated = MenuTestData.getUpdated();
         service.update(updated, RESTAURANT1_ID);
-        assertMatch(service.getAll(RESTAURANT1_ID), updated, MENU3, MENU2);
+        assertMatch(service.getAll(RESTAURANT1_ID), MENU3, updated, MENU2);
     }
 
     @Test(expected = NotFoundException.class)
@@ -94,7 +94,6 @@ public class MenuServiceImplTest extends AbstractServiceTest {
     @Test
     public void getWithRestaurant() throws Exception {
         Menu menu = service.getWithRestaurant(MENU1_ID, RESTAURANT1_ID);
-        System.out.println(menu.getRestaurant());
         RestaurantTestData.assertMatch(menu.getRestaurant(), RESTAURANT1);
     }
 }
