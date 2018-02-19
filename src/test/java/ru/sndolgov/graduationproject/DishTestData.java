@@ -32,7 +32,7 @@ public class DishTestData {
     }
 
     public static void assertMatch(Dish actual, Dish expected) {
-        assertThat(actual).isEqualTo(expected);
+        assertThat(actual).isEqualToIgnoringGivenFields(expected, "restaurant");
     }
 
     public static void assertMatch(Iterable<Dish> actual, Dish... expected) {

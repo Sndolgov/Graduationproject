@@ -1,6 +1,5 @@
 package ru.sndolgov.graduationproject;
 
-import org.springframework.test.web.servlet.ResultMatcher;
 import ru.sndolgov.graduationproject.model.Role;
 import ru.sndolgov.graduationproject.model.User;
 
@@ -8,7 +7,6 @@ import ru.sndolgov.graduationproject.model.User;
 import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static ru.sndolgov.graduationproject.model.AbstractBaseEntity.START_SEQ;
 
 public class UserTestData {

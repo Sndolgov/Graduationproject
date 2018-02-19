@@ -75,6 +75,7 @@ CREATE TABLE menuconsist
 
 CREATE TABLE voting
 (
+  id            INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),
   menu_id       INTEGER NOT NULL,
   restaurant_id INTEGER NOT NULL,
   user_id INTEGER NOT NULL,

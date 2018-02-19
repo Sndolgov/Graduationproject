@@ -49,6 +49,14 @@ function updateRow(id) {
         });
         $('#editRow').modal();
     });
+}function voiceRow(id) {
+    $.ajax({
+        url: ajaxUrl + id,
+        type: "PUT"
+    }).done(function () {
+        updateTable();
+        successNoty("common.deleted");
+    });
 }
 
 function deleteRow(id) {
@@ -101,10 +109,17 @@ function failNoty(jqXHR) {
     // https://stackoverflow.com/questions/48229776
     var errorInfo = JSON.parse(jqXHR.responseText);
     failedNote = new Noty({
-        text: "<span class='glyphicon glyphicon-exclamation-sign'></span> &nbsp;" + errorInfo.typeMessage + "<br>" + errorInfo.details.join("<br>"),
+        text: "<span class='glyphicon glyphicon-exclamation-sign'></span> &nbsp;"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        + errorInfo.typeMessage + "<br>" + errorInfo.details.join("<br>"),
         type: "error",
         layout: "bottomRight"
     }).show();
+}
+
+function renderBtnVoice(data, type, row) {
+    if (type === "display") {
+        return "<a onclick='voiceRow(" + row.id + ");'>" +
+            "<span class='glyphicon glyphicon-pencil' aria-hidden='true'></span></a>";
+    }
 }
 
 function renderEditBtn(data, type, row) {

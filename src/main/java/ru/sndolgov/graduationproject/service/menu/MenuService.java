@@ -2,6 +2,7 @@ package ru.sndolgov.graduationproject.service.menu;
 
 import org.springframework.transaction.annotation.Transactional;
 import ru.sndolgov.graduationproject.model.Menu;
+import ru.sndolgov.graduationproject.model.Voice;
 import ru.sndolgov.graduationproject.util.exception.NotFoundException;
 
 import java.util.Date;
@@ -26,5 +27,5 @@ public interface MenuService {
 
     List<Menu> getAllTodayWithRestaraunt(Date date);
 
-//    Integer getVoices(int id, int restaurantId);
+    Menu getWithVoices(int id, int restaurantId);
 }

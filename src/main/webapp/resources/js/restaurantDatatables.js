@@ -29,6 +29,14 @@ $(function () {
                 "data": "totalValue"
             },
             {
+                "data": "voices"
+            },
+            {
+                "render": renderBtnVoice,
+                "defaultContent": "",
+                "orderable": false
+            },
+            {
                 "render": renderEditBtnAdmin,
                 "defaultContent": "",
                 "orderable": false

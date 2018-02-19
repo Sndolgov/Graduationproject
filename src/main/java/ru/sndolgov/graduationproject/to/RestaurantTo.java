@@ -40,16 +40,19 @@ public class RestaurantTo extends BaseTo implements Serializable {
     @NotNull
     private Integer  totalValue;
 
+    private Integer voices;
+
     public RestaurantTo() {
     }
 
-    public RestaurantTo(Integer id, String restaurantName, String menuDescription, String dishDescription, String dishPrice, Integer totalValue) {
+    public RestaurantTo(Integer id, String restaurantName, String menuDescription, String dishDescription, String dishPrice, Integer totalValue, Integer voices) {
         super(id);
         this.restaurantName = restaurantName;
         this.menuDescription =menuDescription;
         this.dishDescription=dishDescription;
         this.dishPrice=dishPrice;
         this.totalValue=totalValue;
+        this.voices=voices;
     }
 
     public String getRestaurantName() {
@@ -90,6 +93,14 @@ public class RestaurantTo extends BaseTo implements Serializable {
 
     public void setTotalValue(Integer totalValue) {
         this.totalValue = totalValue;
+    }
+
+    public Integer getVoices() {
+        return voices;
+    }
+
+    public void setVoices(Integer voices) {
+        this.voices = voices;
     }
 
     @Override

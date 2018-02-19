@@ -18,7 +18,7 @@ public class RestaurantUtil {
         List<Dish> dishes = menu.getDishes();
 
         return new RestaurantTo(menu.getRestaurant().getId(), menu.getRestaurant().getName(), menu.getDescription(),
-                getDishDescription(dishes), getDishPrice(dishes), getTotalValue(dishes));
+                getDishDescription(dishes), getDishPrice(dishes), getTotalValue(dishes), menu.getVoices().size());
     }
 
     private static String getDishDescription(List<Dish> dishes) {

@@ -51,7 +51,7 @@ public class DataJpaMenuRepositoryImpl {
         return crudMenuRepository.getAllTodayWithRestaraunt(date);
     }
 
-   /* public Integer getVoices(int id, int restaurantId){
-        return crudMenuRepository.getVoices(id, restaurantId);
-    }*/
+    public Menu getWithVoices(int id, int restaurantId){
+        return crudMenuRepository.getWithVoices(id, restaurantId);
+    }
 }

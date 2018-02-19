@@ -39,11 +39,15 @@ public class Menu extends AbstractBaseEntity{
     private Restaurant restaurant;
 
 
-    @OneToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
     @JoinTable(name="menuconsist", joinColumns={@JoinColumn(name ="menu_id", referencedColumnName ="id")},
             inverseJoinColumns={@JoinColumn(name ="dish_id", referencedColumnName ="id")})
     @OrderBy("id ASC")
-    protected List<Dish> dishes;
+    private List<Dish> dishes;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "menu")
+    @OrderBy("user_id ASC")
+    private List<Voice> voices;
 
     public Menu(){}
 
@@ -83,6 +87,18 @@ public class Menu extends AbstractBaseEntity{
 
     public List<Dish> getDishes() {
         return dishes;
+    }
+
+    public void setDishes(List<Dish> dishes) {
+        this.dishes = dishes;
+    }
+
+    public List<Voice> getVoices() {
+        return voices;
+    }
+
+    public void setVoices(List<Voice> voices) {
+        this.voices = voices;
     }
 
     @Override

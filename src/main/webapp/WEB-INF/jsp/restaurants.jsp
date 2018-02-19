@@ -20,6 +20,8 @@
                 <th><spring:message code="dish.description"/></th>
                 <th><spring:message code="dish.price"/></th>
                 <th><spring:message code="menu.totalValue"/></th>
+                <th><spring:message code="menu.voices"/></th>
+
 
                 <th></th>
                 <th></th>
