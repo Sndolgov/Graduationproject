@@ -5,13 +5,14 @@ import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Date;
 
 /**
  * Created by Сергей on 13.02.2018.
  */
 
 @Entity
-@Table(name = "voting", uniqueConstraints = {@UniqueConstraint(columnNames = {"menu_id", "user_id"}, name = "menu_user_idx")})
+@Table(name = "voting", uniqueConstraints = {@UniqueConstraint(columnNames = {"date", "user_id"}, name = "date_user_idx")})
 public class Voice extends AbstractBaseEntity {
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -32,14 +33,19 @@ public class Voice extends AbstractBaseEntity {
     @NotNull
     private User user;
 
+    @Column(name = "date", nullable = false)
+    @NotNull
+    private Date date;
+
     public Voice() {
     }
 
-    public Voice(Integer id, @NotNull Menu menu, @NotNull Restaurant restaurant, @NotNull User user) {
+    public Voice(Integer id, Menu menu, Restaurant restaurant, User user, Date date) {
         super(id);
         this.menu = menu;
         this.restaurant = restaurant;
         this.user = user;
+        this.date=date;
     }
 
     public Menu getMenu() {
@@ -64,5 +70,22 @@ public class Voice extends AbstractBaseEntity {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    @Override
+    public String toString() {
+        return "Voice{" +
+                "id=" + id +
+                ", menuId=" + menu.getId() +
+                ", date=" + date +
+                '}';
     }
 }

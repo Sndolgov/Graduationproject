@@ -43,6 +43,11 @@ public class RootController extends AbstractUserController {
         return "restaurants";
     }
 
+    @GetMapping("/restaurant")
+    public String restaurant() {
+        return "restaurant";
+    }
+
     @GetMapping("/profile")
     public String profile(ModelMap model, @AuthenticationPrincipal AuthorizedUser authorizedUser) {
         model.addAttribute("userTo", authorizedUser.getUserTo());

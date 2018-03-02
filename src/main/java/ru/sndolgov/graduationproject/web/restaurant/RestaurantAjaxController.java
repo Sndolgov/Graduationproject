@@ -5,10 +5,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import ru.sndolgov.graduationproject.AuthorizedUser;
 import ru.sndolgov.graduationproject.model.Menu;
 import ru.sndolgov.graduationproject.model.Restaurant;
+import ru.sndolgov.graduationproject.model.Voice;
 import ru.sndolgov.graduationproject.service.menu.MenuService;
 import ru.sndolgov.graduationproject.service.restaurant.RestaurantService;
+import ru.sndolgov.graduationproject.service.voice.VoiceService;
 import ru.sndolgov.graduationproject.to.RestaurantTo;
 import ru.sndolgov.graduationproject.util.DateUtil;
 import ru.sndolgov.graduationproject.util.RestaurantUtil;
@@ -35,6 +38,9 @@ public class RestaurantAjaxController {
 
     @Autowired
     private MenuService menuService;
+
+    @Autowired
+    private VoiceService voiceService;
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<RestaurantTo> getAll() {
@@ -68,7 +74,22 @@ public class RestaurantAjaxController {
             restaurantService.update(restaurant);
         }
     }
-    @PutMapping
+
+    @PutMapping (value = "/{id}")
+    public void vote(@PathVariable("id") int id){
+        log.info("voted for menu{}", id);
+        voiceService.creat(id, AuthorizedUser.get().getId(), DateUtil.getDateToday());
+    }
+
+    @DeleteMapping ("/deletevoice")
+    public void deleteVoice(){
+        Voice voice = voiceService.getByDate(DateUtil.getDateToday(), AuthorizedUser.get().getId());
+        if (voice!=null){
+            voiceService.delete(voice.getId());
+        }
+    }
+
+   /* @PutMapping
     public void voice(@Valid Restaurant restaurant) {
         if (restaurant.isNew()) {
             log.info("restaurant create {}", restaurant);
@@ -78,5 +99,5 @@ public class RestaurantAjaxController {
             assureIdConsistent(restaurant, restaurant.getId());
             restaurantService.update(restaurant);
         }
-    }
+    }*/
 }

@@ -75,15 +75,16 @@ CREATE TABLE menuconsist
 
 CREATE TABLE voting
 (
-  id            INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),
-  menu_id       INTEGER NOT NULL,
-  restaurant_id INTEGER NOT NULL,
-  user_id INTEGER NOT NULL,
-  CONSTRAINT menu_user_idx UNIQUE (menu_id, user_id),
+  id            INTEGER   PRIMARY KEY DEFAULT nextval('global_seq'),
+  menu_id       INTEGER   NOT NULL,
+  restaurant_id INTEGER   NOT NULL,
+  user_id       INTEGER   NOT NULL,
+  date          DATE      NOT NULL,
+--   CONSTRAINT menu_user_idx UNIQUE (menu_id, user_id),
+  CONSTRAINT date_user_idx UNIQUE (date, user_id),
   FOREIGN KEY (menu_id) REFERENCES menu (id) ON DELETE CASCADE,
   FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE,
   FOREIGN KEY (restaurant_id) REFERENCES restaurants (id) ON DELETE CASCADE
-
 );
 
 /*

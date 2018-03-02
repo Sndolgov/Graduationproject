@@ -35,6 +35,10 @@ function extendsOpts(opts) {
     return opts;
 }
 
+function updateTable() {
+    $.get(ajaxUrl, updateTableByData);
+}
+
 function add() {
     $("#modalTitle").html(i18n["addTitle"]);
     form.find(":input").val("");
@@ -49,15 +53,8 @@ function updateRow(id) {
         });
         $('#editRow').modal();
     });
-}function voiceRow(id) {
-    $.ajax({
-        url: ajaxUrl + id,
-        type: "PUT"
-    }).done(function () {
-        updateTable();
-        successNoty("common.deleted");
-    });
 }
+
 
 function deleteRow(id) {
     $.ajax({
@@ -115,12 +112,7 @@ function failNoty(jqXHR) {
     }).show();
 }
 
-function renderBtnVoice(data, type, row) {
-    if (type === "display") {
-        return "<a onclick='voiceRow(" + row.id + ");'>" +
-            "<span class='glyphicon glyphicon-pencil' aria-hidden='true'></span></a>";
-    }
-}
+
 
 function renderEditBtn(data, type, row) {
     if (type === "display") {

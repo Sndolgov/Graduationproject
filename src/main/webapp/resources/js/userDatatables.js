@@ -1,9 +1,7 @@
 var ajaxUrl = "ajax/admin/users/";
 var datatableApi;
 
-function updateTable() {
-    $.get(ajaxUrl, updateTableByData);
-}
+
 
 function enable(chkbox, id) {
     var enabled = chkbox.is(":checked");

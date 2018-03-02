@@ -23,7 +23,7 @@ public interface MenuService {
 
      List<Menu> getAll(int restaurantId);
 
-     Menu getWithRestaurant(int id, int restaurantId);
+     Menu getWithRestaurant(int id);
 
     List<Menu> getAllTodayWithRestaraunt(Date date);
 

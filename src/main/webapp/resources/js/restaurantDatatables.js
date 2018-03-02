@@ -1,9 +1,50 @@
 var ajaxUrl = "ajax/profile/restaurants/";
 var datatableApi;
 
-function updateTable() {
-    $.get(ajaxUrl, updateTableByData);
+function renderBtnVoice(data, type, row) {
+    if (type === "display") {
+        return "<a onclick='voiceRow(" + row.menuId + ");'>" +
+            "<span class='glyphicon glyphicon-thumbs-up' aria-hidden='true'></span></a>";
+    }
 }
+
+
+function voiceRow(id) {
+    var hour = new Date().getHours();
+    if (hour>=11) {
+        deleteVoice();
+    }
+    setTimeout(function addVoice() {
+        $.ajax({
+            url: ajaxUrl + id,
+            type: "PUT"
+        }).done(function () {
+            updateTable();
+            successNoty("voice.saved");
+        });
+    }, 500)
+    //addVoice(id);
+    /*var time=setTimeout(addVoice(id), 5000);
+    setTimeout(function alertTime() {
+        alert(time);
+    }, 1000);*/
+}
+
+
+
+
+
+
+function deleteVoice() {
+        $.ajax({
+            url: ajaxUrl + "deletevoice",
+            type: "DELETE"
+        }).done(function () {
+            updateTable();
+            successNoty("voice.deleted");
+        });
+}
+
 $(function () {
     datatableApi = $("#datatable").DataTable({
         "ajax": {

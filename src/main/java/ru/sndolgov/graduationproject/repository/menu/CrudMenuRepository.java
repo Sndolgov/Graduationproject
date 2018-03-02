@@ -29,8 +29,8 @@ public interface CrudMenuRepository extends JpaRepository<Menu, Integer> {
     List<Menu> getAll(@Param("restaurantId") int restaurantId);
 
     @EntityGraph(attributePaths = {"restaurant"}, type = EntityGraph.EntityGraphType.LOAD)
-    @Query("SELECT m FROM Menu m JOIN FETCH m.restaurant WHERE m.id = ?1 and m.restaurant.id = ?2")
-    Menu getWithRestaurant(int id, int restaurantId);
+    @Query("SELECT m FROM Menu m JOIN FETCH m.restaurant WHERE m.id = ?1")
+    Menu getWithRestaurant(int id);
 
     @EntityGraph(attributePaths = {"restaurant", "dishes"}, type = EntityGraph.EntityGraphType.LOAD)
     @Query("SELECT m FROM Menu m WHERE m.date=?1 ORDER BY m.restaurant.name ASC")

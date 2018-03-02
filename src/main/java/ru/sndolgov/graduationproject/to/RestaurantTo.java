@@ -17,6 +17,9 @@ import java.io.Serializable;
 public class RestaurantTo extends BaseTo implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    @Size(min = 2, max = 100)
+    private Integer menuId;
+
     @NotBlank
     @Size(min = 2, max = 100)
     @SafeHtml
@@ -45,8 +48,9 @@ public class RestaurantTo extends BaseTo implements Serializable {
     public RestaurantTo() {
     }
 
-    public RestaurantTo(Integer id, String restaurantName, String menuDescription, String dishDescription, String dishPrice, Integer totalValue, Integer voices) {
+    public RestaurantTo(Integer id, Integer menuId, String restaurantName, String menuDescription, String dishDescription, String dishPrice, Integer totalValue, Integer voices) {
         super(id);
+        this.menuId=menuId;
         this.restaurantName = restaurantName;
         this.menuDescription =menuDescription;
         this.dishDescription=dishDescription;
@@ -103,11 +107,25 @@ public class RestaurantTo extends BaseTo implements Serializable {
         this.voices = voices;
     }
 
+    public Integer getMenuId() {
+        return menuId;
+    }
+
+    public void setMenuId(Integer menuId) {
+        this.menuId = menuId;
+    }
+
     @Override
     public String toString() {
         return "RestaurantTo{" +
                 "id=" + id +
+                ", menuId=" + menuId +
                 ", restaurantName='" + restaurantName + '\'' +
+                ", menuDescription='" + menuDescription + '\'' +
+                ", dishDescription='" + dishDescription + '\'' +
+                ", dishPrice='" + dishPrice + '\'' +
+                ", totalValue=" + totalValue +
+                ", voices=" + voices +
                 '}';
     }
 }
