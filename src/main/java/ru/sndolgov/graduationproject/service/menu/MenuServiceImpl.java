@@ -50,6 +50,10 @@ public class MenuServiceImpl implements MenuService{
         return checkNotFoundWithId(repository.getWithRestaurant(id), id);    }
 
     @Override
+    public Menu getWithDishes(int id) {
+        return checkNotFoundWithId(repository.getWithDishes(id), id);    }
+
+    @Override
     public List<Menu> getAllTodayWithRestaraunt(Date date) {
         return repository.getAllTodayWithRestaraunt(date);
     }

@@ -51,14 +51,21 @@
 <script type="text/javascript">
     function renderDeleteBtnAdmin(data, type, row) {
         if (type === "display") {
-            return "<sec:authorize access="hasRole('ROLE_ADMIN')">"+"<a onclick='deleteRow(" + row.id + ");'>" +
-            "<span class='glyphicon glyphicon-remove' aria-hidden='true'></span></a>"+"</sec:authorize>";
+            return "<sec:authorize access="hasRole('ROLE_ADMIN')">" + "<a onclick='deleteRow(" + row.id + ");'>" +
+                "<span class='glyphicon glyphicon-remove' aria-hidden='true'></span></a>" + "</sec:authorize>";
         }
     }
+
+    /*function renderEditBtnAdmin(data, type, row) {
+        if (type === "display") {
+            return "<sec:authorize access="hasRole('ROLE_ADMIN')">"+"<a onclick='updateRowTo(" + data + ");'>" +
+                "<span class='glyphicon glyphicon-pencil' aria-hidden='true'></span></a>"+"</sec:authorize>";
+        }
+    }*/
     function renderEditBtnAdmin(data, type, row) {
         if (type === "display") {
-            return "<sec:authorize access="hasRole('ROLE_ADMIN')">"+"<a onclick='updateRow(" + row.id + ");'>" +
-                "<span class='glyphicon glyphicon-pencil' aria-hidden='true'></span></a>"+"</sec:authorize>";
+            return "<sec:authorize access="hasRole('ROLE_ADMIN')">" + "<a href='restaurant/" + row.menuId + "'>" +
+                "<span class='glyphicon glyphicon-pencil' aria-hidden='true'></span></a>" + "</sec:authorize>";
         }
     }
 </script>

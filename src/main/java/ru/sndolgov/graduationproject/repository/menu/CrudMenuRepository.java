@@ -39,4 +39,8 @@ public interface CrudMenuRepository extends JpaRepository<Menu, Integer> {
     @EntityGraph(attributePaths = {"voices"}, type = EntityGraph.EntityGraphType.LOAD)
     @Query("SELECT m FROM Menu m WHERE m.id = ?1 and m.restaurant.id = ?2")
     Menu getWithVoices(int id, int restaurantId);
+
+    @EntityGraph(attributePaths = {"dishes"}, type = EntityGraph.EntityGraphType.LOAD)
+    @Query("SELECT m FROM Menu m WHERE m.id = ?1")
+    Menu getWithDishes(int id);
 }

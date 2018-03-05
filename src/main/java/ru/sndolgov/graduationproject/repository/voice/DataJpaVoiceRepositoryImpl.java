@@ -39,10 +39,6 @@ public class DataJpaVoiceRepositoryImpl {
 
     @Transactional
     public Voice save(int menuId, int userId, Date date) {
-        /*Voice voice = getByDate(date, userId);
-        if (voice!=null && new Date().getHours()<11){
-                    delete(voice.getId());
-        }*/
         Menu menu = menuRepository.getWithRestaurant(menuId);
         User user = userRepository.getOne(userId);
         Voice newVoice = new Voice(null, menu, menu.getRestaurant(), user, new Date());

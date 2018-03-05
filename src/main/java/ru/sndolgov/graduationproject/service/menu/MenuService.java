@@ -1,8 +1,6 @@
 package ru.sndolgov.graduationproject.service.menu;
 
-import org.springframework.transaction.annotation.Transactional;
 import ru.sndolgov.graduationproject.model.Menu;
-import ru.sndolgov.graduationproject.model.Voice;
 import ru.sndolgov.graduationproject.util.exception.NotFoundException;
 
 import java.util.Date;
@@ -21,9 +19,11 @@ public interface MenuService {
 
     void delete(int id, int restaurantId) throws NotFoundException;
 
-     List<Menu> getAll(int restaurantId);
+    List<Menu> getAll(int restaurantId);
 
-     Menu getWithRestaurant(int id);
+    Menu getWithRestaurant(int id);
+
+    Menu getWithDishes(int id);
 
     List<Menu> getAllTodayWithRestaraunt(Date date);
 

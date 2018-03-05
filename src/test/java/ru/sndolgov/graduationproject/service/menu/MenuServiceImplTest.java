@@ -3,6 +3,7 @@ package ru.sndolgov.graduationproject.service.menu;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import ru.sndolgov.graduationproject.DishTestData;
 import ru.sndolgov.graduationproject.MenuTestData;
 import ru.sndolgov.graduationproject.RestaurantTestData;
 import ru.sndolgov.graduationproject.VoiceTestData;
@@ -16,9 +17,7 @@ import java.util.List;
 import static ru.sndolgov.graduationproject.DishTestData.*;
 import static ru.sndolgov.graduationproject.MenuTestData.*;
 import static ru.sndolgov.graduationproject.MenuTestData.assertMatch;
-import static ru.sndolgov.graduationproject.RestaurantTestData.RESTAURANT1;
-import static ru.sndolgov.graduationproject.RestaurantTestData.RESTAURANT1_ID;
-import static ru.sndolgov.graduationproject.RestaurantTestData.RESTAURANT2_ID;
+import static ru.sndolgov.graduationproject.RestaurantTestData.*;
 import static ru.sndolgov.graduationproject.UserTestData.USER_ID;
 import static ru.sndolgov.graduationproject.VoiceTestData.VOICE1;
 import static ru.sndolgov.graduationproject.VoiceTestData.VOICE2;
@@ -96,6 +95,12 @@ public class MenuServiceImplTest extends AbstractServiceTest {
     public void getWithRestaurant() throws Exception {
         Menu menu = service.getWithRestaurant(MENU1_ID);
         RestaurantTestData.assertMatch(menu.getRestaurant(), RESTAURANT1);
+    }
+
+    @Test
+    public void getWithDishes() throws Exception {
+        Menu menu = service.getWithDishes(MENU1_ID);
+        DishTestData.assertMatch(menu.getDishes(), DISH1, DISH2, DISH3, DISH4);
     }
 
     @Test

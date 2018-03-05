@@ -23,17 +23,7 @@ function voiceRow(id) {
             successNoty("voice.saved");
         });
     }, 500)
-    //addVoice(id);
-    /*var time=setTimeout(addVoice(id), 5000);
-    setTimeout(function alertTime() {
-        alert(time);
-    }, 1000);*/
 }
-
-
-
-
-
 
 function deleteVoice() {
         $.ajax({
@@ -44,6 +34,7 @@ function deleteVoice() {
             successNoty("voice.deleted");
         });
 }
+
 
 $(function () {
     datatableApi = $("#datatable").DataTable({

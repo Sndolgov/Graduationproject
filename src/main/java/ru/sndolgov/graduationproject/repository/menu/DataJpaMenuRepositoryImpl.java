@@ -54,4 +54,9 @@ public class DataJpaMenuRepositoryImpl {
     public Menu getWithVoices(int id, int restaurantId){
         return crudMenuRepository.getWithVoices(id, restaurantId);
     }
+
+    public Menu getWithDishes(int id) {
+        return crudMenuRepository.getWithDishes(id);
+    }
+
 }

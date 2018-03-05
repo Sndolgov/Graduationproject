@@ -88,16 +88,4 @@ public class RestaurantAjaxController {
             voiceService.delete(voice.getId());
         }
     }
-
-   /* @PutMapping
-    public void voice(@Valid Restaurant restaurant) {
-        if (restaurant.isNew()) {
-            log.info("restaurant create {}", restaurant);
-            restaurantService.create(restaurant);
-        } else {
-            log.info("restaurant update {}", restaurant);
-            assureIdConsistent(restaurant, restaurant.getId());
-            restaurantService.update(restaurant);
-        }
-    }*/
 }

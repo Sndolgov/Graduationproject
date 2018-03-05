@@ -7,9 +7,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.support.SessionStatus;
 import ru.sndolgov.graduationproject.AuthorizedUser;
+import ru.sndolgov.graduationproject.to.RestaurantTo;
 import ru.sndolgov.graduationproject.to.UserTo;
 import ru.sndolgov.graduationproject.util.UserUtil;
 import ru.sndolgov.graduationproject.web.user.AbstractUserController;
@@ -43,8 +45,8 @@ public class RootController extends AbstractUserController {
         return "restaurants";
     }
 
-    @GetMapping("/restaurant")
-    public String restaurant() {
+    @GetMapping("/restaurant/{id}")
+    public String restaurant(@PathVariable("id") int menuId) {
         return "restaurant";
     }
 

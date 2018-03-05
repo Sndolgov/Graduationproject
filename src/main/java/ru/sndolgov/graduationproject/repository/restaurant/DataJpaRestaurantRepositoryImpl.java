@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import ru.sndolgov.graduationproject.model.Menu;
 import ru.sndolgov.graduationproject.model.Restaurant;
+import ru.sndolgov.graduationproject.repository.menu.CrudMenuRepository;
 
 import java.util.List;
 
@@ -15,6 +17,9 @@ public class DataJpaRestaurantRepositoryImpl{
 
     @Autowired
     CrudRestaurantRepository crudRepository;
+
+    @Autowired
+    CrudMenuRepository crudMenuRepository;
 
     @Transactional
     public Restaurant save(Restaurant restaurant) {
@@ -39,6 +44,7 @@ public class DataJpaRestaurantRepositoryImpl{
     }
 
     public Restaurant getWithMenus(int id){
-        return crudRepository.getWithMenu(id);
+        Restaurant restaurant = crudRepository.getWithMenu(id);
+        return restaurant;
     }
 }
