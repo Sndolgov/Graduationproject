@@ -1,5 +1,6 @@
 package ru.sndolgov.graduationproject.web;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -11,11 +12,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.support.SessionStatus;
 import ru.sndolgov.graduationproject.AuthorizedUser;
+import ru.sndolgov.graduationproject.model.Restaurant;
+import ru.sndolgov.graduationproject.service.restaurant.RestaurantService;
 import ru.sndolgov.graduationproject.to.RestaurantTo;
 import ru.sndolgov.graduationproject.to.UserTo;
 import ru.sndolgov.graduationproject.util.UserUtil;
 import ru.sndolgov.graduationproject.web.user.AbstractUserController;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import static ru.sndolgov.graduationproject.web.ExceptionInfoHandler.EXCEPTION_DUPLICATE_EMAIL;
@@ -23,12 +27,14 @@ import static ru.sndolgov.graduationproject.web.ExceptionInfoHandler.EXCEPTION_D
 @Controller
 public class RootController extends AbstractUserController {
 
+    @Autowired
+    RestaurantService restaurantService;
+
     @GetMapping("/")
     public String root() {
         return "redirect:restaurants";
     }
 
-    //    @Secured("ROLE_ADMIN")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/users")
     public String users() {
@@ -41,12 +47,16 @@ public class RootController extends AbstractUserController {
     }
 
     @GetMapping("/restaurants")
-    public String restaurants() {
+    public String restaurants(ModelMap model) {
         return "restaurants";
     }
 
-    @GetMapping("/restaurant/{id}")
-    public String restaurant(@PathVariable("id") int menuId) {
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @GetMapping("/restaurant")
+    public String restaurant (ModelMap model,  HttpServletRequest request) {
+        Integer id = Integer.parseInt(request.getParameter("id"));
+        Restaurant restaurant = restaurantService.getWithMenus(id);
+        model.addAttribute("restaurant", restaurant);
         return "restaurant";
     }
 

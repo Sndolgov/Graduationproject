@@ -1,20 +1,20 @@
 var ajaxUrl = "ajax/profile/restaurants/";
 var datatableApi;
 
-function renderBtnVoice(data, type, row) {
+function renderBtn(data, type, row) {
     if (type === "display") {
-        return "<a onclick='voiceRow(" + row.menuId + ");'>" +
+        return "<a onclick='editInRow(" + row.menuId + ");'>" +
             "<span class='glyphicon glyphicon-thumbs-up' aria-hidden='true'></span></a>";
     }
 }
 
 
-function voiceRow(id) {
+function editInRow(id) {
     var hour = new Date().getHours();
     if (hour>=11) {
-        deleteVoice();
+        $.get(ajaxUrl+"getvoice", deleteFromRow);
     }
-    setTimeout(function addVoice() {
+    setTimeout(function addInRow() {
         $.ajax({
             url: ajaxUrl + id,
             type: "PUT"
@@ -25,14 +25,27 @@ function voiceRow(id) {
     }, 500)
 }
 
-function deleteVoice() {
+function deleteFromRow(id) {
+    if (id!==0) {
         $.ajax({
-            url: ajaxUrl + "deletevoice",
+            url: ajaxUrl + "deletevoice/"+ id,
             type: "DELETE"
-        }).done(function () {
-            updateTable();
-            successNoty("voice.deleted");
-        });
+        })
+            .done(function () {
+                updateTable();
+                successNoty("voice.deleted");
+            });
+    }
+}
+
+function rowDelete(id) {
+    $.ajax({
+        url: ajaxUrl+"admin/" + id,
+        type: "DELETE"
+    }).done(function () {
+        updateTable();
+        successNoty("common.deleted");
+    });
 }
 
 
@@ -64,7 +77,7 @@ $(function () {
                 "data": "voices"
             },
             {
-                "render": renderBtnVoice,
+                "render": renderBtn,
                 "defaultContent": "",
                 "orderable": false
             },
@@ -87,5 +100,4 @@ $(function () {
         ],
         "initComplete": makeEditable
     });
-
 });

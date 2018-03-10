@@ -10,7 +10,7 @@
 <script type="text/javascript" src="resources/js/restaurantDatatables.js" defer></script>
 <div class="jumbotron">
     <div class="container">
-        <h3><spring:message code="restaurant.title"/></h3>
+        <h3><spring:message code='restaurant.title'/></h3>
 
         <table class="table table-striped display" id="datatable">
             <thead>

@@ -46,8 +46,8 @@ public class MenuServiceImpl implements MenuService{
         return repository.getAll(restaurantId);    }
 
     @Override
-    public Menu getWithRestaurant(int id) {
-        return checkNotFoundWithId(repository.getWithRestaurant(id), id);    }
+    public Menu getWithRestaurantAndDishes(int id) {
+        return checkNotFoundWithId(repository.getWithRestaurantAndDishes(id), id);    }
 
     @Override
     public Menu getWithDishes(int id) {

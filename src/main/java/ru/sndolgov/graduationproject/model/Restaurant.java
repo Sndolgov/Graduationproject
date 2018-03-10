@@ -39,6 +39,10 @@ public class Restaurant extends AbstractNamedEntity {
         this.enabled = enabled;
     }
 
+    public void setMenus(List<Menu> menus) {
+        this.menus = menus;
+    }
+
     public List<Menu> getMenus() {
         return menus;
     }

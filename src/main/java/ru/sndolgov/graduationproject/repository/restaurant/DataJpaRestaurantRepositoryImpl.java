@@ -8,6 +8,7 @@ import ru.sndolgov.graduationproject.model.Menu;
 import ru.sndolgov.graduationproject.model.Restaurant;
 import ru.sndolgov.graduationproject.repository.menu.CrudMenuRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -45,6 +46,12 @@ public class DataJpaRestaurantRepositoryImpl{
 
     public Restaurant getWithMenus(int id){
         Restaurant restaurant = crudRepository.getWithMenu(id);
+        List<Menu> menus = restaurant.getMenus();
+        List<Menu> menusWithDishes = new ArrayList<>();
+        for (Menu menu: menus){
+            menusWithDishes.add(crudMenuRepository.getWithDishes(menu.getId()));
+        }
+        restaurant.setMenus(menusWithDishes);
         return restaurant;
     }
 }

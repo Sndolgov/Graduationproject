@@ -5,7 +5,9 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.CacheManager;
 import org.springframework.dao.DataAccessException;
+import ru.sndolgov.graduationproject.DishTestData;
 import ru.sndolgov.graduationproject.MenuTestData;
+import ru.sndolgov.graduationproject.RestaurantTestData;
 import ru.sndolgov.graduationproject.model.Restaurant;
 import ru.sndolgov.graduationproject.model.Role;
 import ru.sndolgov.graduationproject.repository.JpaUtil;
@@ -16,6 +18,7 @@ import javax.validation.ConstraintViolationException;
 import java.util.Collections;
 import java.util.List;
 
+import static ru.sndolgov.graduationproject.DishTestData.*;
 import static ru.sndolgov.graduationproject.MenuTestData.MENU1;
 import static ru.sndolgov.graduationproject.MenuTestData.MENU2;
 import static ru.sndolgov.graduationproject.MenuTestData.MENU3;
@@ -48,7 +51,7 @@ public class RestaurantServiceTest extends AbstractServiceTest {
 
     @Test
     public void create() throws Exception {
-        Restaurant newRestaurant = getCreated();
+        Restaurant newRestaurant = RestaurantTestData.getCreated();
         Restaurant created = service.create(newRestaurant);
         newRestaurant.setId(created.getId());
         assertMatch(service.getAll(), newRestaurant, RESTAURANT1, RESTAURANT2);
@@ -56,7 +59,7 @@ public class RestaurantServiceTest extends AbstractServiceTest {
 
     @Test
     public void update() throws Exception {
-        Restaurant updated = getUpdated();
+        Restaurant updated = RestaurantTestData.getUpdated();
         service.update(updated);
         assertMatch(service.get(RESTAURANT1_ID), updated);
     }
@@ -103,6 +106,7 @@ public class RestaurantServiceTest extends AbstractServiceTest {
     public void getWithMenus() throws Exception {
         Restaurant restaurant = service.getWithMenus(RESTAURANT1_ID);
         MenuTestData.assertMatch(restaurant.getMenus(), MENU3, MENU2, MENU1);
+        DishTestData.assertMatch(restaurant.getMenus().get(2).getDishes(), DISH1, DISH2, DISH3, DISH4);
     }
 
     @Test

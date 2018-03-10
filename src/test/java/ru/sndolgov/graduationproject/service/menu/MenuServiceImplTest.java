@@ -93,7 +93,7 @@ public class MenuServiceImplTest extends AbstractServiceTest {
 
     @Test
     public void getWithRestaurant() throws Exception {
-        Menu menu = service.getWithRestaurant(MENU1_ID);
+        Menu menu = service.getWithRestaurantAndDishes(MENU1_ID);
         RestaurantTestData.assertMatch(menu.getRestaurant(), RESTAURANT1);
     }
 

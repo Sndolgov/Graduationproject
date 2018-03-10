@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import ru.sndolgov.graduationproject.AuthorizedUser;
 import ru.sndolgov.graduationproject.model.Menu;
@@ -15,6 +16,7 @@ import ru.sndolgov.graduationproject.service.voice.VoiceService;
 import ru.sndolgov.graduationproject.to.RestaurantTo;
 import ru.sndolgov.graduationproject.util.DateUtil;
 import ru.sndolgov.graduationproject.util.RestaurantUtil;
+import ru.sndolgov.graduationproject.util.exception.NotFoundException;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -51,13 +53,7 @@ public class RestaurantAjaxController {
                 .collect(Collectors.toList());
     }
 
-    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Restaurant get(@PathVariable("id") int id) {
-        log.info("restaurant get {}", id);
-        return restaurantService.get(id);
-    }
-
-    @DeleteMapping("/{id}")
+    @DeleteMapping("admin/{id}")
     public void delete(@PathVariable("id") int id) {
         log.info("restaurant delete {}", id);
         restaurantService.delete(id);
@@ -75,17 +71,26 @@ public class RestaurantAjaxController {
         }
     }
 
-    @PutMapping (value = "/{id}")
-    public void vote(@PathVariable("id") int id){
+    @PutMapping(value = "/{id}")
+    public void vote(@PathVariable("id") int id) {
         log.info("voted for menu{}", id);
         voiceService.creat(id, AuthorizedUser.get().getId(), DateUtil.getDateToday());
     }
 
-    @DeleteMapping ("/deletevoice")
-    public void deleteVoice(){
-        Voice voice = voiceService.getByDate(DateUtil.getDateToday(), AuthorizedUser.get().getId());
-        if (voice!=null){
-            voiceService.delete(voice.getId());
+    @DeleteMapping("/deletevoice/{id}")
+    public void deleteVoice(@PathVariable("id") int id) {
+        voiceService.delete(id);
+    }
+
+    @GetMapping("/getvoice")
+    public Integer getVoice() {
+        Integer id = 0;
+        try {
+            Voice voice = voiceService.getByDate(DateUtil.getDateToday(), AuthorizedUser.get().getId());
+            id = voice.getId();
+        } catch (NotFoundException e) {
+            System.out.println(e);
         }
+        return id;
     }
 }

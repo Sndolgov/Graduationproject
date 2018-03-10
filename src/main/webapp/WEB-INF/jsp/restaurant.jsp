@@ -1,41 +1,36 @@
-<%@ page contentType="text/html" pageEncoding="UTF-8" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ taglib prefix="graduation" tagdir="/WEB-INF/tags" %>
 
 <html>
 <jsp:include page="fragments/headTag.jsp"/>
-
 <body>
-<jsp:include page="fragments/bodyHeader.jsp"/>
-
+<script type="text/javascript" src="resources/js/datatablesUtil.js" defer></script>
+<script type="text/javascript" src="resources/js/menuDatatables.js" defer></script>
 <div class="jumbotron">
     <div class="container">
-        <%--@elvariable id="restaurantTo" type="ru.sndolgov.graduationproject.to.RestaurantTo"--%>
-        <h2>${RestaurantTo.restaurantName} </h2>
+        <h3>${restaurant.name}</h3>
 
-        <form:form modelAttribute="restaurantTo" class="form-horizontal" method="post" action='register'
-                   charset="utf-8" accept-charset="UTF-8">
+        <table class="table table-striped display" id="datatable">
+            <thead>
+            <tr>
+                <th><spring:message code="menu.description"/></th>
+                <th><spring:message code="dish.description"/></th>
+                <th><spring:message code="dish.price"/></th>
+                <th><spring:message code="menu.totalValue"/></th>
+                <th><spring:message code="menu.voices"/></th>
 
-            <spring:message code="user.name" var="userName"/>
-            <graduation:inputField label='${userName}' name="restaurantName"/>
-
-          <%--  <spring:message code="user.email" var="userEmail"/>
-            <graduation:inputField label='${userEmail}' name="email"/>
-
-            <spring:message code="user.password" var="userPassword"/>
-            <graduation:inputField label='${userPassword}' name="password" inputType="password"/>--%>
-
-            <div class="form-group">
-                <div class="col-xs-offset-2 col-xs-10">
-                    <button type="submit" class="btn btn-primary">
-                        <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-                    </button>
-                </div>
-            </div>
-        </form:form>
+                <th></th>
+                <th></th>
+            </tr>
+            </thead>
+        </table>
     </div>
 </div>
+
+<jsp:include page="fragments/bodyHeader.jsp"/>
 <jsp:include page="fragments/footer.jsp"/>
 </body>
+<jsp:include page="fragments/i18n.jsp"/>
 </html>
