@@ -1,9 +1,6 @@
 package ru.sndolgov.graduationproject.web.user;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.sndolgov.graduationproject.model.User;
 import ru.sndolgov.graduationproject.to.UserTo;
@@ -12,7 +9,6 @@ import ru.sndolgov.graduationproject.util.UserUtil;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.StringJoiner;
 
 @RestController
 @RequestMapping("/ajax/admin/users")

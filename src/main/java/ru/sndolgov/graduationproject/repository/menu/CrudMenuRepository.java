@@ -19,8 +19,8 @@ import java.util.List;
 public interface CrudMenuRepository extends JpaRepository<Menu, Integer> {
 
     @Modifying
-    @Query("DELETE FROM Menu m WHERE m.id=:id AND m.restaurant.id=:restaurantId")
-    int delete(@Param("id") int id, @Param("restaurantId") int restaurantId);
+    @Query("DELETE FROM Menu m WHERE m.id=:id")
+    int delete(@Param("id") int id);
 
     @Override
     Menu save(Menu menu);

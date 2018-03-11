@@ -5,12 +5,15 @@
 
 <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
-        <a href="restaurants" class="navbar-brand"><spring:message code="app.title"/></a>
+        <a href="voting" class="navbar-brand"><spring:message code="app.title"/></a>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
                 <li>
                     <sec:authorize access="isAuthenticated()">
                         <form:form class="navbar-form" action="logout" method="post">
+                            <sec:authorize access="hasRole('ROLE_ADMIN')">
+                                <a class="btn btn-info" href="restaurants"><spring:message code="restaurant.title"/></a>
+                            </sec:authorize>
                             <sec:authorize access="hasRole('ROLE_ADMIN')">
                                 <a class="btn btn-info" href="users"><spring:message code="user.title"/></a>
                             </sec:authorize>

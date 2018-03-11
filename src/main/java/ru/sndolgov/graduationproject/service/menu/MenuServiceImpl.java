@@ -37,8 +37,8 @@ public class MenuServiceImpl implements MenuService{
         return checkNotFoundWithId(repository.get(id, restaurantId), id);    }
 
     @Override
-    public void delete(int id, int restaurantId) throws NotFoundException {
-        checkNotFoundWithId(repository.delete(id, restaurantId), id);
+    public void delete(int id) throws NotFoundException {
+        checkNotFoundWithId(repository.delete(id), id);
     }
 
     @Override

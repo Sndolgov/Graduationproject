@@ -4,7 +4,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import ru.sndolgov.graduationproject.AuthorizedUser;
 import ru.sndolgov.graduationproject.model.Menu;
@@ -29,31 +28,27 @@ import static ru.sndolgov.graduationproject.util.ValidationUtil.assureIdConsiste
  */
 
 @RestController
-@RequestMapping(value = "/ajax/profile/restaurants")
+@RequestMapping(value = "/ajax/admin/restaurants")
 public class RestaurantAjaxController {
 
     protected final Logger log = LoggerFactory.getLogger(getClass());
 
-
     @Autowired
     private RestaurantService restaurantService;
 
-    @Autowired
-    private MenuService menuService;
-
-    @Autowired
-    private VoiceService voiceService;
-
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<RestaurantTo> getAll() {
-        log.info("restaurant getAll");
-        List<Menu> menus = menuService.getAllTodayWithRestaraunt(DateUtil.getDateToday());
-        return menus.stream()
-                .map(RestaurantUtil::asTo)
-                .collect(Collectors.toList());
+    public List<Restaurant> getAll() {
+        log.info("restaurants getAll");
+        return  restaurantService.getAll();
     }
 
-    @DeleteMapping("admin/{id}")
+    @PostMapping(value = "/{id}")
+    public void enable(@PathVariable("id") int id, @RequestParam("enabled") boolean enabled) {
+        log.info((enabled ? "enable " : "disable ") + id);
+        restaurantService.enable(id, enabled);
+    }
+
+    @DeleteMapping("/{id}")
     public void delete(@PathVariable("id") int id) {
         log.info("restaurant delete {}", id);
         restaurantService.delete(id);
@@ -62,35 +57,13 @@ public class RestaurantAjaxController {
     @PostMapping
     public void createOrUpdate(@Valid Restaurant restaurant) {
         if (restaurant.isNew()) {
-            log.info("restaurant create {}", restaurant);
+            log.info("voting create {}", restaurant);
             restaurantService.create(restaurant);
         } else {
-            log.info("restaurant update {}", restaurant);
+            log.info("voting update {}", restaurant);
             assureIdConsistent(restaurant, restaurant.getId());
             restaurantService.update(restaurant);
         }
     }
 
-    @PutMapping(value = "/{id}")
-    public void vote(@PathVariable("id") int id) {
-        log.info("voted for menu{}", id);
-        voiceService.creat(id, AuthorizedUser.get().getId(), DateUtil.getDateToday());
-    }
-
-    @DeleteMapping("/deletevoice/{id}")
-    public void deleteVoice(@PathVariable("id") int id) {
-        voiceService.delete(id);
-    }
-
-    @GetMapping("/getvoice")
-    public Integer getVoice() {
-        Integer id = 0;
-        try {
-            Voice voice = voiceService.getByDate(DateUtil.getDateToday(), AuthorizedUser.get().getId());
-            id = voice.getId();
-        } catch (NotFoundException e) {
-            System.out.println(e);
-        }
-        return id;
-    }
 }

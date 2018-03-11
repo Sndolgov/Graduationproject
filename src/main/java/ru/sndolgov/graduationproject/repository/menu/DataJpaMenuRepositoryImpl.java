@@ -35,8 +35,8 @@ public class DataJpaMenuRepositoryImpl {
     }
 
     @Transactional
-    public boolean delete(int id, int restaurantId) {
-        return crudMenuRepository.delete(id, restaurantId) != 0;
+    public boolean delete(int id) {
+        return crudMenuRepository.delete(id) != 0;
     }
 
     public List<Menu> getAll(int restaurantId) {

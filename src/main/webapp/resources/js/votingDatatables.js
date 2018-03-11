@@ -1,4 +1,4 @@
-var ajaxUrl = "ajax/admin/restaurants/";
+var ajaxUrl = "ajax/profile/voting/";
 var datatableApi;
 
 function renderBtn(data, type, row) {
@@ -11,8 +11,8 @@ function renderBtn(data, type, row) {
 
 function editInRow(id) {
     var hour = new Date().getHours();
-    if (hour >= 11) {
-        $.get(ajaxUrl + "getvoice", deleteFromRow);
+    if (hour>=11) {
+        $.get(ajaxUrl+"getvoice", deleteFromRow);
     }
     setTimeout(function addInRow() {
         $.ajax({
@@ -26,9 +26,9 @@ function editInRow(id) {
 }
 
 function deleteFromRow(id) {
-    if (id !== 0) {
+    if (id!==0) {
         $.ajax({
-            url: ajaxUrl + "deletevoice/" + id,
+            url: ajaxUrl + "deletevoice/"+ id,
             type: "DELETE"
         })
             .done(function () {
@@ -40,7 +40,7 @@ function deleteFromRow(id) {
 
 function rowDelete(id) {
     $.ajax({
-        url: ajaxUrl + "admin/" + id,
+        url: ajaxUrl+"admin/" + id,
         type: "DELETE"
     }).done(function () {
         updateTable();
@@ -59,26 +59,37 @@ $(function () {
         "info": true,
         "columns": [
             {
-                "data": "name"
+                "data": "restaurantName"
             },
-                     {
-             "data": "enabled",
-             "render": function (data, type, row) {
-             if (type === "display") {
-             return "<input type='checkbox' " + (data ? "checked" : "") + " onclick='enable($(this)," + row.id + ");'/>";
-             }
-             return data;
-             }
-             },
+            {
+                "data": "menuDescription"
+            },
+            {
+                "data": "dishDescription"
+            },
+            {
+                "data": "dishPrice"
+            },
+            {
+                "data": "totalValue"
+            },
+            {
+                "data": "voices"
+            },
+            {
+                "render": renderBtn,
+                "defaultContent": "",
+                "orderable": false
+            },
             {
                 "render": renderEditBtnAdmin,
                 "defaultContent": "",
                 "orderable": false
             },
             {
-                "orderable": false,
+                "render": renderDeleteBtnAdmin,
                 "defaultContent": "",
-                "render": renderDeleteBtn
+                "orderable": false
             }
         ],
         "order": [
@@ -87,11 +98,6 @@ $(function () {
                 "asc"
             ]
         ],
-        "createdRow": function (row, data, dataIndex) {
-            if (!data.enabled) {
-                $(row).addClass("disabled");
-            }
-        },
         "initComplete": makeEditable
     });
 });

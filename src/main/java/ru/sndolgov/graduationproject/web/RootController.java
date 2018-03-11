@@ -32,7 +32,7 @@ public class RootController extends AbstractUserController {
 
     @GetMapping("/")
     public String root() {
-        return "redirect:restaurants";
+        return "redirect:voting";
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
@@ -46,18 +46,24 @@ public class RootController extends AbstractUserController {
         return "login";
     }
 
-    @GetMapping("/restaurants")
-    public String restaurants(ModelMap model) {
-        return "restaurants";
+    @GetMapping("/voting")
+    public String voting(ModelMap model) {
+        return "voting";
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/restaurant")
-    public String restaurant (ModelMap model,  HttpServletRequest request) {
+    public String restaurant(ModelMap model, HttpServletRequest request) {
         Integer id = Integer.parseInt(request.getParameter("id"));
         Restaurant restaurant = restaurantService.getWithMenus(id);
         model.addAttribute("restaurant", restaurant);
         return "restaurant";
+    }
+
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @GetMapping("/restaurants")
+    public String restaurants(ModelMap model) {
+        return "restaurants";
     }
 
     @GetMapping("/profile")
@@ -75,7 +81,7 @@ public class RootController extends AbstractUserController {
             super.update(userTo, authorizedUser.getId());
             authorizedUser.update(userTo);
             status.setComplete();
-            return "redirect:restaurants";
+            return "redirect:voting";
         } catch (DataIntegrityViolationException ex) {
             result.rejectValue("email", EXCEPTION_DUPLICATE_EMAIL);
             return "profile";

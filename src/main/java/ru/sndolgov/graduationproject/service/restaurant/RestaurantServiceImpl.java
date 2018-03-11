@@ -6,6 +6,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import ru.sndolgov.graduationproject.model.Restaurant;
+import ru.sndolgov.graduationproject.model.User;
 import ru.sndolgov.graduationproject.repository.restaurant.DataJpaRestaurantRepositoryImpl;
 import ru.sndolgov.graduationproject.util.exception.NotFoundException;
 
@@ -57,6 +58,13 @@ public class RestaurantServiceImpl implements RestaurantService{
     @Override
     public Restaurant getWithMenus(int id) {
         return checkNotFoundWithId(repository.getWithMenus(id), id);
+    }
+
+    @Override
+    public void enable(int id, boolean enable) {
+        Restaurant restaurant = get(id);
+        restaurant.setEnabled(enable);
+        repository.save(restaurant);
     }
 
     // @CacheEvict(value = "restaurants", allEntries = true)

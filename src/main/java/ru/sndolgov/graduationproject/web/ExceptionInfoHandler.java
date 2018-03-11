@@ -39,6 +39,7 @@ public class ExceptionInfoHandler {
 
     public static final String EXCEPTION_DUPLICATE_EMAIL = "exception.user.duplicateEmail";
     public static final String EXCEPTION_DUPLICATE_VOICE = "exception.menu.voice";
+    public static final String EXCEPTION_DUPLICATE_NAME = "exception.restaurant.name";
 
 
     private static final Map<String, String> CONSTRAINS_I18N_MAP = Collections.unmodifiableMap(
@@ -46,6 +47,8 @@ public class ExceptionInfoHandler {
                 {
                     put("users_unique_email_idx", EXCEPTION_DUPLICATE_EMAIL);
                     put("date_user_idx", EXCEPTION_DUPLICATE_VOICE);
+                    put("restaurant_unique_name_idx", EXCEPTION_DUPLICATE_NAME);
+
                 }
             });
 

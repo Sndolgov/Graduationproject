@@ -36,6 +36,6 @@ public class RootControllerTest extends AbstractControllerTest {
                 .with(userAuth(USER)))
                 .andDo(print())
                 .andExpect(view().name("restaurants"))
-                .andExpect(forwardedUrl("/WEB-INF/jsp/restaurants.jsp"));
+                .andExpect(forwardedUrl("/WEB-INF/jsp/voting.jsp"));
     }
 }

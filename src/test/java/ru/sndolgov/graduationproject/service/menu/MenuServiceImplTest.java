@@ -70,12 +70,12 @@ public class MenuServiceImplTest extends AbstractServiceTest {
 
     @Test(expected = NotFoundException.class)
     public void deleteNotFound() throws Exception {
-        service.delete(MENU1_ID, RESTAURANT2_ID);
+        service.delete(RESTAURANT1_ID);
     }
 
     @Test
     public void delete() throws Exception {
-        service.delete(MENU1_ID, RESTAURANT1_ID);
+        service.delete(MENU1_ID);
         assertMatch(service.getAll(RESTAURANT1_ID), MENU3, MENU2);
     }
 

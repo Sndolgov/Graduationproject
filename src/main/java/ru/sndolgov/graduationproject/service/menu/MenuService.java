@@ -17,7 +17,7 @@ public interface MenuService {
 
     Menu get(int id, int restaurantId) throws NotFoundException;
 
-    void delete(int id, int restaurantId) throws NotFoundException;
+    void delete(int id) throws NotFoundException;
 
     List<Menu> getAll(int restaurantId);
 
