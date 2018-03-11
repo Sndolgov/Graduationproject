@@ -48,6 +48,13 @@ function rowDelete(id) {
     });
 }
 
+function renderEditBtnAdmin(data, type, row) {
+    if (type === "display") {
+        return "<a href='restaurant?id=" + row.id + "'>" +
+        "<span class='glyphicon glyphicon-pencil' aria-hidden='true'></span></a>";
+    }
+}
+
 
 $(function () {
     datatableApi = $("#datatable").DataTable({
@@ -71,9 +78,9 @@ $(function () {
              }
              },
             {
-                "render": renderEditBtnAdmin,
                 "defaultContent": "",
-                "orderable": false
+                "orderable": false,
+                "render": renderEditBtnAdmin
             },
             {
                 "orderable": false,

@@ -8,7 +8,6 @@ function renderBtn(data, type, row) {
     }
 }
 
-
 function editInRow(id) {
     var hour = new Date().getHours();
     if (hour>=11) {
@@ -78,16 +77,6 @@ $(function () {
             },
             {
                 "render": renderBtn,
-                "defaultContent": "",
-                "orderable": false
-            },
-            {
-                "render": renderEditBtnAdmin,
-                "defaultContent": "",
-                "orderable": false
-            },
-            {
-                "render": renderDeleteBtnAdmin,
                 "defaultContent": "",
                 "orderable": false
             }

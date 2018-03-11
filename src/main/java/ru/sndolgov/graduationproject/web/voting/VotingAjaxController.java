@@ -64,11 +64,6 @@ public class VotingAjaxController {
         voiceService.creat(id, AuthorizedUser.get().getId(), DateUtil.getDateToday());
     }
 
-    @DeleteMapping("/deletevoice/{id}")
-    public void deleteVoice(@PathVariable("id") int id) {
-        voiceService.delete(id);
-    }
-
     @GetMapping("/getvoice")
     public Integer getVoice() {
         Integer id = 0;

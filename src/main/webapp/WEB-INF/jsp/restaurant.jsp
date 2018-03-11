@@ -34,8 +34,71 @@
     </div>
 </div>
 
+<div class="modal fade" id="editRow">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h2 class="modal-title" id="modalTitle"></h2>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" id="detailsForm">
+                    <div class="form-group">
+                        <label for="id" class="control-label col-xs-3">Id</label>
+
+                        <div class="col-xs-9">
+                            <input type="text" class="form-control" id="id" name="id"
+                                   placeholder="MenuId">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="menuId" class="control-label col-xs-3">MenuId</label>
+
+                        <div class="col-xs-9">
+                            <input type="text" class="form-control" id="menuId" name="menuId"
+                                   placeholder="MenuId">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="description" class="control-label col-xs-3"><spring:message
+                                code="menu.description"/></label>
+
+                        <div class="col-xs-9">
+                            <input type="text" class="form-control" id="description" name="description"
+                                   placeholder="<spring:message code="menu.description"/>">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="date" class="control-label col-xs-3"><spring:message code="menu.date"/></label>
+
+                        <div class="col-xs-9">
+                            <input type="text" class="form-control" id="date" name="date"
+                                   placeholder="<spring:message code="menu.date"/>">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-xs-offset-3 col-xs-9">
+                            <button type="button" onclick="save()" class="btn btn-primary">
+                                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 <jsp:include page="fragments/bodyHeader.jsp"/>
 <jsp:include page="fragments/footer.jsp"/>
 </body>
 <jsp:include page="fragments/i18n.jsp"/>
+<script type="text/javascript">
+    i18n["addTitle"] = '<spring:message code="menu.add"/>';
+    i18n["editTitle"] = '<spring:message code="menu.edit"/>';
+</script>
 </html>

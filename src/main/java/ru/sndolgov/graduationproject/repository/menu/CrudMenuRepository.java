@@ -33,7 +33,7 @@ public interface CrudMenuRepository extends JpaRepository<Menu, Integer> {
     Menu getWithRestaurantAndDishes(int id);
 
     @EntityGraph(attributePaths = {"restaurant", "dishes"}, type = EntityGraph.EntityGraphType.LOAD)
-    @Query("SELECT m FROM Menu m WHERE m.date=?1 ORDER BY m.restaurant.name ASC")
+    @Query("SELECT m FROM Menu m WHERE m.date=?1 AND m.restaurant.enabled=true ORDER BY m.restaurant.name ASC")
     List<Menu> getAllTodayWithRestaraunt(Date date);
 
     @EntityGraph(attributePaths = {"voices"}, type = EntityGraph.EntityGraphType.LOAD)

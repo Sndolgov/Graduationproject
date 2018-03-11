@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.sndolgov.graduationproject.AuthorizedUser;
 import ru.sndolgov.graduationproject.model.Menu;
 import ru.sndolgov.graduationproject.model.Restaurant;
+import ru.sndolgov.graduationproject.model.User;
 import ru.sndolgov.graduationproject.model.Voice;
 import ru.sndolgov.graduationproject.service.menu.MenuService;
 import ru.sndolgov.graduationproject.service.restaurant.RestaurantService;
@@ -66,4 +67,8 @@ public class RestaurantAjaxController {
         }
     }
 
+    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Restaurant get(@PathVariable("id") int id) {
+        return restaurantService.get(id);
+    }
 }
