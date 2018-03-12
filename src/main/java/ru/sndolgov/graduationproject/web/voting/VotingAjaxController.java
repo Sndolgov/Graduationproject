@@ -52,10 +52,9 @@ public class VotingAjaxController {
                 .collect(Collectors.toList());
     }
 
-    @DeleteMapping("admin/{id}")
-    public void delete(@PathVariable("id") int id) {
-        log.info("voting delete {}", id);
-        restaurantService.delete(id);
+    @DeleteMapping("/{id}")
+    public void deleteVoice(@PathVariable("id") int id) {
+        voiceService.delete(id);
     }
 
     @PutMapping(value = "/{id}")

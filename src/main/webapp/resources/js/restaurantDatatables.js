@@ -50,7 +50,7 @@ function rowDelete(id) {
 
 function renderEditBtnAdmin(data, type, row) {
     if (type === "display") {
-        return "<a href='restaurant?id=" + row.id + "'>" +
+        return "<a href='restaurant/" + row.id + "'>" +
         "<span class='glyphicon glyphicon-pencil' aria-hidden='true'></span></a>";
     }
 }

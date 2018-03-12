@@ -10,6 +10,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.Date;
 
 /**
  * Created by Сергей on 07.02.2018.
@@ -43,12 +45,16 @@ public class RestaurantTo extends BaseTo implements Serializable {
     @NotNull
     private Integer  totalValue;
 
+    @NotNull
+    private LocalDate date;
+
     private Integer voices;
 
     public RestaurantTo() {
     }
 
-    public RestaurantTo(Integer id, Integer menuId, String restaurantName, String menuDescription, String dishDescription, String dishPrice, Integer totalValue, Integer voices) {
+    public RestaurantTo(Integer id, Integer menuId, String restaurantName, String menuDescription, String dishDescription, String dishPrice,
+                        Integer totalValue, Integer voices, LocalDate date) {
         super(id);
         this.menuId=menuId;
         this.restaurantName = restaurantName;
@@ -57,6 +63,7 @@ public class RestaurantTo extends BaseTo implements Serializable {
         this.dishPrice=dishPrice;
         this.totalValue=totalValue;
         this.voices=voices;
+        this.date=date;
     }
 
     public String getRestaurantName() {
@@ -115,6 +122,14 @@ public class RestaurantTo extends BaseTo implements Serializable {
         this.menuId = menuId;
     }
 
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
     @Override
     public String toString() {
         return "RestaurantTo{" +
@@ -125,6 +140,7 @@ public class RestaurantTo extends BaseTo implements Serializable {
                 ", dishDescription='" + dishDescription + '\'' +
                 ", dishPrice='" + dishPrice + '\'' +
                 ", totalValue=" + totalValue +
+                ", date=" + date +
                 ", voices=" + voices +
                 '}';
     }

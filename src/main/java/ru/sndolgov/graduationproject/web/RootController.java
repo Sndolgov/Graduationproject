@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.support.SessionStatus;
 import ru.sndolgov.graduationproject.AuthorizedUser;
+import ru.sndolgov.graduationproject.ChangeableRestaurant;
 import ru.sndolgov.graduationproject.model.Restaurant;
 import ru.sndolgov.graduationproject.service.restaurant.RestaurantService;
 import ru.sndolgov.graduationproject.to.RestaurantTo;
@@ -52,10 +53,10 @@ public class RootController extends AbstractUserController {
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @GetMapping("/restaurant")
-    public String restaurant(ModelMap model, HttpServletRequest request) {
-        Integer id = Integer.parseInt(request.getParameter("id"));
+    @GetMapping("/restaurant/{id}")
+    public String restaurant(ModelMap model, @PathVariable("id") int id) {
         Restaurant restaurant = restaurantService.getWithMenus(id);
+        ChangeableRestaurant.setId(id);
         model.addAttribute("restaurant", restaurant);
         return "restaurant";
     }

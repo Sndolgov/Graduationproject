@@ -11,11 +11,29 @@ function getId() {
     return get.substr(x+1, l);
 }
 
+function renderDeleteBtn(data, type, row) {
+    if (type === "display") {
+        return "<a onclick='deleteRow(" + row.menuId + ");'>" +
+            "<span class='glyphicon glyphicon-remove' aria-hidden='true'></span></a>";
+    }
+}
+
+function updateTable() {
+    id = getId();
+    $.get(ajaxUrl+id, updateTableByData);
+}
+
+function renderEditBtn(data, type, row) {
+    if (type === "display") {
+        return "<a onclick='updateRow(" + row.menuId + ");'>" +
+            "<span class='glyphicon glyphicon-pencil' aria-hidden='true'></span></a>";
+    }
+}
+
 $(function () {
-    id = getId()
     datatableApi = $("#datatable").DataTable({
         "ajax": {
-            "url": ajaxUrl+id,
+            "url": ajaxUrl,
             "dataSrc": ""
         },
         "paging": false,
@@ -37,14 +55,18 @@ $(function () {
                 "data": "voices"
             },
             {
-                "render": renderEditBtnAdmin,
+                "data": "date"
+            },
+
+            {
+                "orderable": false,
                 "defaultContent": "",
-                "orderable": false
+                "render": renderEditBtn
             },
             {
-                "render": renderDeleteBtnAdmin,
+                "orderable": false,
                 "defaultContent": "",
-                "orderable": false
+                "render": renderDeleteBtn
             }
         ],
         "order": [

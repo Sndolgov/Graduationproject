@@ -27,4 +27,8 @@ public class DateUtil {
         LocalDate ld = LocalDate.now();
         return of(ld.getYear(), ld.getMonthValue(), ld.getDayOfMonth());
     }
+
+    public static LocalDate toLocalDate(Date date){
+        return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+    }
 }

@@ -25,7 +25,7 @@
                 <th><spring:message code="dish.price"/></th>
                 <th><spring:message code="menu.totalValue"/></th>
                 <th><spring:message code="menu.voices"/></th>
-
+                <th><spring:message code="menu.date"/></th>
                 <th></th>
                 <th></th>
             </tr>
@@ -48,7 +48,7 @@
 
                         <div class="col-xs-9">
                             <input type="text" class="form-control" id="id" name="id"
-                                   placeholder="MenuId">
+                                   placeholder="id">
                         </div>
                     </div>
 
@@ -62,11 +62,11 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="description" class="control-label col-xs-3"><spring:message
+                        <label for="menuDescription" class="control-label col-xs-3"><spring:message
                                 code="menu.description"/></label>
 
                         <div class="col-xs-9">
-                            <input type="text" class="form-control" id="description" name="description"
+                            <input type="text" class="form-control" id="menuDescription" name="menuDescription"
                                    placeholder="<spring:message code="menu.description"/>">
                         </div>
                     </div>

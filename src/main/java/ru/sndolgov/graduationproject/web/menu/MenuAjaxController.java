@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import ru.sndolgov.graduationproject.AuthorizedUser;
+import ru.sndolgov.graduationproject.ChangeableRestaurant;
 import ru.sndolgov.graduationproject.model.Menu;
 import ru.sndolgov.graduationproject.model.Restaurant;
 import ru.sndolgov.graduationproject.model.Voice;
@@ -43,13 +44,11 @@ public class MenuAjaxController {
     @Autowired
     private MenuService menuService;
 
-    @Autowired
-    private VoiceService voiceService;
 
-    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<RestaurantTo> getAll(@PathVariable("id") int id) {
-        log.info("get menus of restautant {}", id);
-        return restaurantService.getWithMenus(id).getMenus().stream()
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<RestaurantTo> getAll() {
+        log.info("get menus of restautant {}", ChangeableRestaurant.id);
+        return restaurantService.getWithMenus(ChangeableRestaurant.id).getMenus().stream()
                 .map(menu -> RestaurantUtil.asTo(menuService.getWithRestaurantAndDishes(menu.getId())))
                 .collect(Collectors.toList());
     }
@@ -59,6 +58,9 @@ public class MenuAjaxController {
         log.info("menu delete {}", id);
         menuService.delete(id);
     }
-
-
+    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public RestaurantTo getById(@PathVariable("id") int id) {
+        log.info("get menu", id);
+        return RestaurantUtil.asTo(menuService.getWithRestaurantAndDishes(id));
+    }
 }

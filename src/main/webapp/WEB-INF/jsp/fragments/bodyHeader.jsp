@@ -51,22 +51,6 @@
     </div>
 </div>
 
-<script type="text/javascript">
-    function renderDeleteBtnAdmin(data, type, row) {
-        if (type === "display") {
-            return "<sec:authorize access="hasRole('ROLE_ADMIN')">" + "<a onclick='rowDelete(" + row.id + ");'>" +
-                "<span class='glyphicon glyphicon-remove' aria-hidden='true'></span></a>" + "</sec:authorize>";
-        }
-    }
-
-    function renderEditBtnAdmin(data, type, row) {
-        if (type === "display") {
-            return "<sec:authorize access="hasRole('ROLE_ADMIN')">" + "<a href='restaurant?id=" + row.id + "'>" +
-                "<span class='glyphicon glyphicon-pencil' aria-hidden='true'></span></a>" + "</sec:authorize>";
-        }
-    }
-</script>
-
 
 <script type="text/javascript">
     var localeCode = "${pageContext.response.locale}";
