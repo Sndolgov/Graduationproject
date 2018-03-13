@@ -29,11 +29,6 @@ public class VoiceServiceImpl implements VoiceService {
         return checkNotFound(repository.getByDate(date, userId), "date="+date+" userId="+userId);
     }
 
-    @Override
-    public List<Voice> getAllByDate(Date date) {
-        Assert.notNull(date, "date must not be null");
-        return repository.getAllByDate(date);
-    }
 
     @Override
     public Voice creat(int menuId, int userId, Date date) {

@@ -18,10 +18,6 @@ function renderDeleteBtn(data, type, row) {
     }
 }
 
-function updateTable() {
-    id = getId();
-    $.get(ajaxUrl+id, updateTableByData);
-}
 
 function renderEditBtn(data, type, row) {
     if (type === "display") {

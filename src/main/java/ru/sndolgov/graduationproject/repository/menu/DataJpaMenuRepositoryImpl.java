@@ -8,6 +8,7 @@ import ru.sndolgov.graduationproject.repository.restaurant.CrudRestaurantReposit
 
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by Сергей on 07.02.2018.
@@ -47,16 +48,26 @@ public class DataJpaMenuRepositoryImpl {
         return crudMenuRepository.getWithRestaurantAndDishes(id);
     }
 
-    public List<Menu> getAllTodayWithRestaraunt(Date date){
-        return crudMenuRepository.getAllTodayWithRestaraunt(date);
+    public List<Menu> getAllByDate(Date date) {
+        List<Menu> menus = crudMenuRepository.getAllByDate(date);
+        menus.forEach(menu -> menu.setVoices(getWithVoices(menu.getId(), menu.getRestaurant().getId()).getVoices()));
+        return menus;
     }
 
-    public Menu getWithVoices(int id, int restaurantId){
+    public Menu getWithVoices(int id, int restaurantId) {
         return crudMenuRepository.getWithVoices(id, restaurantId);
     }
 
-    public Menu getWithDishes(int id) {
-        return crudMenuRepository.getWithDishes(id);
+    public Menu getWithDishes(int id, int restaurantId) {
+        return crudMenuRepository.getWithDishes(id, restaurantId);
     }
+
+    public Menu getWithDishesVoices(int id, int restaurantId) {
+        Menu withVoices = getWithVoices(id, restaurantId);
+        Menu menu = getWithDishes(id, restaurantId);
+        menu.setVoices(withVoices.getVoices());
+        return menu;
+    }
+
 
 }

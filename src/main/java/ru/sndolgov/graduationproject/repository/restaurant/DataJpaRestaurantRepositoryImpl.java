@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class DataJpaRestaurantRepositoryImpl{
+public class DataJpaRestaurantRepositoryImpl {
     private static final Sort SORT_NAME = new Sort(Sort.Direction.ASC, "name");
 
 
@@ -29,7 +29,7 @@ public class DataJpaRestaurantRepositoryImpl{
 
     @Transactional
     public boolean delete(int id) {
-        return crudRepository.delete(id)!=0;
+        return crudRepository.delete(id) != 0;
     }
 
     public Restaurant get(int id) {
@@ -44,14 +44,7 @@ public class DataJpaRestaurantRepositoryImpl{
         return crudRepository.findAll(SORT_NAME);
     }
 
-    public Restaurant getWithMenus(int id){
-        Restaurant restaurant = crudRepository.getWithMenu(id);
-        List<Menu> menus = restaurant.getMenus();
-        List<Menu> menusWithDishes = new ArrayList<>();
-        for (Menu menu: menus){
-            menusWithDishes.add(crudMenuRepository.getWithDishes(menu.getId()));
-        }
-        restaurant.setMenus(menusWithDishes);
-        return restaurant;
+    public Restaurant getWithMenus(int id) {
+        return crudRepository.getWithMenu(id);
     }
 }

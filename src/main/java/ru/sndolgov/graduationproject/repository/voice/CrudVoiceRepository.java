@@ -27,8 +27,6 @@ public interface CrudVoiceRepository extends JpaRepository<Voice, Integer> {
     @Query("SELECT v FROM Voice v WHERE v.date=:date AND v.user.id=:userId")
     Voice getByDate(@Param("date") Date date , @Param("userId") int userId);
 
-    @Query("SELECT v FROM Voice v WHERE v.date=:date")
-    List<Voice> getAllByDate(@Param("date") Date date);
 
     @Override
     Voice save(Voice voice);

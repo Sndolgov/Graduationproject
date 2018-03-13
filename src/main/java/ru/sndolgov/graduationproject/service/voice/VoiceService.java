@@ -16,5 +16,4 @@ public interface VoiceService {
 
     void delete(int id);
 
-    List<Voice> getAllByDate(Date date);
 }

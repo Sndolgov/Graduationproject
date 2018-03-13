@@ -35,19 +35,15 @@ public class VotingAjaxController {
 
 
     @Autowired
-    private RestaurantService restaurantService;
-
-    @Autowired
     private MenuService menuService;
 
     @Autowired
     private VoiceService voiceService;
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<RestaurantTo> getAll() {
+    public List<RestaurantTo> getAllTodayMenus() {
         log.info("voting getAll");
-        List<Menu> menus = menuService.getAllTodayWithRestaraunt(DateUtil.getDateToday());
-        return menus.stream()
+        return menuService.getAllByDate(DateUtil.getDateToday()).stream()
                 .map(RestaurantUtil::asTo)
                 .collect(Collectors.toList());
     }

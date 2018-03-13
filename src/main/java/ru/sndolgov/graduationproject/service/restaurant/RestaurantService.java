@@ -23,4 +23,6 @@ public interface RestaurantService {
 
         void enable(int id, boolean enable);
 
+        Restaurant getWithMenusDishesVoices(int id);
+
 }

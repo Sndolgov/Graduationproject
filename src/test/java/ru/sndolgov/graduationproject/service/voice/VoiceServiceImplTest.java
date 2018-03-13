@@ -52,9 +52,4 @@ public class VoiceServiceImplTest extends AbstractServiceTest {
         service.creat(MENU1_ID, USER_ID, DateUtil.getDateToday());
     }
 
-    @Test
-    public void delete() throws Exception {
-        service.delete(VOICE2_ID);
-        assertMatch(service.getAllByDate(DateUtil.of(2017, 12, 26)), VOICE1);
-    }
 }

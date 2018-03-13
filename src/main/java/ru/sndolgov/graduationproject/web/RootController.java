@@ -55,7 +55,7 @@ public class RootController extends AbstractUserController {
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/restaurant/{id}")
     public String restaurant(ModelMap model, @PathVariable("id") int id) {
-        Restaurant restaurant = restaurantService.getWithMenus(id);
+        Restaurant restaurant = restaurantService.get(id);
         ChangeableRestaurant.setId(id);
         model.addAttribute("restaurant", restaurant);
         return "restaurant";

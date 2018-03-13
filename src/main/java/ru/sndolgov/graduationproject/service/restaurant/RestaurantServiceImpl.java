@@ -1,76 +1,93 @@
 package ru.sndolgov.graduationproject.service.restaurant;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import ru.sndolgov.graduationproject.model.Menu;
 import ru.sndolgov.graduationproject.model.Restaurant;
-import ru.sndolgov.graduationproject.model.User;
+import ru.sndolgov.graduationproject.repository.menu.DataJpaMenuRepositoryImpl;
 import ru.sndolgov.graduationproject.repository.restaurant.DataJpaRestaurantRepositoryImpl;
 import ru.sndolgov.graduationproject.util.exception.NotFoundException;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static ru.sndolgov.graduationproject.util.ValidationUtil.checkNotFound;
 import static ru.sndolgov.graduationproject.util.ValidationUtil.checkNotFoundWithId;
 
 @Service
 public class RestaurantServiceImpl implements RestaurantService{
-    private final DataJpaRestaurantRepositoryImpl repository;
+
 
     @Autowired
-    public RestaurantServiceImpl(DataJpaRestaurantRepositoryImpl repository) {
-        this.repository = repository;
-    }
+    DataJpaRestaurantRepositoryImpl restaurantRepository;
+
+    @Autowired
+    DataJpaMenuRepositoryImpl menuRepository;
 
    // @CacheEvict(value = "restaurants", allEntries = true)
 
     @Override
     public Restaurant create(Restaurant restaurant) {
         Assert.notNull(restaurant, "user must not be null");
-        return repository.save(restaurant);
+        return restaurantRepository.save(restaurant);
     }
 
    // @CacheEvict(value = "restaurants", allEntries = true)
     @Override
     public void delete(int id) throws NotFoundException {
-        checkNotFoundWithId(repository.delete(id), id);
+        checkNotFoundWithId(restaurantRepository.delete(id), id);
     }
 
     @Override
     public Restaurant get(int id) throws NotFoundException {
-        return checkNotFoundWithId(repository.get(id), id);
+        return checkNotFoundWithId(restaurantRepository.get(id), id);
     }
 
+    // TODO need?
     @Override
     public Restaurant getByName(String name) throws NotFoundException {
         Assert.notNull(name, "name must not be null");
-        return checkNotFound(repository.getByName(name), "name=" + name);
+        return checkNotFound(restaurantRepository.getByName(name), "name=" + name);
     }
 
    // @Cacheable("restaurants")
     @Override
     public List<Restaurant> getAll() {
-        return repository.getAll();
+        return restaurantRepository.getAll();
     }
 
     @Override
     public Restaurant getWithMenus(int id) {
-        return checkNotFoundWithId(repository.getWithMenus(id), id);
+        return checkNotFoundWithId(restaurantRepository.getWithMenus(id), id);
     }
 
     @Override
     public void enable(int id, boolean enable) {
         Restaurant restaurant = get(id);
         restaurant.setEnabled(enable);
-        repository.save(restaurant);
+        restaurantRepository.save(restaurant);
     }
 
     // @CacheEvict(value = "restaurants", allEntries = true)
     @Override
     public void update(Restaurant restaurant) {
         Assert.notNull(restaurant, "restaurant must not be null");
-        checkNotFoundWithId(repository.save(restaurant), restaurant.getId());
+        checkNotFoundWithId(restaurantRepository.save(restaurant), restaurant.getId());
+    }
+
+    @Override
+    public Restaurant getWithMenusDishesVoices(int id) {
+        Restaurant restaurant = restaurantRepository.getWithMenus(id);
+
+        List<Menu> menusWithDishes =restaurant.getMenus().stream()
+                .map(menu -> menuRepository.getWithDishesVoices(menu.getId(), id))
+                .collect(Collectors.toList());
+
+        menusWithDishes.forEach(menu -> menu.setRestaurant(restaurant));
+
+        restaurant.setMenus(menusWithDishes);
+        return restaurant;
     }
 }

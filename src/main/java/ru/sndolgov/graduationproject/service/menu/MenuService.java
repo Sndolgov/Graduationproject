@@ -23,9 +23,11 @@ public interface MenuService {
 
     Menu getWithRestaurantAndDishes(int id);
 
-    Menu getWithDishes(int id);
+    Menu getWithDishes(int id, int restaurantId);
 
-    List<Menu> getAllTodayWithRestaraunt(Date date);
+    List<Menu> getAllByDate(Date date);
 
     Menu getWithVoices(int id, int restaurantId);
+
+    Menu getWithDishesVoices(int id, int restaurantId);
 }

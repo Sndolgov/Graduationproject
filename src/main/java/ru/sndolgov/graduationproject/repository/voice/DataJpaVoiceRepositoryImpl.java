@@ -33,9 +33,6 @@ public class DataJpaVoiceRepositoryImpl {
         return voiceRepository.getByDate(date, userId);
     }
 
-    public List<Voice> getAllByDate(Date date){
-        return voiceRepository.getAllByDate(date);
-    }
 
     @Transactional
     public Voice save(int menuId, int userId, Date date) {

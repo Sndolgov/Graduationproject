@@ -45,7 +45,7 @@ public class Menu extends AbstractBaseEntity{
     @OrderBy("id ASC")
     private List<Dish> dishes;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "menu")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "menu")
     @OrderBy("user_id ASC")
     private List<Voice> voices;
 
