@@ -1,41 +1,86 @@
 package ru.sndolgov.graduationproject.to;
 
+import org.hibernate.validator.constraints.Range;
 import org.hibernate.validator.constraints.SafeHtml;
-import ru.sndolgov.graduationproject.View;
+import org.springframework.format.annotation.DateTimeFormat;
+import ru.sndolgov.graduationproject.model.Dish;
+import ru.sndolgov.graduationproject.util.DateUtil;
 
-import javax.persistence.Column;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Date;
+import java.util.List;
 
 public class MenuTo extends BaseTo implements Serializable {
     private static final long serialVersionUID = 1L;
 
 
+    @Size(min = 2, max = 100)
+    private Integer restaurantId;
+
     @NotBlank
     @Size(min = 2, max = 100)
-    @SafeHtml(groups = {View.Web.class})
-    protected String description;
+    @SafeHtml
+    private String restaurantName;
+
+    @NotBlank
+    @Size(min = 2, max = 120)
+    @SafeHtml
+    private String menuDescription;
+
+
+    private List<Dish> dishes;
+
 
     @NotNull
+    @DateTimeFormat(pattern = DateUtil.DATE_PATTERN)
     private LocalDate date;
 
 
-    public MenuTo(Integer id, String description, LocalDate date) {
+    public MenuTo() {
+    }
+
+    public MenuTo(Integer id, Integer restaurantId, String restaurantName, String menuDescription, List<Dish> dishes, LocalDate date) {
         super(id);
-        this.description = description;
-        this.date = date;
+        this.restaurantId = restaurantId;
+        this.restaurantName = restaurantName;
+        this.menuDescription =menuDescription;
+        this.dishes=dishes;
+        this.date=date;
     }
 
-    public String getDescription() {
-        return description;
+    public Integer getRestaurantId() {
+        return restaurantId;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setRestaurantId(Integer restaurantId) {
+        this.restaurantId = restaurantId;
+    }
+
+    public String getRestaurantName() {
+        return restaurantName;
+    }
+
+    public void setRestaurantName(String restaurantName) {
+        this.restaurantName = restaurantName;
+    }
+
+    public String getMenuDescription() {
+        return menuDescription;
+    }
+
+    public void setMenuDescription(String menuDescription) {
+        this.menuDescription = menuDescription;
+    }
+
+    public List<Dish> getDishes() {
+        return dishes;
+    }
+
+    public void setDishes(List<Dish> dishes) {
+        this.dishes = dishes;
     }
 
     public LocalDate getDate() {
@@ -49,7 +94,12 @@ public class MenuTo extends BaseTo implements Serializable {
     @Override
     public String toString() {
         return "MenuTo{" +
-                ", description='" + description + '\'' +
+                "id=" + id +
+                ", restaurantId=" + restaurantId +
+                ", restaurantName='" + restaurantName + '\'' +
+                ", menuDescription='" + menuDescription + '\'' +
+                ", dishes=" + dishes +
+                ", date=" + date +
                 '}';
     }
 }

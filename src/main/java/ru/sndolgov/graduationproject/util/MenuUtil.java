@@ -12,6 +12,6 @@ import java.util.List;
 public class MenuUtil {
 
     public static MenuTo asTo (Menu menu){
-       return new MenuTo(menu.getId(), menu.getDescription(), menu.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+       return new MenuTo(menu.getId(), menu.getRestaurant().getId(), menu.getRestaurant().getName(), menu.getDescription(), menu.getDishes(), DateUtil.toLocalDate(menu.getDate()));
     }
 }

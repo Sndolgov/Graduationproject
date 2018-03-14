@@ -10,6 +10,9 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class DateUtil {
+    public static final String DATE_PATTERN = "yyyy-MM-dd";
+
+
     public static Date of(int year, int month, int date) {
         Calendar calendar = new GregorianCalendar();
         SimpleDateFormat format1 = new SimpleDateFormat("dd-MM-yyyy");

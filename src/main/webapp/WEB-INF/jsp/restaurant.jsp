@@ -53,11 +53,21 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="menuId" class="control-label col-xs-3">MenuId</label>
+                        <label for="restaurantId" class="control-label col-xs-3">restaurantId</label>
 
                         <div class="col-xs-9">
-                            <input type="text" class="form-control" id="menuId" name="menuId"
+                            <input type="text" class="form-control" id="restaurantId" name="restaurantId"
                                    placeholder="MenuId">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="restaurantName" class="control-label col-xs-3"><spring:message
+                                code="restaurant.name"/></label>
+
+                        <div class="col-xs-9">
+                            <input type="text" class="form-control" id="restaurantName" name="restaurantName"
+                                   placeholder="<spring:message code="restaurant.name"/>">
                         </div>
                     </div>
 
@@ -80,6 +90,16 @@
                         </div>
                     </div>
 
+                    <table class="table table-striped display" id="menutable">
+                        <thead>
+                        <tr>
+                            <th>Блюдо</th>
+                        </tr>
+                        </thead>
+                    </table>
+
+
+
                     <div class="form-group">
                         <div class="col-xs-offset-3 col-xs-9">
                             <button type="button" onclick="save()" class="btn btn-primary">
@@ -92,6 +112,8 @@
         </div>
     </div>
 </div>
+
+
 
 <jsp:include page="fragments/bodyHeader.jsp"/>
 <jsp:include page="fragments/footer.jsp"/>

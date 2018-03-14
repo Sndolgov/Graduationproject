@@ -50,6 +50,9 @@ function updateRow(id) {
     $.get(ajaxUrl + id, function (data) {
         $.each(data, function (key, value) {
             form.find("input[name='" + key + "']").val(value);
+            if (key==="dishes"){
+                getDishes(data.id)
+            }
         });
         $('#editRow').modal();
     });

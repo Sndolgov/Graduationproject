@@ -27,7 +27,7 @@ function editInRow(id) {
 function deleteFromRow(id) {
     if (id!==0) {
         $.ajax({
-            url: ajaxUrl + "deletevoice/"+ id,
+            url: ajaxUrl + id,
             type: "DELETE"
         })
             .done(function () {
@@ -36,17 +36,6 @@ function deleteFromRow(id) {
             });
     }
 }
-
-function rowDelete(id) {
-    $.ajax({
-        url: ajaxUrl+"admin/" + id,
-        type: "DELETE"
-    }).done(function () {
-        updateTable();
-        successNoty("common.deleted");
-    });
-}
-
 
 $(function () {
     datatableApi = $("#datatable").DataTable({

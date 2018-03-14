@@ -1,16 +1,6 @@
 var ajaxUrl = "ajax/admin/menus/";
 var datatableApi;
 
-function getId() {
-    get = String(window.location);
-    x = get.indexOf('?');
-    l = get.length;
-    get = get.substr(x+1, l-x);
-    x = get.indexOf('=');
-    l = get.length;
-    return get.substr(x+1, l);
-}
-
 function renderDeleteBtn(data, type, row) {
     if (type === "display") {
         return "<a onclick='deleteRow(" + row.menuId + ");'>" +
@@ -25,6 +15,7 @@ function renderEditBtn(data, type, row) {
             "<span class='glyphicon glyphicon-pencil' aria-hidden='true'></span></a>";
     }
 }
+
 
 $(function () {
     datatableApi = $("#datatable").DataTable({
@@ -74,3 +65,21 @@ $(function () {
         "initComplete": makeEditable
     });
 });
+
+function getDishes(id) {
+    $("#menutable").DataTable({
+        "ajax": {
+            "url": ajaxUrl+"dishes/"+id,
+            "dataSrc": ""
+        },
+        "paging": false,
+        "info": false,
+        "destroy": true,
+        "columns": [
+            {
+                "data": "description"
+            }
+        ]
+
+    });
+}
