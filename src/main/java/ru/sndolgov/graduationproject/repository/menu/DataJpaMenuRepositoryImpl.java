@@ -68,6 +68,4 @@ public class DataJpaMenuRepositoryImpl {
         menu.setVoices(withVoices.getVoices());
         return menu;
     }
-
-
 }

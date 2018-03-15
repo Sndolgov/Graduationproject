@@ -64,6 +64,10 @@ $(function () {
         ],
         "initComplete": makeEditable
     });
+    $('#date').datetimepicker({
+        format: 'Y-m-d',
+        timepicker: false
+    });
 });
 
 function getDishes(id) {

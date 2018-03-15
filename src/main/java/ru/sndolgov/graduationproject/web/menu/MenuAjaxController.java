@@ -3,7 +3,6 @@ package ru.sndolgov.graduationproject.web.menu;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -18,10 +17,6 @@ import ru.sndolgov.graduationproject.util.MenuUtil;
 import ru.sndolgov.graduationproject.util.RestaurantUtil;
 
 import javax.validation.Valid;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -79,7 +74,7 @@ public class MenuAjaxController {
     }
 
     @PostMapping
-    public void createOrUpdate(MenuTo menuTo)  {
-        System.out.println();
+    public void createOrUpdate(MenuTo menuTo) {
+        System.out.println(menuTo);
     }
 }

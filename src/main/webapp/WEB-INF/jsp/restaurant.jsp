@@ -85,7 +85,7 @@
                         <label for="date" class="control-label col-xs-3"><spring:message code="menu.date"/></label>
 
                         <div class="col-xs-9">
-                            <input type="text" class="form-control" id="date" name="date"
+                            <input class="form-control" id="date" name="date"
                                    placeholder="<spring:message code="menu.date"/>">
                         </div>
                     </div>
