@@ -36,7 +36,7 @@ public class DataJpaVoiceRepositoryImpl {
 
     @Transactional
     public Voice save(int menuId, int userId, Date date) {
-        Menu menu = menuRepository.getWithRestaurantAndDishes(menuId);
+        Menu menu = menuRepository.getWithRestaurant(menuId);
         User user = userRepository.getOne(userId);
         Voice newVoice = new Voice(null, menu, menu.getRestaurant(), user, new Date());
         return voiceRepository.save(newVoice);

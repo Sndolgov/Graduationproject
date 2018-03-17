@@ -16,7 +16,7 @@ import static ru.sndolgov.graduationproject.util.ValidationUtil.checkNotFoundWit
  * Created by Сергей on 07.02.2018.
  */
 @Service
-public class MenuServiceImpl implements MenuService{
+public class MenuServiceImpl implements MenuService {
 
     @Autowired
     DataJpaMenuRepositoryImpl repository;
@@ -34,7 +34,8 @@ public class MenuServiceImpl implements MenuService{
 
     @Override
     public Menu get(int id, int restaurantId) throws NotFoundException {
-        return checkNotFoundWithId(repository.get(id, restaurantId), id);    }
+        return checkNotFoundWithId(repository.get(id, restaurantId), id);
+    }
 
     @Override
     public void delete(int id) throws NotFoundException {
@@ -43,15 +44,23 @@ public class MenuServiceImpl implements MenuService{
 
     @Override
     public List<Menu> getAll(int restaurantId) {
-        return repository.getAll(restaurantId);    }
+        return repository.getAll(restaurantId);
+    }
 
     @Override
-    public Menu getWithRestaurantAndDishes(int id) {
-        return checkNotFoundWithId(repository.getWithRestaurantAndDishes(id), id);    }
+    public Menu getWithRestaurant(int id) {
+        return checkNotFoundWithId(repository.getWithRestaurant(id), id);
+    }
+
+    @Override
+    public Menu getWithRestaurantAndDishes(int id, int restaurantId) {
+        return checkNotFoundWithId(repository.getWithRestaurantAndDishes(id, restaurantId), id);
+    }
 
     @Override
     public Menu getWithDishes(int id, int restaurantId) {
-        return checkNotFoundWithId(repository.getWithDishes(id, restaurantId), id);    }
+        return checkNotFoundWithId(repository.getWithDishes(id, restaurantId), id);
+    }
 
     @Override
     public List<Menu> getAllByDate(Date date) {
@@ -65,9 +74,11 @@ public class MenuServiceImpl implements MenuService{
 
     @Override
     public Menu getWithDishesVoices(int id, int restaurantId) {
-        Menu menu = repository.getWithDishesVoices(id, restaurantId);
-        if (menu.getRestaurant().getId()==restaurantId)
-            return menu;
-        return null;
+        return checkNotFoundWithId(repository.getWithDishes(id, restaurantId), id);
+    }
+
+    @Override
+    public Menu addDish(int id, int dishId, int restaurantId) {
+        return checkNotFoundWithId(repository.addDish(id, dishId, restaurantId), id);
     }
 }

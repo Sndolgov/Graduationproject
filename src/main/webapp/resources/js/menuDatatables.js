@@ -8,6 +8,13 @@ function renderDeleteBtn(data, type, row) {
     }
 }
 
+function renderDelete(data, type, row) {
+    if (type === "display") {
+        return "<a onclick='alert("+row.id+")'>" +
+            "<span class='glyphicon glyphicon-remove' aria-hidden='true'></span></a>";
+    }
+}
+
 
 function renderEditBtn(data, type, row) {
     if (type === "display") {
@@ -15,6 +22,7 @@ function renderEditBtn(data, type, row) {
             "<span class='glyphicon glyphicon-pencil' aria-hidden='true'></span></a>";
     }
 }
+
 
 
 $(function () {
@@ -73,17 +81,25 @@ $(function () {
 function getDishes(id) {
     $("#menutable").DataTable({
         "ajax": {
-            "url": ajaxUrl+"dishes/"+id,
+            "url": ajaxUrl + "dishes/" + id,
             "dataSrc": ""
         },
         "paging": false,
         "info": false,
         "destroy": true,
+        "sDom": '',
         "columns": [
             {
                 "data": "description"
+            },
+            {
+                "data": "price"
+            },
+            {
+                "orderable": false,
+                "defaultContent": "",
+                "render": renderDelete
             }
         ]
-
     });
 }

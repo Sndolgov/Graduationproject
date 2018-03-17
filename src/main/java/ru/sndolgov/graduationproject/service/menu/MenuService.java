@@ -21,7 +21,9 @@ public interface MenuService {
 
     List<Menu> getAll(int restaurantId);
 
-    Menu getWithRestaurantAndDishes(int id);
+    Menu getWithRestaurant(int id);
+
+    Menu getWithRestaurantAndDishes(int id, int restaurantId);
 
     Menu getWithDishes(int id, int restaurantId);
 
@@ -30,4 +32,6 @@ public interface MenuService {
     Menu getWithVoices(int id, int restaurantId);
 
     Menu getWithDishesVoices(int id, int restaurantId);
+
+    Menu addDish (int id, int dishId, int restaurantId);
 }

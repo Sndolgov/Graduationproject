@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import ru.sndolgov.graduationproject.model.Dish;
+import ru.sndolgov.graduationproject.model.Menu;
 import ru.sndolgov.graduationproject.repository.dish.DataJpaDishRepositoryImpl;
 
 import java.util.List;
@@ -45,5 +46,10 @@ public class DishServiceImpl implements DishService {
     @Override
     public List<Dish> getAllByRestaurant(int restaurantId) {
         return repository.getAllByRestaurant(restaurantId);
+    }
+
+    @Override
+    public Dish getWithRestaurant(int id, int restaurantId) {
+        return checkNotFoundWithId(repository.getWithRestaurant(id, restaurantId), id);
     }
 }

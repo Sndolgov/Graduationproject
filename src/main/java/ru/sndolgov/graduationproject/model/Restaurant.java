@@ -17,11 +17,11 @@ public class Restaurant extends AbstractNamedEntity {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "restaurant")
     @OrderBy("date DESC")
-    protected List<Menu> menus;
+    private List<Menu> menus;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "restaurant")
     @OrderBy("description ASC")
-    protected List<Dish> dishes;
+    private List<Dish> dishes;
 
      //TODO need?
     public Restaurant(){}

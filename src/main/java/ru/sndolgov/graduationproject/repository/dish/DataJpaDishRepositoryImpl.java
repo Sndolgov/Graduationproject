@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import ru.sndolgov.graduationproject.model.Dish;
+import ru.sndolgov.graduationproject.model.Menu;
 import ru.sndolgov.graduationproject.repository.restaurant.CrudRestaurantRepository;
 
 import java.util.List;
@@ -40,5 +41,9 @@ public class DataJpaDishRepositoryImpl {
 
     public List<Dish> getAllByRestaurant(int restaurantId){
         return crudDishRepository.getAllByRestaurant(restaurantId);
+    }
+
+    public Dish getWithRestaurant(int id, int restaurantId){
+        return crudDishRepository.getWithRestaurant(id, restaurantId);
     }
 }

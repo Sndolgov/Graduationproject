@@ -7,6 +7,7 @@ import ru.sndolgov.graduationproject.DishTestData;
 import ru.sndolgov.graduationproject.MenuTestData;
 import ru.sndolgov.graduationproject.RestaurantTestData;
 import ru.sndolgov.graduationproject.VoiceTestData;
+import ru.sndolgov.graduationproject.model.Dish;
 import ru.sndolgov.graduationproject.model.Menu;
 import ru.sndolgov.graduationproject.service.AbstractServiceTest;
 import ru.sndolgov.graduationproject.util.DateUtil;
@@ -50,6 +51,18 @@ public class MenuServiceImplTest extends AbstractServiceTest {
         Menu updated = MenuTestData.getUpdated();
         service.update(updated, RESTAURANT1_ID);
         assertMatch(service.getAll(RESTAURANT1_ID), MENU3, updated, MENU2);
+    }
+
+    @Test
+    public void updateDishes() throws Exception {
+        Menu updated = service.getWithDishes(MENU1_ID, RESTAURANT1_ID);
+        List<Dish> dishes = updated.getDishes();
+        Dish dish = DISH5;
+        dish.setRestaurant(RESTAURANT1);
+        dishes.add(dish);
+        updated.setDishes(dishes);
+        service.update(updated, RESTAURANT1_ID);
+        System.out.println(service.getWithDishes(MENU1_ID, RESTAURANT1_ID).getDishes());
     }
 
     @Test(expected = NotFoundException.class)
@@ -100,7 +113,7 @@ public class MenuServiceImplTest extends AbstractServiceTest {
 
     @Test
     public void getWithRestaurant() throws Exception {
-        Menu menu = service.getWithRestaurantAndDishes(MENU1_ID);
+        Menu menu = service.getWithRestaurantAndDishes(MENU1_ID, RESTAURANT1_ID);
         RestaurantTestData.assertMatch(menu.getRestaurant(), RESTAURANT1);
     }
 

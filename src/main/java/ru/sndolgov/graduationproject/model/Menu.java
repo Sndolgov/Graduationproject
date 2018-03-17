@@ -39,8 +39,9 @@ public class Menu extends AbstractBaseEntity{
     private Restaurant restaurant;
 
 
-    @OneToMany(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
-    @JoinTable(name="menuconsist", joinColumns={@JoinColumn(name ="menu_id", referencedColumnName ="id")},
+    @ManyToMany(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
+    @JoinTable(name="menuconsist",
+            joinColumns={@JoinColumn(name ="menu_id", referencedColumnName ="id")},
             inverseJoinColumns={@JoinColumn(name ="dish_id", referencedColumnName ="id")})
     @OrderBy("id ASC")
     private List<Dish> dishes;

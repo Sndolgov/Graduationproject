@@ -56,21 +56,16 @@ public class MenuAjaxController {
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public MenuTo getById(@PathVariable("id") int id) {
         log.info("get menu", id);
-        Menu menu = menuService.getWithRestaurantAndDishes(id);
-        if (menu!=null && menu.getRestaurant().getId() == ChangeableRestaurant.id) {
+        Menu menu = menuService.getWithRestaurantAndDishes(id, ChangeableRestaurant.id);
             return MenuUtil.asTo(menu);
-        }
-        return null;
+
     }
 
     @GetMapping(value = "dishes/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Dish> getByDishesId(@PathVariable("id") int id) {
         log.info("get diashes of menu", id);
         Menu menu = menuService.getWithDishes(id, ChangeableRestaurant.id);
-        if (menu!=null && menu.getRestaurant().getId() == ChangeableRestaurant.id) {
-            return menu.getDishes();
-        }
-        return null;
+        return menu.getDishes();
     }
 
     @PostMapping

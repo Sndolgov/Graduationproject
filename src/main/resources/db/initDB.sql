@@ -65,11 +65,9 @@ CREATE TABLE menuconsist
 (
   menu_id       INTEGER NOT NULL,
   dish_id INTEGER NOT NULL,
-  restaurant_id INTEGER NOT NULL,
   CONSTRAINT menu_dish_idx UNIQUE (menu_id, dish_id),
   FOREIGN KEY (menu_id) REFERENCES menu (id) ON DELETE CASCADE,
-  FOREIGN KEY (dish_id) REFERENCES dishes (id) ON DELETE CASCADE,
-  FOREIGN KEY (restaurant_id) REFERENCES restaurants (id) ON DELETE CASCADE
+  FOREIGN KEY (dish_id) REFERENCES dishes (id) ON DELETE CASCADE
 
 );
 

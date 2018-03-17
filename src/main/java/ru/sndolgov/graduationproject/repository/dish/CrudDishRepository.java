@@ -33,4 +33,8 @@ public interface CrudDishRepository extends JpaRepository<Dish, Integer> {
     @Query("SELECT d FROM Dish d WHERE d.restaurant.id = ?1 ORDER BY d.id ASC")
     List<Dish> getAllByRestaurant(int restaurantId);
 
+    @EntityGraph(attributePaths = {"restaurant"}, type = EntityGraph.EntityGraphType.LOAD)
+    @Query("SELECT d FROM Dish d WHERE d.id = ?1 and d.restaurant.id = ?2")
+    Dish getWithRestaurant(int id, int restaurantId);
+
 }

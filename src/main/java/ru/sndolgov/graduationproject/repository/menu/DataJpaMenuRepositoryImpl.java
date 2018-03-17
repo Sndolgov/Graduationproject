@@ -3,7 +3,9 @@ package ru.sndolgov.graduationproject.repository.menu;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import ru.sndolgov.graduationproject.model.Dish;
 import ru.sndolgov.graduationproject.model.Menu;
+import ru.sndolgov.graduationproject.repository.dish.CrudDishRepository;
 import ru.sndolgov.graduationproject.repository.restaurant.CrudRestaurantRepository;
 
 import java.util.Date;
@@ -21,6 +23,9 @@ public class DataJpaMenuRepositoryImpl {
 
     @Autowired
     private CrudRestaurantRepository crudRestaurantRepository;
+
+    @Autowired
+    private CrudDishRepository crudDishRepository;
 
     @Transactional
     public Menu save(Menu menu, int restaurantId) {
@@ -44,8 +49,12 @@ public class DataJpaMenuRepositoryImpl {
         return crudMenuRepository.getAll(restaurantId);
     }
 
-    public Menu getWithRestaurantAndDishes(int id) {
-        return crudMenuRepository.getWithRestaurantAndDishes(id);
+    public Menu getWithRestaurant(int id) {
+        return crudMenuRepository.getWithRestaurant(id);
+    }
+
+    public Menu getWithRestaurantAndDishes(int id, int restaurantId) {
+        return crudMenuRepository.getWithRestaurantAndDishes(id, restaurantId);
     }
 
     public List<Menu> getAllByDate(Date date) {
@@ -67,5 +76,13 @@ public class DataJpaMenuRepositoryImpl {
         Menu menu = getWithDishes(id, restaurantId);
         menu.setVoices(withVoices.getVoices());
         return menu;
+    }
+
+    public Menu addDish (int id, int dishId, int restaurantId){
+        Menu menu = crudMenuRepository.getWithRestaurantAndDishes(id, restaurantId);
+        List <Dish> dishes = menu.getDishes();
+        dishes.add(crudDishRepository.getWithRestaurant(dishId, restaurantId));
+        menu.setDishes(dishes);
+        return save(menu, restaurantId);
     }
 }
