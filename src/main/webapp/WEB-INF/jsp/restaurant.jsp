@@ -40,36 +40,15 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h2 class="modal-title" id="modalTitle"></h2>
+                <h4 class="modal-title" id="restaurantName"></h4>
+
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" id="detailsForm">
-                    <div class="form-group">
-                        <label for="id" class="control-label col-xs-3">Id</label>
 
-                        <div class="col-xs-9">
-                            <input type="text" class="form-control" id="id" name="id"
-                                   placeholder="id">
-                        </div>
-                    </div>
+                    <input type="hidden" id="id" name="id">
+                    <input type="hidden" id="restaurantId" name="restaurantId">
 
-                    <div class="form-group">
-                        <label for="restaurantId" class="control-label col-xs-3">restaurantId</label>
-
-                        <div class="col-xs-9">
-                            <input type="text" class="form-control" id="restaurantId" name="restaurantId"
-                                   placeholder="MenuId">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="restaurantName" class="control-label col-xs-3"><spring:message
-                                code="restaurant.name"/></label>
-
-                        <div class="col-xs-9">
-                            <input type="text" class="form-control" id="restaurantName" name="restaurantName"
-                                   placeholder="<spring:message code="restaurant.name"/>">
-                        </div>
-                    </div>
 
                     <div class="form-group">
                         <label for="menuDescription" class="control-label col-xs-3"><spring:message
@@ -91,13 +70,14 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="menutable" class="control-label col-xs-3"><spring:message code="dish.description"/></label>
+                        <label for="menutable" class="control-label col-xs-3"><spring:message
+                                code="dish.description"/></label>
 
                         <div class="col-xs-9">
                             <table class="table table-striped display" id="menutable">
                                 <thead>
                                 <tr>
-                                    <th><h5>Включены в меню</h5></th>
+                                    <th><h5><spring:message code="dish.included"/></h5></th>
                                     <th></th>
                                     <th></th>
                                 </tr>

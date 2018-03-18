@@ -16,7 +16,6 @@ function makeEditable() {
     });
 }
 
-// https://api.jquery.com/jquery.extend/#jQuery-extend-deep-target-object1-objectN
 function extendsOpts(opts) {
     $.extend(true, opts,
         {
@@ -43,19 +42,21 @@ function add() {
     $("#modalTitle").html(i18n["addTitle"]);
     form.find(":input").val("");
     $("#editRow").modal();
+    datatable.rows().remove().draw();
+
+
 }
 
 function updateRow(id) {
     $("#modalTitle").html(i18n["editTitle"]);
     $.get(ajaxUrl + id, function (data) {
-        $.each(data, function (key, value) {
-            form.find("input[name='" + key + "']").val(value);
-            if (key==="dishes"){
-                getDishes(data.id)
-            }
-        });
-        $('#editRow').modal();
-    });
+            $.each(data, function (key, value) {
+                form.find("input[name='" + key + "']").val(value);
+            });
+            $('#editRow').modal();
+        }
+    )
+    ;
 }
 
 
@@ -123,12 +124,11 @@ function failNoty(jqXHR) {
     // https://stackoverflow.com/questions/48229776
     var errorInfo = JSON.parse(jqXHR.responseText);
     failedNote = new Noty({
-        text: "<span class='glyphicon glyphicon-exclamation-sign'></span> &nbsp;"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        + errorInfo.typeMessage + "<br>" + errorInfo.details.join("<br>"),
+        text: "<span class='glyphicon glyphicon-exclamation-sign'></span> &nbsp;" + errorInfo.typeMessage + "<br>" + errorInfo.details.join("<br>"),
         type: "error",
         layout: "bottomRight"
     }).show();
 }
-
 
 
 function renderEditBtn(data, type, row) {

@@ -1,5 +1,6 @@
 var ajaxUrl = "ajax/admin/menus/";
 var datatableApi;
+var datatable;
 
 function renderDeleteBtn(data, type, row) {
     if (type === "display") {
@@ -8,12 +9,25 @@ function renderDeleteBtn(data, type, row) {
     }
 }
 
-function renderDelete(data, type, row) {
+/*function renderDelete(data, type, row) {
     if (type === "display") {
         return "<a onclick='alert(" + row.id + ")'>" +
             "<span class='glyphicon glyphicon-remove' aria-hidden='true'></span></a>";
     }
-}
+}*/
+
+/*function renderAddDeleteBtn(data, type, row) {
+ if (type === "display") {
+ if (row.inMenu === true) {
+ return "<a onclick='deleteRow(" + row.menuId + ");'>" +
+ "<span class='glyphicon glyphicon-remove' aria-hidden='true' style='color: red;'></span></a>";
+ }
+ else {
+ return "<a onclick='updateRow(" + row.menuId + ");'>" +
+ "<span class='glyphicon glyphicon-plus' aria-hidden='true'></span></a>";
+ }
+ }
+ }*/
 
 
 function renderEditBtn(data, type, row) {
@@ -23,18 +37,22 @@ function renderEditBtn(data, type, row) {
     }
 }
 
-function renderAddDeleteBtn(data, type, row) {
-    if (type === "display") {
-        if (row.inMenu === true) {
-            return "<a onclick='deleteRow(" + row.menuId + ");'>" +
-                "<span class='glyphicon glyphicon-remove' aria-hidden='true' style='color: red;'></span></a>";
-        }
-        else {
-            return "<a onclick='updateRow(" + row.menuId + ");'>" +
-                "<span class='glyphicon glyphicon-plus' aria-hidden='true'></span></a>";
-        }
-    }
+function updateRow(id) {
+    $("#modalTitle").html(i18n["editTitle"]);
+    $.get(ajaxUrl + id, function (data) {
+        $.each(data, function (key, value) {
+            form.find("input[name='" + key + "']").val(value);
+            if (key === "restaurantName")
+                $("#restaurantName").html(value);
+            if (key === "dishes") {
+                getDishes(data.id)
+            }
+        });
+        $('#editRow').modal();
+    });
 }
+
+
 
 function enable(chkbox, dishId, menuId) {
     var enabled = chkbox.is(":checked");
@@ -97,8 +115,8 @@ $(function () {
         ],
         "order": [
             [
-                0,
-                "asc"
+                5,
+                "desc"
             ]
         ],
         "initComplete": makeEditable
@@ -110,7 +128,7 @@ $(function () {
 });
 
 function getDishes(id) {
-    $("#menutable").DataTable({
+    datatable= $("#menutable").DataTable({
         "ajax": {
             "url": ajaxUrl + "dishes/" + id,
             "dataSrc": ""
@@ -135,7 +153,7 @@ function getDishes(id) {
                     }
                     return data;
                 }
-            },
+            }
         ],
         "createdRow": function (row, data, dataIndex) {
             if (!data.inMenu) {

@@ -85,11 +85,11 @@ public class MenuAjaxController {
     }
 
     @PostMapping
-    public void createOrUpdate(MenuTo menuTo) {
+    public void createOrUpdate(@Valid MenuTo menuTo) {
         if (menuTo.isNew()) {
             Menu menu = MenuUtil.createNewFromTo(menuTo);
             log.info("menu create {}", menu);
-            menuService.creat(menu, menuTo.getRestaurantId());
+            menuService.creat(menu, ChangeableRestaurant.id);
         } else {
             assureIdConsistent(menuTo, menuTo.getId());
             log.info("menu update {}", menuTo);

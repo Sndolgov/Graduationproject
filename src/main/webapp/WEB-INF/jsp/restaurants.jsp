@@ -13,10 +13,10 @@
     <div class="container">
         <h3><spring:message code='restaurant.menutoday'/></h3>
 
-            <a class="btn btn-primary" onclick="add()">
-                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                <spring:message code="common.add"/>
-            </a>
+        <a class="btn btn-primary" onclick="add()">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+            <spring:message code="common.add"/>
+        </a>
 
         <table class="table table-striped display" id="datatable">
             <thead>
@@ -44,10 +44,21 @@
                     <input type="hidden" id="id" name="id">
 
                     <div class="form-group">
-                        <label for="name" class="control-label col-xs-4"><spring:message code="restaurant.name"/></label>
+                        <label for="name" class="control-label col-xs-4"><spring:message
+                                code="restaurant.name"/></label>
 
                         <div class="col-xs-7">
-                            <input type="text" class="form-control" id="name" name="name" placeholder="<spring:message code="restaurant.name"/>">
+                            <input type="text" class="form-control" id="name" name="name"
+                                   placeholder="<spring:message code="restaurant.name"/>">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="name" class="control-label col-xs-4">Редактировать меню</label>
+
+                        <div class="col-xs-7">
+                                <a class="btn btn-info" href id="menu"> <spring:message code="restaurant.menus"/></a>
+
                         </div>
                     </div>
 
