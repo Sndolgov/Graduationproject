@@ -106,7 +106,12 @@ public class RestaurantServiceTest extends AbstractServiceTest {
     public void getWithMenus() throws Exception {
         Restaurant restaurant = service.getWithMenus(RESTAURANT1_ID);
         MenuTestData.assertMatch(restaurant.getMenus(), MENU3, MENU2, MENU1);
-        DishTestData.assertMatch(restaurant.getMenus().get(2).getDishes(), DISH1, DISH2, DISH3, DISH4);
+    }
+
+    @Test
+    public void getWithDishes() throws Exception {
+        Restaurant restaurant = service.getWithDishes(RESTAURANT1_ID);
+        DishTestData.assertMatch(restaurant.getDishes(), DISH1, DISH2, DISH3, DISH4, DISH5, DISH6);
     }
 
     @Test

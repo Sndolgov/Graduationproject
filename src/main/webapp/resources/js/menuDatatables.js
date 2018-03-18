@@ -10,7 +10,7 @@ function renderDeleteBtn(data, type, row) {
 
 function renderDelete(data, type, row) {
     if (type === "display") {
-        return "<a onclick='alert("+row.id+")'>" +
+        return "<a onclick='alert(" + row.id + ")'>" +
             "<span class='glyphicon glyphicon-remove' aria-hidden='true'></span></a>";
     }
 }
@@ -23,6 +23,37 @@ function renderEditBtn(data, type, row) {
     }
 }
 
+function renderAddDeleteBtn(data, type, row) {
+    if (type === "display") {
+        if (row.inMenu === true) {
+            return "<a onclick='deleteRow(" + row.menuId + ");'>" +
+                "<span class='glyphicon glyphicon-remove' aria-hidden='true' style='color: red;'></span></a>";
+        }
+        else {
+            return "<a onclick='updateRow(" + row.menuId + ");'>" +
+                "<span class='glyphicon glyphicon-plus' aria-hidden='true'></span></a>";
+        }
+    }
+}
+
+function enable(chkbox, dishId, menuId) {
+    var enabled = chkbox.is(":checked");
+//  https://stackoverflow.com/a/22213543/548473
+    $.ajax({
+        url: ajaxUrl + dishId + "/" + menuId,
+        type: "POST",
+        data: "enabled=" + enabled
+    }).done(function () {
+        chkbox.closest("tr").toggleClass("disabled");
+        successNoty(enabled ? "common.enabled" : "common.disabled");
+    }).fail(function () {
+        $(chkbox).prop("checked", !enabled);
+    });
+}
+
+$('#editRow').on('hide.bs.modal', function() {
+    updateTable();
+});
 
 
 $(function () {
@@ -96,10 +127,20 @@ function getDishes(id) {
                 "data": "price"
             },
             {
-                "orderable": false,
-                "defaultContent": "",
-                "render": renderDelete
+                "data": "inMenu",
+                "render": function (data, type, row) {
+                    if (type === "display") {
+                        return "<input type='checkbox' " + (data ? "checked" : "") +
+                            " onclick='enable($(this)," + row.id + ", " + row.menuId + ");'/>";
+                    }
+                    return data;
+                }
+            },
+        ],
+        "createdRow": function (row, data, dataIndex) {
+            if (!data.inMenu) {
+                $(row).addClass("disabled");
             }
-        ]
+        }
     });
 }

@@ -6,11 +6,13 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
+import ru.sndolgov.graduationproject.model.Dish;
 import ru.sndolgov.graduationproject.model.Menu;
 import ru.sndolgov.graduationproject.model.Voice;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Created by Сергей on 07.02.2018.
@@ -27,6 +29,9 @@ public interface CrudMenuRepository extends JpaRepository<Menu, Integer> {
 
     @Query("SELECT m FROM Menu m WHERE m.restaurant.id=:restaurantId ORDER BY m.date DESC")
     List<Menu> getAll(@Param("restaurantId") int restaurantId);
+
+    @Override
+    Optional<Menu> findById(Integer id);
 
     @EntityGraph(attributePaths = {"restaurant"}, type = EntityGraph.EntityGraphType.LOAD)
     @Query("SELECT m FROM Menu m WHERE m.id = ?1")

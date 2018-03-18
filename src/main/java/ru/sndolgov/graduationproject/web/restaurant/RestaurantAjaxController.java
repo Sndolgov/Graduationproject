@@ -58,10 +58,10 @@ public class RestaurantAjaxController {
     @PostMapping
     public void createOrUpdate(@Valid Restaurant restaurant) {
         if (restaurant.isNew()) {
-            log.info("voting create {}", restaurant);
+            log.info("restaurant create {}", restaurant);
             restaurantService.create(restaurant);
         } else {
-            log.info("voting update {}", restaurant);
+            log.info("restaurant update {}", restaurant);
             assureIdConsistent(restaurant, restaurant.getId());
             restaurantService.update(restaurant);
         }

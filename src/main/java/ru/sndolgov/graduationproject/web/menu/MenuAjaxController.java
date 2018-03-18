@@ -11,14 +11,18 @@ import ru.sndolgov.graduationproject.model.Dish;
 import ru.sndolgov.graduationproject.model.Menu;
 import ru.sndolgov.graduationproject.service.menu.MenuService;
 import ru.sndolgov.graduationproject.service.restaurant.RestaurantService;
+import ru.sndolgov.graduationproject.to.DishTo;
 import ru.sndolgov.graduationproject.to.MenuTo;
 import ru.sndolgov.graduationproject.to.RestaurantTo;
+import ru.sndolgov.graduationproject.util.DishUtil;
 import ru.sndolgov.graduationproject.util.MenuUtil;
 import ru.sndolgov.graduationproject.util.RestaurantUtil;
 
 import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static ru.sndolgov.graduationproject.util.ValidationUtil.assureIdConsistent;
 
 /**
  * Created by Сергей on 07.02.2018.
@@ -57,19 +61,40 @@ public class MenuAjaxController {
     public MenuTo getById(@PathVariable("id") int id) {
         log.info("get menu", id);
         Menu menu = menuService.getWithRestaurantAndDishes(id, ChangeableRestaurant.id);
-            return MenuUtil.asTo(menu);
+        return MenuUtil.asTo(menu);
 
     }
 
     @GetMapping(value = "dishes/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Dish> getByDishesId(@PathVariable("id") int id) {
+    public List<DishTo> getDishesById(@PathVariable("id") int id) {
         log.info("get diashes of menu", id);
-        Menu menu = menuService.getWithDishes(id, ChangeableRestaurant.id);
-        return menu.getDishes();
+        List<Dish> menuDishes = menuService.getWithDishes(id, ChangeableRestaurant.id).getDishes();
+        return restaurantService.getWithDishes(ChangeableRestaurant.id).getDishes().stream()
+                .map(dish -> DishUtil.asTo(id, dish, menuDishes))
+                .collect(Collectors.toList());
+    }
+
+    @PostMapping (value = "/{dishId}/{menuId}")
+    public void enable (@PathVariable("dishId") int dishId, @PathVariable("menuId") int menuId, @RequestParam("enabled") boolean enabled){
+        if (enabled){
+            menuService.addDish(menuId, dishId, ChangeableRestaurant.id);
+        }
+        else {
+            menuService.deletDish(menuId, dishId, ChangeableRestaurant.id);
+        }
     }
 
     @PostMapping
     public void createOrUpdate(MenuTo menuTo) {
-        System.out.println(menuTo);
+        if (menuTo.isNew()) {
+            Menu menu = MenuUtil.createNewFromTo(menuTo);
+            log.info("menu create {}", menu);
+            menuService.creat(menu, menuTo.getRestaurantId());
+        } else {
+            assureIdConsistent(menuTo, menuTo.getId());
+            log.info("menu update {}", menuTo);
+            menuService.update(menuTo);
+        }
     }
+
 }

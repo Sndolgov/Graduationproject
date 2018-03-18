@@ -55,14 +55,10 @@ public class MenuServiceImplTest extends AbstractServiceTest {
 
     @Test
     public void updateDishes() throws Exception {
+        Menu menu = service.getWithDishes(MENU1_ID, RESTAURANT1_ID);
+        service.addDish(menu.getId(), DISH5.getId(), RESTAURANT1_ID);
         Menu updated = service.getWithDishes(MENU1_ID, RESTAURANT1_ID);
-        List<Dish> dishes = updated.getDishes();
-        Dish dish = DISH5;
-        dish.setRestaurant(RESTAURANT1);
-        dishes.add(dish);
-        updated.setDishes(dishes);
-        service.update(updated, RESTAURANT1_ID);
-        System.out.println(service.getWithDishes(MENU1_ID, RESTAURANT1_ID).getDishes());
+        DishTestData.assertMatch(updated.getDishes(), DISH1, DISH2, DISH3, DISH4, DISH5);
     }
 
     @Test(expected = NotFoundException.class)

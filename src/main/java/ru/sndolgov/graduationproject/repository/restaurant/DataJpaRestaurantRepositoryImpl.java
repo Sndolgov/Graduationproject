@@ -19,9 +19,6 @@ public class DataJpaRestaurantRepositoryImpl {
     @Autowired
     CrudRestaurantRepository crudRepository;
 
-    @Autowired
-    CrudMenuRepository crudMenuRepository;
-
     @Transactional
     public Restaurant save(Restaurant restaurant) {
         return crudRepository.save(restaurant);
@@ -46,5 +43,9 @@ public class DataJpaRestaurantRepositoryImpl {
 
     public Restaurant getWithMenus(int id) {
         return crudRepository.getWithMenu(id);
+    }
+
+    public Restaurant getWithDishes(int restaurantId){
+        return crudRepository.getWithDishes(restaurantId);
     }
 }

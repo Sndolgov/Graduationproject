@@ -78,6 +78,11 @@ public class RestaurantServiceImpl implements RestaurantService{
     }
 
     @Override
+    public Restaurant getWithDishes(int restaurantId) {
+        return checkNotFoundWithId(restaurantRepository.getWithDishes(restaurantId), restaurantId);
+    }
+
+    @Override
     public Restaurant getWithMenusDishesVoices(int id) {
         Restaurant restaurant = restaurantRepository.getWithMenus(id);
 

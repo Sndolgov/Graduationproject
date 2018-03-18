@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import ru.sndolgov.graduationproject.model.Dish;
 import ru.sndolgov.graduationproject.model.Menu;
+import ru.sndolgov.graduationproject.model.Restaurant;
 import ru.sndolgov.graduationproject.repository.dish.CrudDishRepository;
 import ru.sndolgov.graduationproject.repository.restaurant.CrudRestaurantRepository;
 
@@ -32,7 +33,9 @@ public class DataJpaMenuRepositoryImpl {
         if (!menu.isNew() && get(menu.getId(), restaurantId) == null) {
             return null;
         }
-        menu.setRestaurant(crudRestaurantRepository.getOne(restaurantId));
+        Restaurant restaurant = crudRestaurantRepository.findById(restaurantId).orElse(null);
+        if (restaurant != null)
+            menu.setRestaurant(restaurant);
         return crudMenuRepository.save(menu);
     }
 
@@ -76,13 +79,5 @@ public class DataJpaMenuRepositoryImpl {
         Menu menu = getWithDishes(id, restaurantId);
         menu.setVoices(withVoices.getVoices());
         return menu;
-    }
-
-    public Menu addDish (int id, int dishId, int restaurantId){
-        Menu menu = crudMenuRepository.getWithRestaurantAndDishes(id, restaurantId);
-        List <Dish> dishes = menu.getDishes();
-        dishes.add(crudDishRepository.getWithRestaurant(dishId, restaurantId));
-        menu.setDishes(dishes);
-        return save(menu, restaurantId);
     }
 }

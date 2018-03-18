@@ -25,4 +25,5 @@ public interface RestaurantService {
 
         Restaurant getWithMenusDishesVoices(int id);
 
+        Restaurant getWithDishes(int restaurantId);
 }

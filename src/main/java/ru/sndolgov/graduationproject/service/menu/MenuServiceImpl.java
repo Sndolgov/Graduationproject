@@ -3,12 +3,17 @@ package ru.sndolgov.graduationproject.service.menu;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import ru.sndolgov.graduationproject.model.Dish;
 import ru.sndolgov.graduationproject.model.Menu;
+import ru.sndolgov.graduationproject.repository.dish.DataJpaDishRepositoryImpl;
 import ru.sndolgov.graduationproject.repository.menu.DataJpaMenuRepositoryImpl;
+import ru.sndolgov.graduationproject.to.MenuTo;
+import ru.sndolgov.graduationproject.util.MenuUtil;
 import ru.sndolgov.graduationproject.util.exception.NotFoundException;
 
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static ru.sndolgov.graduationproject.util.ValidationUtil.checkNotFoundWithId;
 
@@ -21,6 +26,9 @@ public class MenuServiceImpl implements MenuService {
     @Autowired
     DataJpaMenuRepositoryImpl repository;
 
+    @Autowired
+    DataJpaDishRepositoryImpl dishRepository;
+
     @Override
     public Menu creat(Menu menu, int restaurantId) {
         Assert.notNull(menu, "menu must not be null");
@@ -29,7 +37,13 @@ public class MenuServiceImpl implements MenuService {
 
     @Override
     public Menu update(Menu menu, int restaurantId) throws NotFoundException {
-        return checkNotFoundWithId(repository.save(menu, restaurantId), menu.getId());
+        return repository.save(menu, restaurantId);
+    }
+
+    @Override
+    public Menu update(MenuTo menuTo) {
+        Menu menu = MenuUtil.updateFromTo(get(menuTo.getId(), menuTo.getRestaurantId()), menuTo);
+        return update(menu, menuTo.getRestaurantId());
     }
 
     @Override
@@ -48,17 +62,17 @@ public class MenuServiceImpl implements MenuService {
     }
 
     @Override
-    public Menu getWithRestaurant(int id) {
+    public Menu getWithRestaurant(int id) throws NotFoundException{
         return checkNotFoundWithId(repository.getWithRestaurant(id), id);
     }
 
     @Override
-    public Menu getWithRestaurantAndDishes(int id, int restaurantId) {
+    public Menu getWithRestaurantAndDishes(int id, int restaurantId) throws NotFoundException{
         return checkNotFoundWithId(repository.getWithRestaurantAndDishes(id, restaurantId), id);
     }
 
     @Override
-    public Menu getWithDishes(int id, int restaurantId) {
+    public Menu getWithDishes(int id, int restaurantId) throws NotFoundException{
         return checkNotFoundWithId(repository.getWithDishes(id, restaurantId), id);
     }
 
@@ -68,17 +82,32 @@ public class MenuServiceImpl implements MenuService {
     }
 
     @Override
-    public Menu getWithVoices(int id, int restaurantId) {
-        return repository.getWithVoices(id, restaurantId);
+    public Menu getWithVoices(int id, int restaurantId) throws NotFoundException{
+        return checkNotFoundWithId(repository.getWithVoices(id, restaurantId), id);
     }
 
     @Override
-    public Menu getWithDishesVoices(int id, int restaurantId) {
+    public Menu getWithDishesVoices(int id, int restaurantId) throws NotFoundException{
         return checkNotFoundWithId(repository.getWithDishes(id, restaurantId), id);
     }
 
     @Override
-    public Menu addDish(int id, int dishId, int restaurantId) {
-        return checkNotFoundWithId(repository.addDish(id, dishId, restaurantId), id);
+    public void addDish(int menuId, int dishId, int restaurantId) {
+        Menu menu = getWithDishes(menuId, restaurantId);
+        List<Dish> dishes = menu.getDishes();
+        Dish dish = dishRepository.get(dishId, restaurantId);
+        dishes.add(dish);
+        menu.setDishes(dishes);
+        update(menu, restaurantId);
+    }
+
+    @Override
+    public void deletDish(int menuId, int dishId, int restaurantId) {
+        Menu menu = getWithDishes(menuId, restaurantId);
+        List<Dish> dishes = menu.getDishes();
+        menu.setDishes(dishes.stream()
+                .filter(dish1 -> dish1.getId()!=dishId)
+                .collect(Collectors.toList()));
+        update(menu, restaurantId);
     }
 }

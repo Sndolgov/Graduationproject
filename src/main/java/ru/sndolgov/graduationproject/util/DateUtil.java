@@ -27,11 +27,14 @@ public class DateUtil {
     }
 
     public static Date getDateToday(){
-        LocalDate ld = LocalDate.now();
-        return of(ld.getYear(), ld.getMonthValue(), ld.getDayOfMonth());
+        return toDate(LocalDate.now());
     }
 
     public static LocalDate toLocalDate(Date date){
         return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+    }
+
+    public static Date toDate(LocalDate ld){
+        return of(ld.getYear(),ld.getMonthValue(), ld.getDayOfMonth());
     }
 }

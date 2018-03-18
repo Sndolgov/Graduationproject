@@ -20,7 +20,7 @@ public class Restaurant extends AbstractNamedEntity {
     private List<Menu> menus;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "restaurant")
-    @OrderBy("description ASC")
+    @OrderBy("id ASC")
     private List<Dish> dishes;
 
      //TODO need?
