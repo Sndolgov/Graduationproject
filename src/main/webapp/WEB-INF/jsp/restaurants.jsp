@@ -54,17 +54,17 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="name" class="control-label col-xs-4">Редактировать меню</label>
+                        <label for="name" class="control-label col-xs-4"></label>
 
                         <div class="col-xs-7">
-                                <a class="btn btn-info" href id="menu"> <spring:message code="restaurant.menus"/></a>
+                                <a class="btn btn-info" href id="menu"  style="visibility:hidden;" > <spring:message code="restaurant.editmenu"/></a>
 
                         </div>
                     </div>
 
                     <div class="form-group">
                         <div class="col-xs-offset-3 col-xs-9">
-                            <button type="button" onclick="save()" class="btn btn-primary">
+                            <button type="submit" onclick="save()" class="btn btn-primary">
                                 <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
                             </button>
                         </div>

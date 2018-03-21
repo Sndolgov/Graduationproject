@@ -23,4 +23,9 @@ public class DishUtil {
     private static boolean isInMenu(Dish dish, List <Dish> menuDishes) {
         return menuDishes.contains(dish);
     }
+
+    public static DishTo asToAll(Integer restaurant, Dish dish) {
+        return new DishTo(dish.getId(), restaurant, dish.getDescription(), dish.getPrice(), dish.isEnabled());
+    }
+
 }

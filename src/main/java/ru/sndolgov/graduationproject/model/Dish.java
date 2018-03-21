@@ -10,6 +10,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 
 /**
  * Created by Сергей on 11.02.2018.
@@ -17,7 +18,7 @@ import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "dishes", uniqueConstraints = {@UniqueConstraint(columnNames = {"description", "restaurant_id"}, name = "restaurant_description_idx")})
-public class Dish extends AbstractBaseEntity{
+public class Dish extends AbstractBaseEntity {
 
     @Column(name = "description", nullable = false)
     @NotBlank

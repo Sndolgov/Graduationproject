@@ -12,7 +12,7 @@ import java.util.List;
 public class MenuUtil {
 
     public static MenuTo asTo (Menu menu){
-       return new MenuTo(menu.getId(), menu.getRestaurant().getId(), menu.getRestaurant().getName(), menu.getDescription(), menu.getDishes(), DateUtil.toLocalDate(menu.getDate()));
+       return new MenuTo(menu.getId(), menu.getRestaurant().getId(), menu.getDescription(), menu.getDishes(), DateUtil.toLocalDate(menu.getDate()));
     }
 
     public static Menu createNewFromTo(MenuTo menuTo) {

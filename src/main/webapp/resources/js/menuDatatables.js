@@ -9,27 +9,6 @@ function renderDeleteBtn(data, type, row) {
     }
 }
 
-/*function renderDelete(data, type, row) {
-    if (type === "display") {
-        return "<a onclick='alert(" + row.id + ")'>" +
-            "<span class='glyphicon glyphicon-remove' aria-hidden='true'></span></a>";
-    }
-}*/
-
-/*function renderAddDeleteBtn(data, type, row) {
- if (type === "display") {
- if (row.inMenu === true) {
- return "<a onclick='deleteRow(" + row.menuId + ");'>" +
- "<span class='glyphicon glyphicon-remove' aria-hidden='true' style='color: red;'></span></a>";
- }
- else {
- return "<a onclick='updateRow(" + row.menuId + ");'>" +
- "<span class='glyphicon glyphicon-plus' aria-hidden='true'></span></a>";
- }
- }
- }*/
-
-
 function renderEditBtn(data, type, row) {
     if (type === "display") {
         return "<a onclick='updateRow(" + row.menuId + ");'>" +
@@ -37,22 +16,29 @@ function renderEditBtn(data, type, row) {
     }
 }
 
+function get(id) {
+    $("#modalTitle2").html(i18n["editTitle2"]);
+    getRows(id);
+    $('#editRow2').modal();
+}
+
+function add() {
+    $("#modalTitle").html(i18n["addTitle"]);
+    form.find(":input").val("");
+    $("#editRow").modal();
+    datatable.rows().remove().draw();
+}
+
 function updateRow(id) {
     $("#modalTitle").html(i18n["editTitle"]);
     $.get(ajaxUrl + id, function (data) {
         $.each(data, function (key, value) {
             form.find("input[name='" + key + "']").val(value);
-            if (key === "restaurantName")
-                $("#restaurantName").html(value);
-            if (key === "dishes") {
-                getDishes(data.id)
-            }
         });
+        getIncludRows(data.id);
         $('#editRow').modal();
     });
 }
-
-
 
 function enable(chkbox, dishId, menuId) {
     var enabled = chkbox.is(":checked");
@@ -69,10 +55,9 @@ function enable(chkbox, dishId, menuId) {
     });
 }
 
-$('#editRow').on('hide.bs.modal', function() {
+$('#editRow').on('hide.bs.modal', function () {
     updateTable();
 });
-
 
 $(function () {
     datatableApi = $("#datatable").DataTable({
@@ -127,8 +112,8 @@ $(function () {
     });
 });
 
-function getDishes(id) {
-    datatable= $("#menutable").DataTable({
+function getIncludRows(id) {
+    datatable = $("#datatable2").DataTable({
         "ajax": {
             "url": ajaxUrl + "dishes/" + id,
             "dataSrc": ""
@@ -145,7 +130,7 @@ function getDishes(id) {
                 "data": "price"
             },
             {
-                "data": "inMenu",
+                "data": "enabled",
                 "render": function (data, type, row) {
                     if (type === "display") {
                         return "<input type='checkbox' " + (data ? "checked" : "") +
@@ -156,9 +141,40 @@ function getDishes(id) {
             }
         ],
         "createdRow": function (row, data, dataIndex) {
-            if (!data.inMenu) {
+            if (!data.enabled) {
                 $(row).addClass("disabled");
             }
         }
+    });
+}
+
+function getRows(id) {
+    datatable = $("#datatable3").DataTable({
+        "ajax": {
+            "url": ajaxUrl + "alldishes/" + id,
+            "dataSrc": ""
+        },
+        "paging": false,
+        "info": false,
+        "destroy": true,
+        "sDom": '',
+        "columns": [
+            {
+                "data": "description"
+            },
+            {
+                "data": "price"
+            },
+            {
+                "data": "enabled",
+                "render": function (data, type, row) {
+                    if (type === "display") {
+                        return "<input type='checkbox' " + (data ? "checked" : "") +
+                            " onclick='enable($(this)," + row.id + ", " + row.menuId + ");'/>";
+                    }
+                    return data;
+                }
+            }
+        ]
     });
 }

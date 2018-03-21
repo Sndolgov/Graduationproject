@@ -4,7 +4,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import ru.sndolgov.graduationproject.ChangeableRestaurant;
 import ru.sndolgov.graduationproject.model.Dish;
@@ -65,6 +64,7 @@ public class MenuAjaxController {
 
     }
 
+
     @GetMapping(value = "dishes/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<DishTo> getDishesById(@PathVariable("id") int id) {
         log.info("get diashes of menu", id);
@@ -74,12 +74,19 @@ public class MenuAjaxController {
                 .collect(Collectors.toList());
     }
 
-    @PostMapping (value = "/{dishId}/{menuId}")
-    public void enable (@PathVariable("dishId") int dishId, @PathVariable("menuId") int menuId, @RequestParam("enabled") boolean enabled){
-        if (enabled){
+    @GetMapping(value = "alldishes/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<DishTo> getDishes(@PathVariable("id") int id) {
+        log.info("get diashes of restaurant", id);
+        return restaurantService.getWithDishes(id).getDishes().stream()
+                .map(dish -> DishUtil.asToAll(id, dish))
+                .collect(Collectors.toList());
+    }
+
+    @PostMapping(value = "/{dishId}/{menuId}")
+    public void enable(@PathVariable("dishId") int dishId, @PathVariable("menuId") int menuId, @RequestParam("enabled") boolean enabled) {
+        if (enabled) {
             menuService.addDish(menuId, dishId, ChangeableRestaurant.id);
-        }
-        else {
+        } else {
             menuService.deletDish(menuId, dishId, ChangeableRestaurant.id);
         }
     }

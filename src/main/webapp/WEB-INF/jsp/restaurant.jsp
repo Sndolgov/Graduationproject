@@ -17,6 +17,11 @@
             <spring:message code="common.add"/>
         </a>
 
+        <a class="btn btn-primary" onclick="get(${restaurant.id})" style="background: green;">
+            <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+            <spring:message code="dish.description"/>
+        </a>
+
         <table class="table table-striped display" id="datatable">
             <thead>
             <tr>
@@ -40,7 +45,6 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h2 class="modal-title" id="modalTitle"></h2>
-                <h4 class="modal-title" id="restaurantName"></h4>
 
             </div>
             <div class="modal-body">
@@ -48,6 +52,7 @@
 
                     <input type="hidden" id="id" name="id">
                     <input type="hidden" id="restaurantId" name="restaurantId">
+
 
 
                     <div class="form-group">
@@ -70,14 +75,55 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="menutable" class="control-label col-xs-3"><spring:message
+                        <label for="datatable2" class="control-label col-xs-3"><spring:message
                                 code="dish.description"/></label>
 
                         <div class="col-xs-9">
-                            <table class="table table-striped display" id="menutable">
+                            <table class="table table-striped display" id="datatable2">
                                 <thead>
                                 <tr>
                                     <th><h5><spring:message code="dish.included"/></h5></th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <div class="col-xs-offset-3 col-xs-9">
+                            <button type="button" onclick="save()" class="btn btn-primary">
+                                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="editRow2">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h2 class="modal-title" id="modalTitle2"></h2>
+
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" id="detailsForm2">
+
+                    <div class="form-group">
+                        <label for="datatable3" class="control-label col-xs-3"></label>
+
+                        <div class="col-xs-9">
+                            <table class="table table-striped display" id="datatable3">
+                                <thead>
+                                <tr>
+                                    <th><spring:message code="dish.description"/></th>
                                     <th></th>
                                     <th></th>
                                 </tr>
@@ -108,5 +154,7 @@
 <script type="text/javascript">
     i18n["addTitle"] = '<spring:message code="menu.add"/>';
     i18n["editTitle"] = '<spring:message code="menu.edit"/>';
+    i18n["editTitle2"] = '<spring:message code="dish.edit"/>';
+
 </script>
 </html>

@@ -1,66 +1,18 @@
 var ajaxUrl = "ajax/admin/restaurants/";
 var datatableApi;
 
-/*function renderBtn(data, type, row) {
- if (type === "display") {
- return "<a onclick='editInRow(" + row.menuId + ");'>" +
- "<span class='glyphicon glyphicon-thumbs-up' aria-hidden='true'></span></a>";
- }
- }*/
-
-
-/*function editInRow(id) {
- var hour = new Date().getHours();
- if (hour >= 11) {
- $.get(ajaxUrl + "getvoice", deleteFromRow);
- }
- setTimeout(function addInRow() {
- $.ajax({
- url: ajaxUrl + id,
- type: "PUT"
- }).done(function () {
- updateTable();
- successNoty("voice.saved");
- });
- }, 500)
- }*/
-
-/*function deleteFromRow(id) {
- if (id !== 0) {
- $.ajax({
- url: ajaxUrl + "deletevoice/" + id,
- type: "DELETE"
- })
- .done(function () {
- updateTable();
- successNoty("voice.deleted");
- });
- }
- }
-
- function rowDelete(id) {
- $.ajax({
- url: ajaxUrl + "admin/" + id,
- type: "DELETE"
- }).done(function () {
- updateTable();
- successNoty("common.deleted");
- });
- }*/
-
-function renderEditBtnAdmin(data, type, row) {
-    //document.getElementById('id').value;
-    if (type === "display") {
-        return "<a href='restaurant/" + row.id + "'>" +
-            "<span class='glyphicon glyphicon-pencil' aria-hidden='true'></span></a>";
-        //  }
-    }
+function add() {
+    $("#modalTitle").html(i18n["addTitle"]);
+    document.getElementById('menu').setAttribute('style', 'visibility:hidden;');
+    form.find(":input").val("");
+    $("#editRow").modal();
 }
 
 function updateRow(id) {
     $("#modalTitle").html(i18n["editTitle"]);
     var href = "restaurant/" + id;
     document.getElementById('menu').setAttribute('href', href);
+    document.getElementById('menu').setAttribute('style', 'visibility:visible;');
 
     $.get(ajaxUrl + id, function (data) {
             $.each(data, function (key, value) {

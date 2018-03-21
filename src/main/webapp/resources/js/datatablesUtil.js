@@ -42,9 +42,6 @@ function add() {
     $("#modalTitle").html(i18n["addTitle"]);
     form.find(":input").val("");
     $("#editRow").modal();
-    datatable.rows().remove().draw();
-
-
 }
 
 function updateRow(id) {
@@ -58,7 +55,6 @@ function updateRow(id) {
     )
     ;
 }
-
 
 function deleteRow(id) {
     $.ajax({

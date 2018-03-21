@@ -17,13 +17,8 @@ public class MenuTo extends BaseTo implements Serializable {
     private static final long serialVersionUID = 1L;
 
 
-    @Size(min = 2, max = 100)
     private Integer restaurantId;
 
-    @NotBlank
-    @Size(min = 2, max = 100)
-    @SafeHtml
-    private String restaurantName;
 
     @NotBlank
     @Size(min = 2, max = 120)
@@ -42,10 +37,9 @@ public class MenuTo extends BaseTo implements Serializable {
     public MenuTo() {
     }
 
-    public MenuTo(Integer id, Integer restaurantId, String restaurantName, String menuDescription, List<Dish> dishes, LocalDate date) {
+    public MenuTo(Integer id, Integer restaurantId, String menuDescription, List<Dish> dishes, LocalDate date) {
         super(id);
         this.restaurantId = restaurantId;
-        this.restaurantName = restaurantName;
         this.menuDescription =menuDescription;
         this.dishes=dishes;
         this.date=date;
@@ -57,14 +51,6 @@ public class MenuTo extends BaseTo implements Serializable {
 
     public void setRestaurantId(Integer restaurantId) {
         this.restaurantId = restaurantId;
-    }
-
-    public String getRestaurantName() {
-        return restaurantName;
-    }
-
-    public void setRestaurantName(String restaurantName) {
-        this.restaurantName = restaurantName;
     }
 
     public String getMenuDescription() {
@@ -96,7 +82,6 @@ public class MenuTo extends BaseTo implements Serializable {
         return "MenuTo{" +
                 "id=" + id +
                 ", restaurantId=" + restaurantId +
-                ", restaurantName='" + restaurantName + '\'' +
                 ", menuDescription='" + menuDescription + '\'' +
                 ", dishes=" + dishes +
                 ", date=" + date +

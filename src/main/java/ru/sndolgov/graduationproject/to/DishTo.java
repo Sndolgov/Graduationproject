@@ -13,8 +13,7 @@ import java.io.Serializable;
 /**
  * Created by Сергей on 17.03.2018.
  */
-public class DishTo extends BaseTo implements Serializable {
-    private static final long serialVersionUID = 1L;
+public class DishTo extends BaseTo {
 
     @Size(min = 2, max = 100)
     private Integer menuId;
@@ -30,17 +29,17 @@ public class DishTo extends BaseTo implements Serializable {
     private Integer price;
 
     @Column(name = "enabled", nullable = false, columnDefinition = "bool default true")
-    private boolean inMenu;
+    private boolean enabled;
 
     public DishTo() {
     }
 
-    public DishTo(Integer id, Integer menuId, String description, Integer price, boolean inMenu) {
+    public DishTo(Integer id, Integer menuId, String description, Integer price, boolean enabled) {
         super(id);
         this.menuId = menuId;
         this.description = description;
         this.price = price;
-        this.inMenu = inMenu;
+        this.enabled = enabled;
     }
 
     public Integer getMenuId() {
@@ -67,12 +66,12 @@ public class DishTo extends BaseTo implements Serializable {
         this.price = price;
     }
 
-    public boolean isInMenu() {
-        return inMenu;
+    public boolean isEnabled() {
+        return enabled;
     }
 
-    public void setInMenu(boolean inMenu) {
-        this.inMenu = inMenu;
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
     @Override
@@ -82,7 +81,7 @@ public class DishTo extends BaseTo implements Serializable {
                 ", menuId=" + menuId +
                 ", description='" + description + '\'' +
                 ", price=" + price +
-                ", inMenu=" + inMenu +
+                ", enabled=" + enabled +
                 '}';
     }
 }
