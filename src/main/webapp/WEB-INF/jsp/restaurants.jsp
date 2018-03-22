@@ -57,7 +57,7 @@
                         <label for="name" class="control-label col-xs-4"></label>
 
                         <div class="col-xs-7">
-                                <a class="btn btn-info" href id="menu"  style="visibility:hidden;" > <spring:message code="restaurant.editmenu"/></a>
+                                <a class="btn btn-info" href id="menu"  style="visibility:hidden;" > <spring:message code="menu.edit"/></a>
 
                         </div>
                     </div>

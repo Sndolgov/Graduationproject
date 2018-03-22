@@ -24,8 +24,8 @@ public class DishUtil {
         return menuDishes.contains(dish);
     }
 
-    public static DishTo asToAll(Integer restaurant, Dish dish) {
-        return new DishTo(dish.getId(), restaurant, dish.getDescription(), dish.getPrice(), dish.isEnabled());
+    public static DishTo asToAll(Integer restaurantId, Dish dish) {
+        return new DishTo(dish.getId(), restaurantId, dish.getDescription(), dish.getPrice(), dish.isEnabled());
     }
 
 }

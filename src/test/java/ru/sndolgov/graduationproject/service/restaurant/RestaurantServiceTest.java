@@ -12,6 +12,7 @@ import ru.sndolgov.graduationproject.model.Restaurant;
 import ru.sndolgov.graduationproject.model.Role;
 import ru.sndolgov.graduationproject.repository.JpaUtil;
 import ru.sndolgov.graduationproject.service.AbstractServiceTest;
+import ru.sndolgov.graduationproject.util.DateUtil;
 import ru.sndolgov.graduationproject.util.exception.NotFoundException;
 
 import javax.validation.ConstraintViolationException;
@@ -113,6 +114,7 @@ public class RestaurantServiceTest extends AbstractServiceTest {
         Restaurant restaurant = service.getWithDishes(RESTAURANT1_ID);
         DishTestData.assertMatch(restaurant.getDishes(), DISH1, DISH2, DISH3, DISH4, DISH5, DISH6);
     }
+
 
     @Test
     public void testValidation() throws Exception {

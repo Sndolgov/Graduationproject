@@ -5,6 +5,7 @@ import ru.sndolgov.graduationproject.model.Menu;
 import ru.sndolgov.graduationproject.model.Restaurant;
 import ru.sndolgov.graduationproject.to.RestaurantTo;
 
+import java.util.Date;
 import java.util.List;
 import java.util.StringJoiner;
 import java.util.stream.Collectors;
@@ -20,6 +21,14 @@ public class RestaurantUtil {
         return new RestaurantTo(menu.getRestaurant().getId(), menu.getId(), menu.getRestaurant().getName(),
                 menu.getDescription(), getDishDescription(dishes), getDishPrice(dishes), getTotalValue(dishes),
                 menu.getVoices().size(), DateUtil.toLocalDate(menu.getDate()));
+    }
+
+    public static RestaurantTo asToActual(Menu menu) {
+        List<Dish> dishes = menu.getDishes();
+
+        return new RestaurantTo(menu.getId(), menu.getRestaurant().getName(),
+                menu.getDescription(), getDishDescription(dishes), getDishPrice(dishes), getTotalValue(dishes),
+                menu.getVoices().size(), DateUtil.toLocalDate(menu.getDate()), isActual(menu.getDate()));
     }
 
     private static String getDishDescription(List<Dish> dishes) {
@@ -39,5 +48,9 @@ public class RestaurantUtil {
         for (Dish dish : dishes)
             totalValue += dish.getPrice();
         return totalValue;
+    }
+
+    private static boolean isActual(Date date){
+        return DateUtil.compareDate(date, DateUtil.getDateToday())>=0;
     }
 }

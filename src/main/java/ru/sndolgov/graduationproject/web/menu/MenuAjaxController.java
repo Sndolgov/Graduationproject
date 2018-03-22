@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.sndolgov.graduationproject.ChangeableRestaurant;
 import ru.sndolgov.graduationproject.model.Dish;
 import ru.sndolgov.graduationproject.model.Menu;
+import ru.sndolgov.graduationproject.service.dish.DishService;
 import ru.sndolgov.graduationproject.service.menu.MenuService;
 import ru.sndolgov.graduationproject.service.restaurant.RestaurantService;
 import ru.sndolgov.graduationproject.to.DishTo;
@@ -40,13 +41,16 @@ public class MenuAjaxController {
     @Autowired
     private MenuService menuService;
 
+    @Autowired
+    private DishService dishService;
+
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<RestaurantTo> getAll() {
         log.info("get menus of restautant {}", ChangeableRestaurant.id);
-        List<Menu> menus = restaurantService.getWithMenusDishesVoices(ChangeableRestaurant.id).getMenus();
+        List<Menu> menus = restaurantService.getWithAllFields(ChangeableRestaurant.id).getMenus();
         return menus.stream()
-                .map(RestaurantUtil::asTo)
+                .map(RestaurantUtil::asToActual)
                 .collect(Collectors.toList());
     }
 
@@ -58,7 +62,7 @@ public class MenuAjaxController {
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public MenuTo getById(@PathVariable("id") int id) {
-        log.info("get menu", id);
+        log.info("get menu {}", id);
         Menu menu = menuService.getWithRestaurantAndDishes(id, ChangeableRestaurant.id);
         return MenuUtil.asTo(menu);
 
@@ -67,19 +71,32 @@ public class MenuAjaxController {
 
     @GetMapping(value = "dishes/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<DishTo> getDishesById(@PathVariable("id") int id) {
-        log.info("get diashes of menu", id);
+        log.info("get dishes of menu {}", id);
         List<Dish> menuDishes = menuService.getWithDishes(id, ChangeableRestaurant.id).getDishes();
         return restaurantService.getWithDishes(ChangeableRestaurant.id).getDishes().stream()
+                .filter(Dish::isEnabled)
                 .map(dish -> DishUtil.asTo(id, dish, menuDishes))
                 .collect(Collectors.toList());
     }
 
     @GetMapping(value = "alldishes/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<DishTo> getDishes(@PathVariable("id") int id) {
-        log.info("get diashes of restaurant", id);
+        log.info("get dishes of restaurant {}", id);
         return restaurantService.getWithDishes(id).getDishes().stream()
                 .map(dish -> DishUtil.asToAll(id, dish))
                 .collect(Collectors.toList());
+    }
+
+    @GetMapping(value = "dish/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Dish getDish(@PathVariable("id") int id) {
+        log.info("get dish {}", id);
+        return dishService.get(id, ChangeableRestaurant.id());
+    }
+
+    @DeleteMapping(value = "dish/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public void deleteDish(@PathVariable("id") int id) {
+        log.info("dish delete {}", id);
+        dishService.delete(id);
     }
 
     @PostMapping(value = "/{dishId}/{menuId}")

@@ -18,7 +18,7 @@
             <tr>
                 <th><spring:message code="restaurant.name"/></th>
                 <th><spring:message code="menu.description"/></th>
-                <th><spring:message code="dish.description"/></th>
+                <th><spring:message code="dish.dishes"/></th>
                 <th><spring:message code="dish.price"/></th>
                 <th><spring:message code="menu.totalValue"/></th>
                 <th><spring:message code="menu.voices"/></th>

@@ -9,10 +9,12 @@ import ru.sndolgov.graduationproject.RestaurantTestData;
 import ru.sndolgov.graduationproject.VoiceTestData;
 import ru.sndolgov.graduationproject.model.Dish;
 import ru.sndolgov.graduationproject.model.Menu;
+import ru.sndolgov.graduationproject.model.Restaurant;
 import ru.sndolgov.graduationproject.service.AbstractServiceTest;
 import ru.sndolgov.graduationproject.util.DateUtil;
 import ru.sndolgov.graduationproject.util.exception.NotFoundException;
 
+import javax.validation.ConstraintViolationException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -130,5 +132,12 @@ public class MenuServiceImplTest extends AbstractServiceTest {
         Menu menu = service.getWithDishesVoices(MENU1_ID, RESTAURANT1_ID);
         DishTestData.assertMatch(menu.getDishes(), DISH1, DISH2, DISH3, DISH4);
         VoiceTestData.assertMatch(menu.getVoices(), VOICE1, VOICE2);
+    }
+
+    @Test
+    public void testValidation() throws Exception {
+        validateRootCause(() -> service.creat(new Menu(null, " ", DateUtil.of(2018, 02, 12)), RESTAURANT1_ID), ConstraintViolationException.class);
+        validateRootCause(() -> service.creat(new Menu(null, "NewMenu", null), RESTAURANT1_ID), ConstraintViolationException.class);
+
     }
 }

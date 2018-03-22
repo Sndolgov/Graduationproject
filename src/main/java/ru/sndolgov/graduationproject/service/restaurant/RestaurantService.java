@@ -3,6 +3,7 @@ package ru.sndolgov.graduationproject.service.restaurant;
 import ru.sndolgov.graduationproject.model.Restaurant;
 import ru.sndolgov.graduationproject.util.exception.NotFoundException;
 
+import java.util.Date;
 import java.util.List;
 
 public interface RestaurantService {
@@ -23,7 +24,7 @@ public interface RestaurantService {
 
         void enable(int id, boolean enable);
 
-        Restaurant getWithMenusDishesVoices(int id);
+        Restaurant getWithAllFields(int id);
 
         Restaurant getWithDishes(int restaurantId);
 }

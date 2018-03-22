@@ -137,6 +137,6 @@ function renderEditBtn(data, type, row) {
 function renderDeleteBtn(data, type, row) {
     if (type === "display") {
         return "<a onclick='deleteRow(" + row.id + ");'>" +
-            "<span class='glyphicon glyphicon-remove' aria-hidden='true'></span></a>";
+            "<span class='glyphicon glyphicon-remove' aria-hidden='true' style='color: red'></span></a>";
     }
 }

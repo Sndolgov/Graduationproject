@@ -20,12 +20,6 @@ public class DateUtil {
         return calendar.getTime();
     }
 
-    public static boolean compareDate(Date date1, Date date2) {
-        LocalDate ld1 = date1.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-        LocalDate ld2 = date2.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-        return ld1.compareTo(ld2) == 0;
-    }
-
     public static Date getDateToday(){
         return toDate(LocalDate.now());
     }
@@ -36,5 +30,9 @@ public class DateUtil {
 
     public static Date toDate(LocalDate ld){
         return of(ld.getYear(),ld.getMonthValue(), ld.getDayOfMonth());
+    }
+
+    public static int compareDate (Date date1, Date date2){
+        return toLocalDate(date1).compareTo(toLocalDate(date2));
     }
 }

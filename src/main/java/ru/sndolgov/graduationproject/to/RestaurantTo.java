@@ -50,6 +50,8 @@ public class RestaurantTo extends BaseTo implements Serializable {
 
     private Integer voices;
 
+    private boolean actual;
+
     public RestaurantTo() {
     }
 
@@ -64,6 +66,19 @@ public class RestaurantTo extends BaseTo implements Serializable {
         this.totalValue=totalValue;
         this.voices=voices;
         this.date=date;
+    }
+
+    public RestaurantTo(Integer menuId, String restaurantName, String menuDescription, String dishDescription, String dishPrice,
+                        Integer totalValue, Integer voices, LocalDate date, boolean actual) {
+        super(menuId);
+        this.restaurantName = restaurantName;
+        this.menuDescription =menuDescription;
+        this.dishDescription=dishDescription;
+        this.dishPrice=dishPrice;
+        this.totalValue=totalValue;
+        this.voices=voices;
+        this.date=date;
+        this.actual=actual;
     }
 
     public String getRestaurantName() {
@@ -128,6 +143,14 @@ public class RestaurantTo extends BaseTo implements Serializable {
 
     public void setDate(LocalDate date) {
         this.date = date;
+    }
+
+    public boolean isActual() {
+        return actual;
+    }
+
+    public void setActual(boolean actual) {
+        this.actual = actual;
     }
 
     @Override

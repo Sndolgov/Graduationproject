@@ -8,15 +8,13 @@ import javax.persistence.Column;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.io.Serializable;
 
 /**
  * Created by Сергей on 17.03.2018.
  */
 public class DishTo extends BaseTo {
 
-    @Size(min = 2, max = 100)
-    private Integer menuId;
+    private Integer parentId;
 
     @NotBlank
     @Size(min = 2, max = 120)
@@ -34,20 +32,20 @@ public class DishTo extends BaseTo {
     public DishTo() {
     }
 
-    public DishTo(Integer id, Integer menuId, String description, Integer price, boolean enabled) {
+    public DishTo(Integer id, Integer parentId, String description, Integer price, boolean enabled) {
         super(id);
-        this.menuId = menuId;
+        this.parentId = parentId;
         this.description = description;
         this.price = price;
         this.enabled = enabled;
     }
 
-    public Integer getMenuId() {
-        return menuId;
+    public Integer getParentId() {
+        return parentId;
     }
 
-    public void setMenuId(Integer menuId) {
-        this.menuId = menuId;
+    public void setParentId(Integer parentId) {
+        this.parentId = parentId;
     }
 
     public String getDescription() {
@@ -78,7 +76,7 @@ public class DishTo extends BaseTo {
     public String toString() {
         return "DishTo{" +
                 "id=" + id +
-                ", menuId=" + menuId +
+                ", parentId=" + parentId +
                 ", description='" + description + '\'' +
                 ", price=" + price +
                 ", enabled=" + enabled +

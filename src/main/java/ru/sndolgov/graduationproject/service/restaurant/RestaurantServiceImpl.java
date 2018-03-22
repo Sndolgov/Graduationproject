@@ -7,9 +7,11 @@ import ru.sndolgov.graduationproject.model.Menu;
 import ru.sndolgov.graduationproject.model.Restaurant;
 import ru.sndolgov.graduationproject.repository.menu.DataJpaMenuRepositoryImpl;
 import ru.sndolgov.graduationproject.repository.restaurant.DataJpaRestaurantRepositoryImpl;
+import ru.sndolgov.graduationproject.util.DateUtil;
 import ru.sndolgov.graduationproject.util.exception.NotFoundException;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -83,7 +85,7 @@ public class RestaurantServiceImpl implements RestaurantService{
     }
 
     @Override
-    public Restaurant getWithMenusDishesVoices(int id) {
+    public Restaurant getWithAllFields(int id) {
         Restaurant restaurant = restaurantRepository.getWithMenus(id);
 
         List<Menu> menusWithDishes =restaurant.getMenus().stream()
@@ -95,4 +97,5 @@ public class RestaurantServiceImpl implements RestaurantService{
         restaurant.setMenus(menusWithDishes);
         return restaurant;
     }
+
 }
