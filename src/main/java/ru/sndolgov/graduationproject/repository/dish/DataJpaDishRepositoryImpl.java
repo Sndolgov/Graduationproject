@@ -42,8 +42,4 @@ public class DataJpaDishRepositoryImpl {
     public List<Dish> getAllByRestaurant(int restaurantId){
         return crudDishRepository.getAllByRestaurant(restaurantId);
     }
-
-    /*public Dish getWithRestaurant(int id, int restaurantId){
-        return crudDishRepository.getWithRestaurant(id, restaurantId);
-    }*/
 }

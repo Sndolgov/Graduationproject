@@ -4,11 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import ru.sndolgov.graduationproject.model.Menu;
 import ru.sndolgov.graduationproject.model.Restaurant;
-import ru.sndolgov.graduationproject.repository.menu.CrudMenuRepository;
-
-import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -32,10 +28,6 @@ public class DataJpaRestaurantRepositoryImpl {
     public Restaurant get(int id) {
         return crudRepository.findById(id).orElse(null);
     }
-
-//    public Restaurant getByName(String name) {
-//        return crudRepository.getByName(name);
-//    }
 
     public List<Restaurant> getAll() {
         return crudRepository.findAll(SORT_NAME);

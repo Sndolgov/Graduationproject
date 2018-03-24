@@ -43,7 +43,6 @@ function renderEdit(data, type, row) {
 
 function renderDelete(data, type, row) {
     if (type === "display") {
-        var dish = "dish/"
         return "<a onclick='rowDelete("+ row.id + ","+row.parentId+");'>" +
             "<span class='glyphicon glyphicon-remove' aria-hidden='true' style='color: red'></span></a>";
     }

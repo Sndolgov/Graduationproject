@@ -26,15 +26,9 @@ public interface MenuService {
 
     Menu getWithRestaurant(int id) throws NotFoundException;
 
-//    Menu getWithRestaurantAndDishes(int id, int restaurantId)throws NotFoundException;
-
     Menu getWithDishes(int id, int restaurantId)throws NotFoundException;
 
     List<Menu> getAllByDate(Date date);
-
-//    Menu getWithVoices(int id, int restaurantId)throws NotFoundException;
-
-//    Menu getWithDishesVoices(int id, int restaurantId) throws NotFoundException;
 
     void addDish (int menuId, int dishId, int restaurantId);
 

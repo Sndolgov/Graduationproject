@@ -2,9 +2,7 @@ package ru.sndolgov.graduationproject;
 
 import ru.sndolgov.graduationproject.model.Menu;
 import ru.sndolgov.graduationproject.util.DateUtil;
-
 import java.util.Arrays;
-import java.util.Date;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static ru.sndolgov.graduationproject.model.AbstractBaseEntity.START_SEQ;
@@ -28,11 +26,11 @@ public class MenuTestData {
     public static final Menu MENU6 = new Menu(MENU6_ID, "Menu of Second restaurant", DateUtil.getDateToday());
 
     public static Menu getCreated() {
-        return new Menu(null, "NewMenu", DateUtil.of(2018, 02, 12));
+        return new Menu(null, "NewMenu", DateUtil.of(2018, 2, 12));
     }
 
     public static Menu getUpdated() {
-        return new Menu(MENU1_ID, "UpdatedMenu", DateUtil.of(2018, 02, 12));
+        return new Menu(MENU1_ID, "UpdatedMenu", DateUtil.of(2018, 2, 12));
     }
 
     public static void assertMatch(Menu actual, Menu expected) {

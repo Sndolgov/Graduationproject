@@ -15,12 +15,9 @@ import ru.sndolgov.graduationproject.AuthorizedUser;
 import ru.sndolgov.graduationproject.ChangeableRestaurant;
 import ru.sndolgov.graduationproject.model.Restaurant;
 import ru.sndolgov.graduationproject.service.restaurant.RestaurantService;
-import ru.sndolgov.graduationproject.to.RestaurantTo;
 import ru.sndolgov.graduationproject.to.UserTo;
 import ru.sndolgov.graduationproject.util.UserUtil;
 import ru.sndolgov.graduationproject.web.user.AbstractUserController;
-
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import static ru.sndolgov.graduationproject.web.ExceptionInfoHandler.EXCEPTION_DUPLICATE_EMAIL;

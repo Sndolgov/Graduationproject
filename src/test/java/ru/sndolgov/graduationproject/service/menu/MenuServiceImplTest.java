@@ -5,24 +5,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import ru.sndolgov.graduationproject.DishTestData;
 import ru.sndolgov.graduationproject.MenuTestData;
-import ru.sndolgov.graduationproject.RestaurantTestData;
-import ru.sndolgov.graduationproject.VoiceTestData;
 import ru.sndolgov.graduationproject.model.Menu;
 import ru.sndolgov.graduationproject.service.AbstractServiceTest;
 import ru.sndolgov.graduationproject.util.DateUtil;
 import ru.sndolgov.graduationproject.util.exception.NotFoundException;
-
 import javax.validation.ConstraintViolationException;
 import java.util.ArrayList;
 import java.util.List;
-
 import static ru.sndolgov.graduationproject.DishTestData.*;
 import static ru.sndolgov.graduationproject.MenuTestData.*;
 import static ru.sndolgov.graduationproject.MenuTestData.assertMatch;
 import static ru.sndolgov.graduationproject.RestaurantTestData.*;
 import static ru.sndolgov.graduationproject.UserTestData.USER_ID;
-import static ru.sndolgov.graduationproject.VoiceTestData.VOICE1;
-import static ru.sndolgov.graduationproject.VoiceTestData.VOICE2;
 
 /**
  * Created by Сергей on 07.02.2018.
@@ -134,7 +128,7 @@ public class MenuServiceImplTest extends AbstractServiceTest {
 
     @Test
     public void testValidation() throws Exception {
-        validateRootCause(() -> service.create(new Menu(null, " ", DateUtil.of(2018, 02, 12)), RESTAURANT1_ID), ConstraintViolationException.class);
+        validateRootCause(() -> service.create(new Menu(null, " ", DateUtil.of(2018, 2, 12)), RESTAURANT1_ID), ConstraintViolationException.class);
         validateRootCause(() -> service.create(new Menu(null, "NewMenu", null), RESTAURANT1_ID), ConstraintViolationException.class);
 
     }

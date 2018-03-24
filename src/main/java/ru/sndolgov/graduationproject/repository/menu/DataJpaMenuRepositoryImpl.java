@@ -3,15 +3,12 @@ package ru.sndolgov.graduationproject.repository.menu;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import ru.sndolgov.graduationproject.model.Dish;
 import ru.sndolgov.graduationproject.model.Menu;
 import ru.sndolgov.graduationproject.model.Restaurant;
 import ru.sndolgov.graduationproject.repository.dish.CrudDishRepository;
 import ru.sndolgov.graduationproject.repository.restaurant.CrudRestaurantRepository;
-
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Created by Сергей on 07.02.2018.
@@ -55,10 +52,6 @@ public class DataJpaMenuRepositoryImpl {
     public Menu getWithRestaurant(int id) {
         return crudMenuRepository.getWithRestaurant(id);
     }
-
-    /*public Menu getWithRestaurantAndDishes(int id, int restaurantId) {
-        return crudMenuRepository.getWithRestaurantAndDishes(id, restaurantId);
-    }*/
 
     public List<Menu> getAllByDate(Date date) {
         List<Menu> menus = crudMenuRepository.getAllByDate(date);

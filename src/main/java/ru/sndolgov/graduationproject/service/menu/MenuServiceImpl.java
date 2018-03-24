@@ -66,11 +66,6 @@ public class MenuServiceImpl implements MenuService {
         return checkNotFoundWithId(repository.getWithRestaurant(id), id);
     }
 
-    /*@Override
-    public Menu getWithRestaurantAndDishes(int id, int restaurantId) throws NotFoundException{
-        return checkNotFoundWithId(repository.getWithRestaurantAndDishes(id, restaurantId), id);
-    }*/
-
     @Override
     public Menu getWithDishes(int id, int restaurantId) throws NotFoundException{
         return checkNotFoundWithId(repository.getWithDishes(id, restaurantId), id);
@@ -80,16 +75,6 @@ public class MenuServiceImpl implements MenuService {
     public List<Menu> getAllByDate(Date date) {
         return repository.getAllByDate(date);
     }
-
-   /* @Override
-    public Menu getWithVoices(int id, int restaurantId) throws NotFoundException{
-        return checkNotFoundWithId(repository.getWithVoices(id, restaurantId), id);
-    }*/
-
-    /*@Override
-    public Menu getWithDishesVoices(int id, int restaurantId) throws NotFoundException{
-        return checkNotFoundWithId(repository.getWithDishes(id, restaurantId), id);
-    }*/
 
     @Override
     public void addDish(int menuId, int dishId, int restaurantId) {

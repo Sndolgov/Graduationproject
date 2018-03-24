@@ -6,22 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import ru.sndolgov.graduationproject.AuthorizedUser;
-import ru.sndolgov.graduationproject.model.Menu;
-import ru.sndolgov.graduationproject.model.Restaurant;
 import ru.sndolgov.graduationproject.model.Voice;
 import ru.sndolgov.graduationproject.service.menu.MenuService;
-import ru.sndolgov.graduationproject.service.restaurant.RestaurantService;
 import ru.sndolgov.graduationproject.service.voice.VoiceService;
 import ru.sndolgov.graduationproject.to.RestaurantTo;
 import ru.sndolgov.graduationproject.util.DateUtil;
 import ru.sndolgov.graduationproject.util.RestaurantUtil;
 import ru.sndolgov.graduationproject.util.exception.NotFoundException;
-
-import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import static ru.sndolgov.graduationproject.util.ValidationUtil.assureIdConsistent;
 
 /**
  * Created by Сергей on 07.02.2018.

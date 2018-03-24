@@ -7,15 +7,9 @@ import ru.sndolgov.graduationproject.model.Menu;
 import ru.sndolgov.graduationproject.model.Restaurant;
 import ru.sndolgov.graduationproject.repository.menu.DataJpaMenuRepositoryImpl;
 import ru.sndolgov.graduationproject.repository.restaurant.DataJpaRestaurantRepositoryImpl;
-import ru.sndolgov.graduationproject.util.DateUtil;
 import ru.sndolgov.graduationproject.util.exception.NotFoundException;
-
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import static ru.sndolgov.graduationproject.util.ValidationUtil.checkNotFound;
 import static ru.sndolgov.graduationproject.util.ValidationUtil.checkNotFoundWithId;
 
 @Service

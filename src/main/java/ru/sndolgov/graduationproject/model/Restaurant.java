@@ -24,7 +24,6 @@ public class Restaurant extends AbstractNamedEntity {
     @OrderBy("id ASC")
     private List<Dish> dishes;
 
-     //TODO need?
     public Restaurant(){}
 
     public Restaurant(Integer id, String name, boolean enabled){

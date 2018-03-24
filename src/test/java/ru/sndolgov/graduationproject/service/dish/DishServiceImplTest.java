@@ -3,17 +3,11 @@ package ru.sndolgov.graduationproject.service.dish;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
-import ru.sndolgov.graduationproject.RestaurantTestData;
 import ru.sndolgov.graduationproject.model.Dish;
 import ru.sndolgov.graduationproject.service.AbstractServiceTest;
 import ru.sndolgov.graduationproject.util.exception.NotFoundException;
-
-import java.awt.*;
-
-import static org.junit.Assert.*;
 import static ru.sndolgov.graduationproject.DishTestData.*;
 import static ru.sndolgov.graduationproject.DishTestData.assertMatch;
-import static ru.sndolgov.graduationproject.RestaurantTestData.RESTAURANT1;
 import static ru.sndolgov.graduationproject.RestaurantTestData.RESTAURANT1_ID;
 import static ru.sndolgov.graduationproject.RestaurantTestData.RESTAURANT2_ID;
 

@@ -65,8 +65,6 @@ abstract public class AbstractControllerTest {
     @Before
     public void setUp() {
         cacheManager.getCache("users").clear();
-        if (jpaUtil != null) {
             jpaUtil.clear2ndLevelHibernateCache();
-        }
     }
 }

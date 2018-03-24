@@ -1,8 +1,6 @@
 package ru.sndolgov.graduationproject.util;
 
-
 import ru.sndolgov.graduationproject.HasId;
-import ru.sndolgov.graduationproject.model.AbstractBaseEntity;
 import ru.sndolgov.graduationproject.util.exception.NotFoundException;
 
 public class ValidationUtil {

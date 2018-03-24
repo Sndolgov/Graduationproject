@@ -1,17 +1,13 @@
 package ru.sndolgov.graduationproject.to;
 
-import org.hibernate.validator.constraints.Range;
 import org.hibernate.validator.constraints.SafeHtml;
 import org.springframework.format.annotation.DateTimeFormat;
-import ru.sndolgov.graduationproject.model.Dish;
 import ru.sndolgov.graduationproject.util.DateUtil;
-
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.List;
 
 public class MenuTo extends BaseTo implements Serializable {
     private static final long serialVersionUID = 1L;

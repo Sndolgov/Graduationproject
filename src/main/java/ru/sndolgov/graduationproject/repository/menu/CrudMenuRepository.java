@@ -6,10 +6,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
-import ru.sndolgov.graduationproject.model.Dish;
 import ru.sndolgov.graduationproject.model.Menu;
-import ru.sndolgov.graduationproject.model.Voice;
-
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -36,12 +33,6 @@ public interface CrudMenuRepository extends JpaRepository<Menu, Integer> {
     @EntityGraph(attributePaths = {"restaurant"}, type = EntityGraph.EntityGraphType.LOAD)
     @Query("SELECT m FROM Menu m WHERE m.id = ?1")
     Menu getWithRestaurant(int id);
-
-/*    @EntityGraph(attributePaths = {"restaurant", "dishes"}, type = EntityGraph.EntityGraphType.LOAD)
-    @Query("SELECT m FROM Menu m WHERE m.id = ?1 and m.restaurant.id = ?2")
-    Menu getWithRestaurantAndDishes(int id, int restaurantId);*/
-
-
 
     @EntityGraph(attributePaths = {"restaurant", "dishes"}, type = EntityGraph.EntityGraphType.LOAD)
     @Query("SELECT m FROM Menu m WHERE m.date=?1 AND m.restaurant.enabled=true ORDER BY m.restaurant.name ASC")

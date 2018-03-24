@@ -4,13 +4,10 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import ru.sndolgov.graduationproject.MenuTestData;
-import ru.sndolgov.graduationproject.model.Menu;
 import ru.sndolgov.graduationproject.model.Voice;
 import ru.sndolgov.graduationproject.service.AbstractServiceTest;
 import ru.sndolgov.graduationproject.util.DateUtil;
 import ru.sndolgov.graduationproject.util.exception.NotFoundException;
-
-import static org.junit.Assert.*;
 import static ru.sndolgov.graduationproject.MenuTestData.MENU1;
 import static ru.sndolgov.graduationproject.MenuTestData.MENU1_ID;
 import static ru.sndolgov.graduationproject.MenuTestData.MENU6_ID;

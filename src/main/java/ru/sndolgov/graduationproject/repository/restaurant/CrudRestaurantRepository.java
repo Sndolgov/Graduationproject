@@ -7,7 +7,6 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
-import ru.sndolgov.graduationproject.model.Menu;
 import ru.sndolgov.graduationproject.model.Restaurant;
 
 import java.util.List;
@@ -28,15 +27,11 @@ public interface CrudRestaurantRepository extends JpaRepository<Restaurant, Inte
     @Override
     List<Restaurant> findAll(Sort sort);
 
-//    Restaurant getByName(String name);
 
     @EntityGraph(attributePaths = {"menus"}, type = EntityGraph.EntityGraphType.LOAD)
     @Query("SELECT r FROM Restaurant r WHERE r.id=?1")
     Restaurant getWithMenu(int restaurantId);
 
-/*    @EntityGraph(attributePaths = {"menus"}, type = EntityGraph.EntityGraphType.LOAD)
-    @Query("SELECT r FROM Restaurant r WHERE r.id=?1")
-    Restaurant getWithMenuFromDate(int restaurantId);*/
 
     @EntityGraph(attributePaths = {"dishes"}, type = EntityGraph.EntityGraphType.LOAD)
     @Query("SELECT r FROM Restaurant r WHERE r.id=?1")

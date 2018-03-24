@@ -7,10 +7,8 @@ import ru.sndolgov.graduationproject.model.User;
 import ru.sndolgov.graduationproject.model.Voice;
 import ru.sndolgov.graduationproject.repository.menu.CrudMenuRepository;
 import ru.sndolgov.graduationproject.repository.user.CrudUserRepository;
-
 import javax.transaction.Transactional;
 import java.util.Date;
-import java.util.List;
 
 /**
  * Created by Сергей on 19.02.2018.
@@ -32,7 +30,6 @@ public class DataJpaVoiceRepositoryImpl {
     public Voice getByDate(Date date, int userId) {
         return voiceRepository.getByDate(date, userId);
     }
-
 
     @Transactional
     public Voice save(int menuId, int userId, Date date) {

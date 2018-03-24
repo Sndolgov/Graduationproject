@@ -1,28 +1,16 @@
 package ru.sndolgov.graduationproject.service.restaurant;
 
-import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.CacheManager;
 import org.springframework.dao.DataAccessException;
 import ru.sndolgov.graduationproject.DishTestData;
-import ru.sndolgov.graduationproject.MenuTestData;
 import ru.sndolgov.graduationproject.RestaurantTestData;
 import ru.sndolgov.graduationproject.model.Restaurant;
-import ru.sndolgov.graduationproject.model.Role;
-import ru.sndolgov.graduationproject.repository.JpaUtil;
 import ru.sndolgov.graduationproject.service.AbstractServiceTest;
-import ru.sndolgov.graduationproject.util.DateUtil;
 import ru.sndolgov.graduationproject.util.exception.NotFoundException;
-
 import javax.validation.ConstraintViolationException;
-import java.util.Collections;
 import java.util.List;
-
 import static ru.sndolgov.graduationproject.DishTestData.*;
-import static ru.sndolgov.graduationproject.MenuTestData.MENU1;
-import static ru.sndolgov.graduationproject.MenuTestData.MENU2;
-import static ru.sndolgov.graduationproject.MenuTestData.MENU3;
 import static ru.sndolgov.graduationproject.RestaurantTestData.*;
 import static ru.sndolgov.graduationproject.UserTestData.USER_ID;
 

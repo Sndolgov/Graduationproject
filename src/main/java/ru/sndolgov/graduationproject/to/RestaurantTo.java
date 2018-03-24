@@ -2,16 +2,11 @@ package ru.sndolgov.graduationproject.to;
 
 import org.hibernate.validator.constraints.Range;
 import org.hibernate.validator.constraints.SafeHtml;
-import ru.sndolgov.graduationproject.View;
-import ru.sndolgov.graduationproject.model.Menu;
-
-import javax.persistence.Column;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Date;
 
 /**
  * Created by Сергей on 07.02.2018.
