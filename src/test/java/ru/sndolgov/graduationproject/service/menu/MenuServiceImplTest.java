@@ -107,11 +107,11 @@ public class MenuServiceImplTest extends AbstractServiceTest {
         assertMatch(menus, MENU3, MENU6);
     }
 
-    @Test
+   /* @Test
     public void getWithRestaurant() throws Exception {
         Menu menu = service.getWithRestaurantAndDishes(MENU1_ID, RESTAURANT1_ID);
         RestaurantTestData.assertMatch(menu.getRestaurant(), RESTAURANT1);
-    }
+    }*/
 
     @Test
     public void getWithDishes() throws Exception {
@@ -119,18 +119,18 @@ public class MenuServiceImplTest extends AbstractServiceTest {
         DishTestData.assertMatch(menu.getDishes(), DISH1, DISH2, DISH3, DISH4);
     }
 
-    @Test
+    /*@Test
     public void getWithVoices() throws Exception {
         Menu menu = service.getWithVoices(MENU1_ID, RESTAURANT1_ID);
         VoiceTestData.assertMatch(menu.getVoices(), VOICE1, VOICE2);
-    }
+    }*/
 
-    @Test
+   /* @Test
     public void getWithDishesVoices() throws Exception {
         Menu menu = service.getWithDishesVoices(MENU1_ID, RESTAURANT1_ID);
         DishTestData.assertMatch(menu.getDishes(), DISH1, DISH2, DISH3, DISH4);
         VoiceTestData.assertMatch(menu.getVoices(), VOICE1, VOICE2);
-    }
+    }*/
 
     @Test
     public void testValidation() throws Exception {

@@ -57,7 +57,7 @@ public class MenuAjaxController {
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public MenuTo getById(@PathVariable("id") int id) {
         log.info("get menu {}", id);
-        Menu menu = menuService.getWithRestaurantAndDishes(id, ChangeableRestaurant.id);
+        Menu menu = menuService.getWithRestaurant(id);
         return MenuUtil.asTo(menu);
     }
 
@@ -102,7 +102,7 @@ public class MenuAjaxController {
         if (enabled) {
             menuService.addDish(menuId, dishId, ChangeableRestaurant.id);
         } else {
-            menuService.deletDish(menuId, dishId, ChangeableRestaurant.id);
+            menuService.deleteDish(menuId, dishId, ChangeableRestaurant.id);
         }
     }
 

@@ -47,12 +47,12 @@ public class RestaurantServiceImpl implements RestaurantService{
         return checkNotFoundWithId(restaurantRepository.get(id), id);
     }
 
-    // TODO need?
+   /* // TODO need?
     @Override
     public Restaurant getByName(String name) throws NotFoundException {
         Assert.notNull(name, "name must not be null");
         return checkNotFound(restaurantRepository.getByName(name), "name=" + name);
-    }
+    }*/
 
    // @Cacheable("restaurants")
     @Override
@@ -60,10 +60,10 @@ public class RestaurantServiceImpl implements RestaurantService{
         return restaurantRepository.getAll();
     }
 
-    @Override
+   /* @Override
     public Restaurant getWithMenus(int id) {
         return checkNotFoundWithId(restaurantRepository.getWithMenus(id), id);
-    }
+    }*/
 
     @Override
     public void enable(int id, boolean enable) {

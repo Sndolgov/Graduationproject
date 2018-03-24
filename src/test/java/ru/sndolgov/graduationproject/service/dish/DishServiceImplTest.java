@@ -36,12 +36,12 @@ public class DishServiceImplTest extends AbstractServiceTest {
         assertMatch(DISH1, dish);
     }
 
-    @Test
+    /*@Test
     public void getWithRestaurant() throws Exception {
         Dish dish = service.getWithRestaurant(DISH1_ID, RESTAURANT1_ID);
         assertMatch(DISH1, dish);
         RestaurantTestData.assertMatch(dish.getRestaurant(), RESTAURANT1);
-    }
+    }*/
 
     @Test (expected = NotFoundException.class)
     public void getNotFound() throws Exception {

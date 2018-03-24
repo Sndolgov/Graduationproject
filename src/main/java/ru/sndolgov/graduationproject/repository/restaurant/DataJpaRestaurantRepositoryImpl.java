@@ -33,9 +33,9 @@ public class DataJpaRestaurantRepositoryImpl {
         return crudRepository.findById(id).orElse(null);
     }
 
-    public Restaurant getByName(String name) {
-        return crudRepository.getByName(name);
-    }
+//    public Restaurant getByName(String name) {
+//        return crudRepository.getByName(name);
+//    }
 
     public List<Restaurant> getAll() {
         return crudRepository.findAll(SORT_NAME);

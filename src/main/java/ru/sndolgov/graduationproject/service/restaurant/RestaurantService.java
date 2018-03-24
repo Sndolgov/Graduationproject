@@ -14,13 +14,13 @@ public interface RestaurantService {
 
         Restaurant get(int id) throws NotFoundException;
 
-        Restaurant getByName(String name) throws NotFoundException;
+//        Restaurant getByName(String name) throws NotFoundException;
 
         void update(Restaurant restaurant);
 
         List<Restaurant> getAll();
 
-        Restaurant getWithMenus(int id);
+//        Restaurant getWithMenus(int id);
 
         void enable(int id, boolean enable);
 

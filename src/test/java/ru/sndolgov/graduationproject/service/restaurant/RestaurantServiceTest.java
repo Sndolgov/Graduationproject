@@ -92,22 +92,22 @@ public class RestaurantServiceTest extends AbstractServiceTest {
         service.get(USER_ID);
     }
 
-    @Test
+   /* @Test
     public void getByEmail() throws Exception {
         Restaurant restaurant = service.getByName("Restaurant1");
         assertMatch(restaurant, RESTAURANT1);
-    }
+    }*/
 
-    @Test(expected = NotFoundException.class)
+    /*@Test(expected = NotFoundException.class)
     public void getByNameNotFound() throws Exception {
         Restaurant restaurant = service.getByName("Restaurant3");
-    }
+    }*/
 
-    @Test
+    /*@Test
     public void getWithMenus() throws Exception {
         Restaurant restaurant = service.getWithMenus(RESTAURANT1_ID);
         MenuTestData.assertMatch(restaurant.getMenus(), MENU3, MENU2, MENU1);
-    }
+    }*/
 
     @Test
     public void getWithDishes() throws Exception {

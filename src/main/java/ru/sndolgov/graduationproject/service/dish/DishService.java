@@ -21,5 +21,5 @@ public interface DishService {
 
     List<Dish> getAllByRestaurant(int restaurantId);
 
-    Dish getWithRestaurant(int id, int restaurantId);
+//    Dish getWithRestaurant(int id, int restaurantId);
 }

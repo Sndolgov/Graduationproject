@@ -56,9 +56,9 @@ public class DataJpaMenuRepositoryImpl {
         return crudMenuRepository.getWithRestaurant(id);
     }
 
-    public Menu getWithRestaurantAndDishes(int id, int restaurantId) {
+    /*public Menu getWithRestaurantAndDishes(int id, int restaurantId) {
         return crudMenuRepository.getWithRestaurantAndDishes(id, restaurantId);
-    }
+    }*/
 
     public List<Menu> getAllByDate(Date date) {
         List<Menu> menus = crudMenuRepository.getAllByDate(date);
