@@ -1,11 +1,11 @@
 var ajaxUrl = "ajax/admin/menus/";
-var form2;
+var formD;
 var datatableApi;
 var datatable;
 
 function makeEditable() {
     form = $('#detailsForm');
-    form2 = $('#detailsForm2');
+    formD = $('#detailsFormD');
 
     $(document).ajaxError(function (event, jqXHR, options, jsExc) {
         failNoty(jqXHR);
@@ -20,53 +20,13 @@ function makeEditable() {
     });
 }
 
-function renderDelete(data, type, row) {
-    if (type === "display") {
-        var dish = "dish/"
-        return "<a onclick='deleteRow("+ row.id + ");'>" +
-            "<span class='glyphicon glyphicon-remove' aria-hidden='true' style='color: red'></span></a>";
-    }
-}
-
-function renderEditBtnActual(data, type, row) {
-    if (type === "display") {
-        if (row.actual) {
-            return "<a onclick='updateRow(" + row.menuId + ");'>" +
-                "<span class='glyphicon glyphicon-pencil' aria-hidden='true'></span></a>";
-        }
-        return " ";
-    }
-}
-
-function get (id) {
-    $("#modalTitle2").html(i18n["editTitle2"]);
-    getRows(id);
-    $('#editRow2').modal();
-}
-
-function getRow(id, parentId) {
-     $("#modalTitle2").html(i18n["editTitle2"]);
-     $.get(ajaxUrl + "dish/" + id, function (data) {
-         $.each(data, function (key, value) {
-             form2.find("input[name='" + key + "']").val(value);
-         });
-         getRows(parentId);
-     });
-}
-
-
-function renderEditBtn(data, type, row) {
-    if (type === "display") {
-        return "<a onclick='getRow(" + row.id + "," + row.parentId +");'>" +
-            "<span class='glyphicon glyphicon-pencil' aria-hidden='true'></span></a>";
-    }
-}
-
 function add() {
     $("#modalTitle").html(i18n["addTitle"]);
     form.find(":input").val("");
+    if(datatable!==undefined) {
+        datatable.rows().remove().draw();
+    }
     $("#editRow").modal();
-    datatable.rows().remove().draw();
 }
 
 function updateRow(id) {
@@ -75,16 +35,26 @@ function updateRow(id) {
         $.each(data, function (key, value) {
             form.find("input[name='" + key + "']").val(value);
         });
-        getIncludRows(data.id);
+        getIncludRows(data.id, data.restaurantId);
         $('#editRow').modal();
     });
 }
 
-function enable(chkbox, dishId, menuId) {
+function renderEditBtnActual(data, type, row) {
+    if (type === "display") {
+        if (row.actual) {
+            return "<a onclick='updateRow(" + row.id + ");'>" +
+                "<span class='glyphicon glyphicon-pencil' aria-hidden='true'></span></a>";
+        }
+        return " ";
+    }
+}
+
+function enable(chkbox, id, parentId) {
     var enabled = chkbox.is(":checked");
 //  https://stackoverflow.com/a/22213543/548473
     $.ajax({
-        url: ajaxUrl + dishId + "/" + menuId,
+        url: ajaxUrl + id + "/" + parentId,
         type: "POST",
         data: "enabled=" + enabled
     }).done(function () {
@@ -157,10 +127,10 @@ $(function () {
     });
 });
 
-function getIncludRows(id) {
-    datatable = $("#datatable2").DataTable({
+function getIncludRows(id, restaurantId) {
+    datatable = $("#datatableM").DataTable({
         "ajax": {
-            "url": ajaxUrl + "dishes/" + id,
+            "url": ajaxUrl + id + "/" + restaurantId,
             "dataSrc": ""
         },
         "paging": false,
@@ -179,7 +149,7 @@ function getIncludRows(id) {
                 "render": function (data, type, row) {
                     if (type === "display") {
                         return "<input type='checkbox' " + (data ? "checked" : "") +
-                            " onclick='enable($(this)," + row.id + ", " + row.menuId + ");'/>";
+                            " onclick='enable($(this)," + row.id + ", " + row.parentId + ");'/>";
                     }
                     return data;
                 }
@@ -199,39 +169,4 @@ function getIncludRows(id) {
     });
 }
 
-function getRows(id) {
-    datatable = $("#datatable3").DataTable({
-        "ajax": {
-            "url": ajaxUrl + "alldishes/" + id,
-            "dataSrc": ""
-        },
-        "paging": false,
-        "info": false,
-        "destroy": true,
-        "sDom": '',
-        "columns": [
-            {
-                "data": "description"
-            },
-            {
-                "data": "price"
-            },
-            {
-                "orderable": false,
-                "defaultContent": "",
-                "render": renderEditBtn
-            },
-            {
-                "orderable": false,
-                "defaultContent": "",
-                "render": renderDelete
-            }
-        ],
-        "order": [
-            [
-                0,
-                "asc"
-            ]
-        ]
-    });
-}
+

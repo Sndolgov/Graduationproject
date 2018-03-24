@@ -1,7 +1,7 @@
 package ru.sndolgov.graduationproject.service.dish;
 
 import ru.sndolgov.graduationproject.model.Dish;
-import ru.sndolgov.graduationproject.model.Menu;
+import ru.sndolgov.graduationproject.to.DishTo;
 
 import java.util.List;
 
@@ -16,6 +16,8 @@ public interface DishService {
     Dish create(Dish dish, int restaurantId);
 
     Dish update(Dish dish, int restaurantId);
+
+    Dish update(DishTo menuTo);
 
     List<Dish> getAllByRestaurant(int restaurantId);
 

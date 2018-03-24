@@ -6,6 +6,8 @@ import org.springframework.util.Assert;
 import ru.sndolgov.graduationproject.model.Dish;
 import ru.sndolgov.graduationproject.model.Menu;
 import ru.sndolgov.graduationproject.repository.dish.DataJpaDishRepositoryImpl;
+import ru.sndolgov.graduationproject.to.DishTo;
+import ru.sndolgov.graduationproject.util.DishUtil;
 
 import java.util.List;
 
@@ -41,6 +43,12 @@ public class DishServiceImpl implements DishService {
     @Override
     public Dish update(Dish dish, int restaurantId) {
         return checkNotFoundWithId(repository.save(dish, restaurantId), dish.getId());
+    }
+
+    @Override
+    public Dish update(DishTo menuTo) {
+        Dish dish = DishUtil.updateFromTo(get(menuTo.getId(), menuTo.getParentId()), menuTo);
+        return update(dish, menuTo.getParentId());
     }
 
     @Override

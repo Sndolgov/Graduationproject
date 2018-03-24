@@ -12,7 +12,7 @@ import java.util.List;
  */
 public interface MenuService {
 
-    Menu creat(Menu menu, int restaurantId);
+    Menu create(Menu menu, int restaurantId);
 
     Menu update(Menu menu, int restaurantId);
 

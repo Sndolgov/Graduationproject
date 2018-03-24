@@ -7,9 +7,7 @@ import ru.sndolgov.graduationproject.DishTestData;
 import ru.sndolgov.graduationproject.MenuTestData;
 import ru.sndolgov.graduationproject.RestaurantTestData;
 import ru.sndolgov.graduationproject.VoiceTestData;
-import ru.sndolgov.graduationproject.model.Dish;
 import ru.sndolgov.graduationproject.model.Menu;
-import ru.sndolgov.graduationproject.model.Restaurant;
 import ru.sndolgov.graduationproject.service.AbstractServiceTest;
 import ru.sndolgov.graduationproject.util.DateUtil;
 import ru.sndolgov.graduationproject.util.exception.NotFoundException;
@@ -36,7 +34,7 @@ public class MenuServiceImplTest extends AbstractServiceTest {
     @Test
     public void creat() throws Exception {
         Menu newMenu = MenuTestData.getCreated();
-        Menu created = service.creat(newMenu, RESTAURANT1_ID);
+        Menu created = service.create(newMenu, RESTAURANT1_ID);
         newMenu.setId(created.getId());
         assertMatch(service.getAll(RESTAURANT1_ID), MENU3, newMenu, MENU2, MENU1);
     }
@@ -45,7 +43,7 @@ public class MenuServiceImplTest extends AbstractServiceTest {
     public void creatDuplicateDate() throws Exception {
         Menu newMenu = MenuTestData.getCreated();
         newMenu.setDate(MENU1.getDate());
-        service.creat(newMenu, RESTAURANT1_ID);
+        service.create(newMenu, RESTAURANT1_ID);
     }
 
     @Test
@@ -136,8 +134,8 @@ public class MenuServiceImplTest extends AbstractServiceTest {
 
     @Test
     public void testValidation() throws Exception {
-        validateRootCause(() -> service.creat(new Menu(null, " ", DateUtil.of(2018, 02, 12)), RESTAURANT1_ID), ConstraintViolationException.class);
-        validateRootCause(() -> service.creat(new Menu(null, "NewMenu", null), RESTAURANT1_ID), ConstraintViolationException.class);
+        validateRootCause(() -> service.create(new Menu(null, " ", DateUtil.of(2018, 02, 12)), RESTAURANT1_ID), ConstraintViolationException.class);
+        validateRootCause(() -> service.create(new Menu(null, "NewMenu", null), RESTAURANT1_ID), ConstraintViolationException.class);
 
     }
 }

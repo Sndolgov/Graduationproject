@@ -82,6 +82,7 @@ function save() {
     });
 }
 
+
 function enable(chkbox, id) {
     var enabled = chkbox.is(":checked");
 //  https://stackoverflow.com/a/22213543/548473

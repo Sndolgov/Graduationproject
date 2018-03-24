@@ -30,7 +30,7 @@ public class MenuServiceImpl implements MenuService {
     DataJpaDishRepositoryImpl dishRepository;
 
     @Override
-    public Menu creat(Menu menu, int restaurantId) {
+    public Menu create(Menu menu, int restaurantId) {
         Assert.notNull(menu, "menu must not be null");
         return repository.save(menu, restaurantId);
     }

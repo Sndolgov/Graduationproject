@@ -10,7 +10,7 @@ function renderBtn(data, type, row) {
 
 function editInRow(id) {
     var hour = new Date().getHours();
-    if (hour>=11) {
+    if (hour<11) {
         $.get(ajaxUrl+"getvoice", deleteFromRow);
     }
     setTimeout(function addInRow() {

@@ -8,6 +8,8 @@
 <body>
 <script type="text/javascript" src="resources/js/datatablesUtil.js" defer></script>
 <script type="text/javascript" src="resources/js/menuDatatables.js" defer></script>
+<script type="text/javascript" src="resources/js/dishDatatables.js" defer></script>
+
 <div class="jumbotron">
     <div class="container">
         <h3>${restaurant.name}</h3>
@@ -18,7 +20,7 @@
         </a>
 
         <a class="btn btn-primary" onclick="get(${restaurant.id})" style="background: green;">
-        <%--<a class="btn btn-primary" onclick="getDish('100008')" style="background: green;">--%>
+            <%--<a class="btn btn-primary" onclick="getDish('100008')" style="background: green;">--%>
             <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
             <spring:message code="dish.dishes"/>
         </a>
@@ -56,7 +58,6 @@
                     <input type="hidden" id="restId" name="restaurantId">
 
 
-
                     <div class="form-group">
                         <label for="description" class="control-label col-xs-3">
                             <spring:message code="menu.description"/></label>
@@ -77,11 +78,11 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="datatable2" class="control-label col-xs-3"><spring:message
+                        <label for="datatableM" class="control-label col-xs-3"><spring:message
                                 code="dish.dishes"/></label>
 
                         <div class="col-xs-9">
-                            <table class="table table-striped display" id="datatable2">
+                            <table class="table table-striped display" id="datatableM">
                                 <thead>
                                 <tr>
                                     <th><h5><spring:message code="dish.included"/></h5></th>
@@ -107,22 +108,22 @@
     </div>
 </div>
 
-<div class="modal fade" id="editRow2">
-    <div class="modal-dialog">
+<div class="modal fade" id="editRowD">
+    <div class="modal-dialog ">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h2 class="modal-title" id="modalTitle2"></h2>
+                <h2 class="modal-title" id="modalTitleD"></h2>
 
             </div>
             <div class="modal-body">
-                <form class="form-horizontal" id="detailsForm2">
+                <form class="form-horizontal" id="detailsFormD">
 
                     <div class="form-group">
-                        <label for="datatable3" class="control-label col-xs-3"></label>
+                        <label for="datatableD" class="control-label col-xs-3"></label>
 
                         <div class="col-xs-9">
-                            <table class="table table-striped display" id="datatable3">
+                            <table class="table table-striped display" id="datatableD">
                                 <thead>
                                 <tr>
                                     <th><spring:message code="dish.dishes"/></th>
@@ -139,7 +140,7 @@
                     <input type="hidden" id="parentId" name="parentId">
 
                     <div class="form-group">
-                        <label for="descriptionD" class="control-label col-xs-3">
+                        <label for="descriptionD" class="control-label col-xs-2">
                             <spring:message code="dish.dishes"/></label>
 
                         <div class="col-xs-4">
@@ -148,15 +149,27 @@
                         </div>
 
                         <div class="col-xs-4">
-                            <input type="text" class="form-control" id="price" name="price"
+                            <input type="number" class="form-control" id="price" name="price"
                                    placeholder="<spring:message code="dish.price"/>">
                         </div>
+
+                            <button type="button" onclick="update(${restaurant.id})" class="btn btn-primary" style="background: none; border-style: none" >
+                                <span class="glyphicon glyphicon-plus" aria-hidden="true"  style="color: blue"></span>
+                            </button>
+
+                            <button type="button" onclick="resert()" class="btn btn-primary" style="background: none; border-style: none">
+                                <span class="glyphicon glyphicon-remove" aria-hidden="true" style="color: red"></span>
+                            </button>
+
                     </div>
 
+                    <br>
+                    <br>
+
                     <div class="form-group">
-                        <div class="col-xs-offset-3 col-xs-9">
-                            <button type="button" onclick="save()" class="btn btn-primary">
-                                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                        <div class="col-xs-offset-8 col-xs-9">
+                            <button type="button" onclick="ok()" class="btn btn-primary">
+                                <spring:message code="common.close"/>
                             </button>
                         </div>
                     </div>

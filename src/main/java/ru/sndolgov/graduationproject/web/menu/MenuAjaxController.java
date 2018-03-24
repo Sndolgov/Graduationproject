@@ -54,46 +54,44 @@ public class MenuAjaxController {
                 .collect(Collectors.toList());
     }
 
+    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public MenuTo getById(@PathVariable("id") int id) {
+        log.info("get menu {}", id);
+        Menu menu = menuService.getWithRestaurantAndDishes(id, ChangeableRestaurant.id);
+        return MenuUtil.asTo(menu);
+    }
+
+    @GetMapping(value = "/{id}/{restaurantId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<DishTo> getDishesById(@PathVariable("id") int id, @PathVariable("restaurantId") int restaurantId) {
+        log.info("get dishes of menu {}", id);
+        List<Dish> menuDishes = menuService.getWithDishes(id, restaurantId).getDishes();
+        return restaurantService.getWithDishes(restaurantId).getDishes().stream()
+                .filter(Dish::isEnabled)
+                .map(dish -> DishUtil.asToIncluded(id, dish, menuDishes))
+                .collect(Collectors.toList());
+    }
+
+    @GetMapping(value = "dishes/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<DishTo> getDishes(@PathVariable("id") int id) {
+        log.info("get dishes of restaurant {}", id);
+        return restaurantService.getWithDishes(id).getDishes().stream()
+                .map(dish -> DishUtil.asTo(id, dish))
+                .collect(Collectors.toList());
+    }
+
+    @GetMapping(value = "dishes/{id}/{parentId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public DishTo getDish(@PathVariable("id") int id, @PathVariable("parentId") int parentId) {
+        log.info("get dish {}", id);
+        return DishUtil.asTo(parentId, dishService.get(id, parentId));
+    }
+
     @DeleteMapping("/{id}")
     public void delete(@PathVariable("id") int id) {
         log.info("menu delete {}", id);
         menuService.delete(id);
     }
 
-    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public MenuTo getById(@PathVariable("id") int id) {
-        log.info("get menu {}", id);
-        Menu menu = menuService.getWithRestaurantAndDishes(id, ChangeableRestaurant.id);
-        return MenuUtil.asTo(menu);
-
-    }
-
-
-    @GetMapping(value = "dishes/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<DishTo> getDishesById(@PathVariable("id") int id) {
-        log.info("get dishes of menu {}", id);
-        List<Dish> menuDishes = menuService.getWithDishes(id, ChangeableRestaurant.id).getDishes();
-        return restaurantService.getWithDishes(ChangeableRestaurant.id).getDishes().stream()
-                .filter(Dish::isEnabled)
-                .map(dish -> DishUtil.asTo(id, dish, menuDishes))
-                .collect(Collectors.toList());
-    }
-
-    @GetMapping(value = "alldishes/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<DishTo> getDishes(@PathVariable("id") int id) {
-        log.info("get dishes of restaurant {}", id);
-        return restaurantService.getWithDishes(id).getDishes().stream()
-                .map(dish -> DishUtil.asToAll(id, dish))
-                .collect(Collectors.toList());
-    }
-
-    @GetMapping(value = "dish/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Dish getDish(@PathVariable("id") int id) {
-        log.info("get dish {}", id);
-        return dishService.get(id, ChangeableRestaurant.id());
-    }
-
-    @DeleteMapping(value = "dish/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @DeleteMapping(value = "dishes/{id}")
     public void deleteDish(@PathVariable("id") int id) {
         log.info("dish delete {}", id);
         dishService.delete(id);
@@ -113,11 +111,24 @@ public class MenuAjaxController {
         if (menuTo.isNew()) {
             Menu menu = MenuUtil.createNewFromTo(menuTo);
             log.info("menu create {}", menu);
-            menuService.creat(menu, ChangeableRestaurant.id);
+            menuService.create(menu, ChangeableRestaurant.id);
         } else {
             assureIdConsistent(menuTo, menuTo.getId());
             log.info("menu update {}", menuTo);
             menuService.update(menuTo);
+        }
+    }
+
+    @PostMapping (value = "/dishes")
+    public void createOrUpdateDish(@Valid DishTo dishTo) {
+        if (dishTo.isNew()) {
+            Dish dish = DishUtil.createNewFromTo(dishTo);
+            log.info("dish create {}", dish);
+            dishService.create(dish, ChangeableRestaurant.id);
+        } else {
+            assureIdConsistent(dishTo, dishTo.getId());
+            log.info("dish update {}", dishTo);
+            dishService.update(dishTo);
         }
     }
 
