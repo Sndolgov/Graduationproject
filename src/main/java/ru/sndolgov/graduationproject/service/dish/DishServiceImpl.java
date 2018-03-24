@@ -56,8 +56,4 @@ public class DishServiceImpl implements DishService {
         return repository.getAllByRestaurant(restaurantId);
     }
 
-    /*@Override
-    public Dish getWithRestaurant(int id, int restaurantId) {
-        return checkNotFoundWithId(repository.getWithRestaurant(id, restaurantId), id);
-    }*/
 }

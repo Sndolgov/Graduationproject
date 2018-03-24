@@ -28,7 +28,6 @@ public interface CrudUserRepository extends JpaRepository<User, Integer> {
     @Override
     List<User> findAll(Sort sort);
 
-    //TODO need?
     User getByEmail(String email);
 
 
