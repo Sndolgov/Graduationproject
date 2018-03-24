@@ -32,8 +32,6 @@ public class Dish extends AbstractBaseEntity {
     @NotNull
     private Integer price;
 
-    @Column(name = "enabled", nullable = false, columnDefinition = "bool default true")
-    private boolean enabled = true;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "restaurant_id", nullable = false)
@@ -45,11 +43,10 @@ public class Dish extends AbstractBaseEntity {
     }
 
 
-    public Dish(Integer id, String description, Integer price, boolean enabled) {
+    public Dish(Integer id, String description, Integer price) {
         super(id);
         this.description = description;
         this.price = price;
-        this.enabled = enabled;
     }
 
     public String getDescription() {
@@ -68,14 +65,6 @@ public class Dish extends AbstractBaseEntity {
         this.price = price;
     }
 
-    public boolean isEnabled() {
-        return enabled;
-    }
-
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
-    }
-
     public Restaurant getRestaurant() {
         return restaurant;
     }
@@ -90,7 +79,6 @@ public class Dish extends AbstractBaseEntity {
                 "id=" + id +
                 ", description='" + description + '\'' +
                 ", price=" + price +
-                ", enabled=" + enabled +
                 '}';
     }
 }

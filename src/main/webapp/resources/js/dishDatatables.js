@@ -20,6 +20,7 @@ function update(id) {
     }).done(function () {
         resert();
         getRows(id);
+        successNoty("common.saved");
     });
 }
 

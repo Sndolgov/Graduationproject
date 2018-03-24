@@ -22,7 +22,7 @@ public class DishUtil {
     }
 
     public static DishTo asTo(Integer restaurantId, Dish dish) {
-        return new DishTo(dish.getId(), restaurantId, dish.getDescription(), dish.getPrice(), dish.isEnabled());
+        return new DishTo(dish.getId(), restaurantId, dish.getDescription(), dish.getPrice(), true);
     }
 
     private static boolean isInMenu(Dish dish, List <Dish> menuDishes) {
@@ -31,7 +31,7 @@ public class DishUtil {
 
 
     public static Dish createNewFromTo(DishTo dishTo) {
-        return new Dish(null, dishTo.getDescription(), dishTo.getPrice(), true);
+        return new Dish(null, dishTo.getDescription(), dishTo.getPrice());
     }
 
     public static Dish updateFromTo(Dish dish, DishTo dishTo) {

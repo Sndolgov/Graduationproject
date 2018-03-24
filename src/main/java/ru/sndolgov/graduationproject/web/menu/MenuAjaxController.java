@@ -66,7 +66,6 @@ public class MenuAjaxController {
         log.info("get dishes of menu {}", id);
         List<Dish> menuDishes = menuService.getWithDishes(id, restaurantId).getDishes();
         return restaurantService.getWithDishes(restaurantId).getDishes().stream()
-                .filter(Dish::isEnabled)
                 .map(dish -> DishUtil.asToIncluded(id, dish, menuDishes))
                 .collect(Collectors.toList());
     }
