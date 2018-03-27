@@ -12,6 +12,11 @@ function resert() {
     formD.find(":input").val("");
 }
 
+function clearForm() {
+    form.find("input[name='description']").val("");
+    form.find("input[name='price']").val("");
+}
+
 function update(id) {
     $.ajax({
         type: "POST",
@@ -23,6 +28,20 @@ function update(id) {
         successNoty("common.saved");
     });
 }
+
+function addNew(menuId, id) {
+    $.ajax({
+        type: "POST",
+        url: ajaxUrlD+id,
+        data: form.serialize()
+    }).done(function () {
+        clearForm();
+        updateTableM(menuId, id);
+        successNoty("common.saved");
+    });
+}
+
+
 
 function getRow(id, parentId) {
     $("#modalTitleD").html(i18n["editTitle2"]);

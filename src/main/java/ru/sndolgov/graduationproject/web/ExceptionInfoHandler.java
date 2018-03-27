@@ -41,6 +41,7 @@ public class ExceptionInfoHandler {
     public static final String EXCEPTION_DUPLICATE_VOICE = "exception.menu.voice";
     public static final String EXCEPTION_DUPLICATE_NAME = "exception.restaurant.name";
     public static final String EXCEPTION_DUPLICATE_DATE = "exception.menu.date";
+    public static final String EXCEPTION_DUPLICATE_DESCRIPTION = "exception.dish.description";
 
 
 
@@ -51,7 +52,7 @@ public class ExceptionInfoHandler {
                     put("date_user_idx", EXCEPTION_DUPLICATE_VOICE);
                     put("restaurant_unique_name_idx", EXCEPTION_DUPLICATE_NAME);
                     put("restaurant_date_idx", EXCEPTION_DUPLICATE_DATE);
-
+                    put("restaurant_description_idx", EXCEPTION_DUPLICATE_DESCRIPTION);
                 }
             });
 

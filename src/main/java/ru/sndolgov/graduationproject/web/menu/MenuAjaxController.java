@@ -131,4 +131,11 @@ public class MenuAjaxController {
         }
     }
 
+    @PostMapping (value = "/dishes/{id}")
+    public void addNew(@PathVariable("id") int restaurantId, @RequestParam("id") int menuId, @Valid Dish dish) {
+        Dish newDish = new Dish(null, dish.getDescription(), dish.getPrice());
+        Dish created = dishService.create(newDish, restaurantId);
+        menuService.addDish(menuId, created.getId(), restaurantId);
+    }
+
 }

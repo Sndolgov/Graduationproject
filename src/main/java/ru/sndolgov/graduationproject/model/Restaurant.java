@@ -7,7 +7,6 @@ import java.io.Serializable;
 import java.util.List;
 
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-
 @Entity
 @Table(name = "restaurants", uniqueConstraints = {@UniqueConstraint(columnNames = "name", name = "restaurant_unique_name_idx")})
 
@@ -16,6 +15,7 @@ public class Restaurant extends AbstractNamedEntity {
     @Column(name = "enabled", nullable = false, columnDefinition = "bool default true")
     private boolean enabled = true;
 
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "restaurant")
     @OrderBy("date DESC")
     private List<Menu> menus;

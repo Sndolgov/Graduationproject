@@ -14,12 +14,12 @@
     <div class="container">
         <h3>${restaurant.name}</h3>
 
-        <a class="btn btn-primary" onclick="add()">
+        <a class="btn btn-primary" onclick="addM()">
             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
             <spring:message code="common.add"/>
         </a>
 
-        <a class="btn btn-primary" onclick="get(${restaurant.id})" style="background: green;">
+        <a class="btn btn-primary" onclick="get(${restaurant.id})" style="1background: green;">
             <%--<a class="btn btn-primary" onclick="getDish('100008')" style="background: green;">--%>
             <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
             <spring:message code="dish.dishes"/>
@@ -77,7 +77,7 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group" id="dishes">
                         <label for="datatableM" class="control-label col-xs-3"><spring:message
                                 code="dish.dishes"/></label>
 
@@ -92,6 +92,30 @@
                                 </thead>
                             </table>
                         </div>
+                    </div>
+
+                    <div class="form-group" id="addNew">
+                        <label for="descriptionD" class="control-label col-xs-3">
+                            <spring:message code="dish.add"/></label>
+
+                        <div class="col-xs-4">
+                            <input type="text" class="form-control" id="nameD" name="description"
+                                   placeholder="<spring:message code="dish.description"/>">
+                        </div>
+
+                        <div class="col-xs-3">
+                            <input type="number" class="form-control" id="price" name="price"
+                                   placeholder="<spring:message code="dish.price"/>">
+                        </div>
+
+                        <button type="button" onclick="addNew(document.getElementById('id').value, ${restaurant.id})" class="btn btn-primary" style="background: none; border-style: none" >
+                            <span class="glyphicon glyphicon-plus" aria-hidden="true"  style="color: blue"></span>
+                        </button>
+
+                        <button type="button" onclick="clearForm()" class="btn btn-primary" style="background: none; border-style: none">
+                            <span class="glyphicon glyphicon-remove" aria-hidden="true" style="color: red"></span>
+                        </button>
+
                     </div>
 
 
@@ -149,7 +173,7 @@
                         </div>
 
                         <div class="col-xs-4">
-                            <input type="number" class="form-control" id="price" name="price"
+                            <input type="number" class="form-control" name="price"
                                    placeholder="<spring:message code="dish.price"/>">
                         </div>
 
@@ -160,7 +184,6 @@
                             <button type="button" onclick="resert()" class="btn btn-primary" style="background: none; border-style: none">
                                 <span class="glyphicon glyphicon-remove" aria-hidden="true" style="color: red"></span>
                             </button>
-
                     </div>
 
                     <br>

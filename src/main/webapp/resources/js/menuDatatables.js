@@ -20,8 +20,10 @@ function makeEditable() {
     });
 }
 
-function add() {
+function addM() {
     $("#modalTitle").html(i18n["addTitle"]);
+    document.getElementById('addNew').setAttribute('style', 'visibility:hidden;');
+    document.getElementById('dishes').setAttribute('style', 'visibility:hidden;');
     form.find(":input").val("");
     if(datatable!==undefined) {
         datatable.rows().remove().draw();
@@ -36,6 +38,8 @@ function updateRow(id) {
             form.find("input[name='" + key + "']").val(value);
         });
         getIncludRows(data.id, data.restaurantId);
+        document.getElementById('addNew').setAttribute('style', 'visibility:visible;');
+        document.getElementById('dishes').setAttribute('style', 'visibility:visible;');
         $('#editRow').modal();
     });
 }
@@ -60,14 +64,23 @@ function enable(chkbox, id, parentId) {
     }).done(function () {
         chkbox.closest("tr").toggleClass("disabled");
         successNoty(enabled ? "common.enabled" : "common.disabled");
+        updateTable();
     }).fail(function () {
         $(chkbox).prop("checked", !enabled);
     });
 }
 
 $('#editRow').on('hide.bs.modal', function () {
-    updateTable();
+    clearForm();
 });
+
+function updateTableM(id, restaurantId) {
+    $.get(ajaxUrl+id+"/"+restaurantId, updateTableByDataM);
+}
+
+function updateTableByDataM(data) {
+    datatable.clear().rows.add(data).draw();
+}
 
 $(function () {
     datatableApi = $("#datatable").DataTable({

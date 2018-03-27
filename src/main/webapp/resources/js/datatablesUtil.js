@@ -70,6 +70,8 @@ function updateTableByData(data) {
     datatableApi.clear().rows.add(data).draw();
 }
 
+
+
 function save() {
     $.ajax({
         type: "POST",
