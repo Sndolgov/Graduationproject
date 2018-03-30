@@ -83,7 +83,7 @@ function ok()  {
 }
 
 
-$('#editRowD').on('hide.bs.modal', function () {
+$("#editRowD").on("hide.bs.modal", function () {
     updateTable();
 });
 
@@ -96,7 +96,7 @@ function getRows(id) {
         "paging": false,
         "info": false,
         "destroy": true,
-        "sDom": '',
+        "sDom": "",
         "columns": [
             {
                 "data": "description"

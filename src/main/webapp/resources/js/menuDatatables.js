@@ -5,7 +5,7 @@ var datatable;
 
 function makeEditable() {
     form = $('#detailsForm');
-    formD = $('#detailsFormD');
+    formD = $("#detailsFormD");
 
     $(document).ajaxError(function (event, jqXHR, options, jsExc) {
         failNoty(jqXHR);
@@ -22,8 +22,8 @@ function makeEditable() {
 
 function addM() {
     $("#modalTitle").html(i18n["addTitle"]);
-    document.getElementById('addNew').setAttribute('style', 'visibility:hidden;');
-    document.getElementById('dishes').setAttribute('style', 'visibility:hidden;');
+    document.getElementById("addNew").setAttribute("style", "visibility:hidden;");
+    document.getElementById("dishes").setAttribute("style", "visibility:hidden;");
     form.find(":input").val("");
     if(datatable!==undefined) {
         datatable.rows().remove().draw();
@@ -38,9 +38,9 @@ function updateRow(id) {
             form.find("input[name='" + key + "']").val(value);
         });
         getIncludRows(data.id, data.restaurantId);
-        document.getElementById('addNew').setAttribute('style', 'visibility:visible;');
-        document.getElementById('dishes').setAttribute('style', 'visibility:visible;');
-        $('#editRow').modal();
+        document.getElementById("addNew").setAttribute("style", "visibility:visible;");
+        document.getElementById("dishes").setAttribute("style", "visibility:visible;");
+          $("#editRow").modal();
     });
 }
 
@@ -149,7 +149,7 @@ function getIncludRows(id, restaurantId) {
         "paging": false,
         "info": false,
         "destroy": true,
-        "sDom": '',
+        "sDom": "",
         "columns": [
             {
                 "data": "description"

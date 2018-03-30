@@ -3,7 +3,7 @@ var datatableApi;
 
 function add() {
     $("#modalTitle").html(i18n["addTitle"]);
-    document.getElementById('menu').setAttribute('style', 'visibility:hidden;');
+    document.getElementById("menu").setAttribute("style", "visibility:hidden;");
     form.find(":input").val("");
     $("#editRow").modal();
 }
@@ -11,14 +11,14 @@ function add() {
 function updateRow(id) {
     $("#modalTitle").html(i18n["editTitle"]);
     var href = "restaurant/" + id;
-    document.getElementById('menu').setAttribute('href', href);
-    document.getElementById('menu').setAttribute('style', 'visibility:visible;');
+    document.getElementById("menu").setAttribute("href", href);
+    document.getElementById("menu").setAttribute("style", "visibility:visible;");
 
     $.get(ajaxUrl + id, function (data) {
             $.each(data, function (key, value) {
                 form.find("input[name='" + key + "']").val(value);
             });
-            $('#editRow').modal();
+            $("#editRow").modal();
         }
     )
     ;

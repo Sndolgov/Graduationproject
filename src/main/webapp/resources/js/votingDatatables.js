@@ -8,6 +8,19 @@ function renderBtn(data, type, row) {
     }
 }
 
+function deleteFromRow(id) {
+    if (id!==0) {
+        $.ajax({
+            url: ajaxUrl + id,
+            type: "DELETE"
+        })
+            .done(function () {
+                updateTable();
+                successNoty("voice.deleted");
+            });
+    }
+}
+
 function editInRow(id) {
     var hour = new Date().getHours();
     if (hour<11) {
@@ -24,18 +37,7 @@ function editInRow(id) {
     }, 500)
 }
 
-function deleteFromRow(id) {
-    if (id!==0) {
-        $.ajax({
-            url: ajaxUrl + id,
-            type: "DELETE"
-        })
-            .done(function () {
-                updateTable();
-                successNoty("voice.deleted");
-            });
-    }
-}
+
 
 $(function () {
     datatableApi = $("#datatable").DataTable({

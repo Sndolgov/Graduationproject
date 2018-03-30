@@ -1,7 +1,7 @@
 var form;
 
 function makeEditable() {
-    form = $('#detailsForm');
+    form = $("#detailsForm");
     $(document).ajaxError(function (event, jqXHR, options, jsExc) {
         failNoty(jqXHR);
     });
@@ -34,6 +34,10 @@ function extendsOpts(opts) {
     return opts;
 }
 
+function updateTableByData(data) {
+    datatableApi.clear().rows.add(data).draw();
+}
+
 function updateTable() {
     $.get(ajaxUrl, updateTableByData);
 }
@@ -50,10 +54,20 @@ function updateRow(id) {
             $.each(data, function (key, value) {
                 form.find("input[name='" + key + "']").val(value);
             });
-            $('#editRow').modal();
+            $("#editRow").modal();
         }
     )
     ;
+}
+
+function successNoty(key) {
+    closeNoty();
+    new Noty({
+        text: "<span class='glyphicon glyphicon-ok'></span> &nbsp;" + i18n[key],
+        type: 'success',
+        layout: "bottomRight",
+        timeout: 1000
+    }).show();
 }
 
 function deleteRow(id) {
@@ -65,11 +79,6 @@ function deleteRow(id) {
         successNoty("common.deleted");
     });
 }
-
-function updateTableByData(data) {
-    datatableApi.clear().rows.add(data).draw();
-}
-
 
 
 function save() {
@@ -108,15 +117,7 @@ function closeNoty() {
     }
 }
 
-function successNoty(key) {
-    closeNoty();
-    new Noty({
-        text: "<span class='glyphicon glyphicon-ok'></span> &nbsp;" + i18n[key],
-        type: 'success',
-        layout: "bottomRight",
-        timeout: 1000
-    }).show();
-}
+
 
 function failNoty(jqXHR) {
     closeNoty();
