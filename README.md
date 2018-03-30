@@ -1,3 +1,5 @@
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/33064c36334d461a8bcd6a59f8bc0d1d)](https://www.codacy.com/app/Sndolgov/graduationproject?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Sndolgov/graduationproject&amp;utm_campaign=Badge_Grade)
+
 Java Enterprise Online Project 
 ===============================
 Полнофункциональное приложение Spring/JPA Enterprise c авторизацией и правами доступа на основе ролей с использованием наиболее популярных инструментов и технологий Java: Maven, Spring MVC, Security, Bootstrap (css,js), datatables, jQuery + plugins, Java 8 Stream and Time API и хранением в базе данных Postgresql.
