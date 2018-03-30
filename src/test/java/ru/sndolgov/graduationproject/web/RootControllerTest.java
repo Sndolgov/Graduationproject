@@ -33,9 +33,18 @@ public class RootControllerTest extends AbstractControllerTest {
     @Test
     public void testRestaurants() throws Exception {
         mockMvc.perform(get("/restaurants")
-                .with(userAuth(USER)))
+                .with(userAuth(ADMIN)))
                 .andDo(print())
                 .andExpect(view().name("restaurants"))
+                .andExpect(forwardedUrl("/WEB-INF/jsp/restaurants.jsp"));
+    }
+
+    @Test
+    public void testVoting() throws Exception {
+        mockMvc.perform(get("/voting")
+                .with(userAuth(USER)))
+                .andDo(print())
+                .andExpect(view().name("voting"))
                 .andExpect(forwardedUrl("/WEB-INF/jsp/voting.jsp"));
     }
 }

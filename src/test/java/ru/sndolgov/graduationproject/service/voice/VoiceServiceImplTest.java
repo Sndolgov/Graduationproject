@@ -26,7 +26,6 @@ public class VoiceServiceImplTest extends AbstractServiceTest {
     public void get() throws Exception {
         Voice voice = service.getByDate(DateUtil.of(2017, 12, 26), USER_ID);
         assertMatch(voice, VOICE1);
-        MenuTestData.assertMatch(voice.getMenu(), MENU1);
     }
 
     @Test(expected = NotFoundException.class)

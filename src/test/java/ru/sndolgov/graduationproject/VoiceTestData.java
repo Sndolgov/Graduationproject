@@ -29,7 +29,7 @@ public class VoiceTestData {
     }
 
     public static void assertMatch(Voice actual, Voice expected) {
-        assertThat(actual).isEqualToIgnoringGivenFields(expected, "restaurant", "user", "date");
+        assertThat(actual).isEqualToIgnoringGivenFields(expected, "restaurant", "user", "date", "menu");
     }
 
     public static void assertMatch(Iterable<Voice> actual, Voice... expected) {
@@ -37,6 +37,6 @@ public class VoiceTestData {
     }
 
     public static void assertMatch(Iterable<Voice> actual, Iterable<Voice> expected) {
-        assertThat(actual).usingElementComparatorIgnoringFields("restaurant", "user", "date").isEqualTo(expected);
+        assertThat(actual).usingElementComparatorIgnoringFields("restaurant", "user", "date", "menu").isEqualTo(expected);
     }
 }
