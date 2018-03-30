@@ -1,11 +1,14 @@
 package ru.sndolgov.graduationproject.service.menu;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.CacheManager;
 import org.springframework.dao.DataAccessException;
 import ru.sndolgov.graduationproject.DishTestData;
 import ru.sndolgov.graduationproject.MenuTestData;
 import ru.sndolgov.graduationproject.model.Menu;
+import ru.sndolgov.graduationproject.repository.JpaUtil;
 import ru.sndolgov.graduationproject.service.AbstractServiceTest;
 import ru.sndolgov.graduationproject.util.DateUtil;
 import ru.sndolgov.graduationproject.util.exception.NotFoundException;
@@ -24,6 +27,18 @@ import static ru.sndolgov.graduationproject.UserTestData.USER_ID;
 public class MenuServiceImplTest extends AbstractServiceTest {
     @Autowired
     MenuService service;
+
+    @Autowired
+    private JpaUtil jpaUtil;
+
+    @Autowired
+    private CacheManager cacheManager;
+
+    @Before
+    public void setUp() throws Exception {
+        cacheManager.getCache("menus").clear();
+        jpaUtil.clear2ndLevelHibernateCache();
+    }
 
     @Test
     public void creat() throws Exception {
@@ -58,7 +73,7 @@ public class MenuServiceImplTest extends AbstractServiceTest {
     @Test(expected = NotFoundException.class)
     public void updateNotFound() throws Exception {
         Menu updated = MenuTestData.getUpdated();
-        service.update(updated, RESTAURANT2_ID);
+        Menu menu = service.update(updated, RESTAURANT2_ID);
     }
 
     @Test
@@ -101,30 +116,12 @@ public class MenuServiceImplTest extends AbstractServiceTest {
         assertMatch(menus, MENU3, MENU6);
     }
 
-   /* @Test
-    public void getWithRestaurant() throws Exception {
-        Menu menu = service.getWithRestaurantAndDishes(MENU1_ID, RESTAURANT1_ID);
-        RestaurantTestData.assertMatch(menu.getRestaurant(), RESTAURANT1);
-    }*/
-
     @Test
     public void getWithDishes() throws Exception {
         Menu menu = service.getWithDishes(MENU1_ID, RESTAURANT1_ID);
         DishTestData.assertMatch(menu.getDishes(), DISH1, DISH2, DISH3, DISH4);
     }
 
-    /*@Test
-    public void getWithVoices() throws Exception {
-        Menu menu = service.getWithVoices(MENU1_ID, RESTAURANT1_ID);
-        VoiceTestData.assertMatch(menu.getVoices(), VOICE1, VOICE2);
-    }*/
-
-   /* @Test
-    public void getWithDishesVoices() throws Exception {
-        Menu menu = service.getWithDishesVoices(MENU1_ID, RESTAURANT1_ID);
-        DishTestData.assertMatch(menu.getDishes(), DISH1, DISH2, DISH3, DISH4);
-        VoiceTestData.assertMatch(menu.getVoices(), VOICE1, VOICE2);
-    }*/
 
     @Test
     public void testValidation() throws Exception {

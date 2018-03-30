@@ -1,6 +1,8 @@
 package ru.sndolgov.graduationproject.service.menu;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import ru.sndolgov.graduationproject.model.Dish;
@@ -29,17 +31,21 @@ public class MenuServiceImpl implements MenuService {
     @Autowired
     DataJpaDishRepositoryImpl dishRepository;
 
+    @CacheEvict(value = "menus", allEntries = true)
     @Override
     public Menu create(Menu menu, int restaurantId) {
         Assert.notNull(menu, "menu must not be null");
         return repository.save(menu, restaurantId);
     }
 
+    @CacheEvict(value = "menus", allEntries = true)
     @Override
     public Menu update(Menu menu, int restaurantId) throws NotFoundException {
-        return repository.save(menu, restaurantId);
+        Assert.notNull(menu, "menu must not be null");
+        return checkNotFoundWithId(repository.save(menu, restaurantId), menu.getId());
     }
 
+    @CacheEvict(value = "menus", allEntries = true)
     @Override
     public Menu update(MenuTo menuTo) {
         Menu menu = MenuUtil.updateFromTo(get(menuTo.getId(), menuTo.getRestaurantId()), menuTo);
@@ -51,11 +57,13 @@ public class MenuServiceImpl implements MenuService {
         return checkNotFoundWithId(repository.get(id, restaurantId), id);
     }
 
+    @CacheEvict(value = "menus", allEntries = true)
     @Override
     public void delete(int id) throws NotFoundException {
         checkNotFoundWithId(repository.delete(id), id);
     }
 
+    @Cacheable("menus")
     @Override
     public List<Menu> getAll(int restaurantId) {
         return repository.getAll(restaurantId);
@@ -76,6 +84,7 @@ public class MenuServiceImpl implements MenuService {
         return repository.getAllByDate(date);
     }
 
+    @CacheEvict(value = "menus", allEntries = true)
     @Override
     public void addDish(int menuId, int dishId, int restaurantId) {
         Menu menu = getWithDishes(menuId, restaurantId);
@@ -86,6 +95,7 @@ public class MenuServiceImpl implements MenuService {
         update(menu, restaurantId);
     }
 
+    @CacheEvict(value = "menus", allEntries = true)
     @Override
     public void deleteDish(int menuId, int dishId, int restaurantId) {
         Menu menu = getWithDishes(menuId, restaurantId);

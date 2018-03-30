@@ -22,8 +22,6 @@ public class DataJpaMenuRepositoryImpl {
     @Autowired
     private CrudRestaurantRepository crudRestaurantRepository;
 
-    @Autowired
-    private CrudDishRepository crudDishRepository;
 
     @Transactional
     public Menu save(Menu menu, int restaurantId) {

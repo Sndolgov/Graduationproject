@@ -6,6 +6,7 @@ import org.springframework.dao.DataAccessException;
 import ru.sndolgov.graduationproject.DishTestData;
 import ru.sndolgov.graduationproject.RestaurantTestData;
 import ru.sndolgov.graduationproject.model.Restaurant;
+import ru.sndolgov.graduationproject.repository.JpaUtil;
 import ru.sndolgov.graduationproject.service.AbstractServiceTest;
 import ru.sndolgov.graduationproject.util.exception.NotFoundException;
 import javax.validation.ConstraintViolationException;
@@ -13,14 +14,15 @@ import java.util.List;
 import static ru.sndolgov.graduationproject.DishTestData.*;
 import static ru.sndolgov.graduationproject.RestaurantTestData.*;
 import static ru.sndolgov.graduationproject.UserTestData.USER_ID;
+import org.springframework.cache.CacheManager;
+import org.junit.Before;
+
 
 public class RestaurantServiceTest extends AbstractServiceTest {
     @Autowired
     protected RestaurantService service;
 
-    //TODO cache
-
-/*    @Autowired
+    @Autowired
     private JpaUtil jpaUtil;
 
     @Autowired
@@ -30,7 +32,7 @@ public class RestaurantServiceTest extends AbstractServiceTest {
     public void setUp() throws Exception {
         cacheManager.getCache("restaurants").clear();
         jpaUtil.clear2ndLevelHibernateCache();
-    }*/
+    }
 
     @Test
     public void getAll() throws Exception {

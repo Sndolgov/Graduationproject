@@ -9,7 +9,6 @@ import ru.sndolgov.graduationproject.model.Restaurant;
 import ru.sndolgov.graduationproject.service.restaurant.RestaurantService;
 import javax.validation.Valid;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static ru.sndolgov.graduationproject.util.ValidationUtil.assureIdConsistent;
 

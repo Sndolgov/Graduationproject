@@ -1,8 +1,8 @@
 Java Enterprise Online Project 
 ===============================
-Разработка полнофункционального Spring/JPA Enterprise приложения c авторизацией и правами доступа на основе ролей с использованием наиболее популярных инструментов и технологий Java: Maven, Spring MVC, Security, Bootstrap (css,js), datatables, jQuery + plugins, Java 8 Stream and Time API и хранением в базе данных Postgresql.
+Полнофункциональное приложение Spring/JPA Enterprise c авторизацией и правами доступа на основе ролей с использованием наиболее популярных инструментов и технологий Java: Maven, Spring MVC, Security, Bootstrap (css,js), datatables, jQuery + plugins, Java 8 Stream and Time API и хранением в базе данных Postgresql.
 
-![topjava_structure](https://user-images.githubusercontent.com/13649199/27433714-8294e6fe-575e-11e7-9c41-7f6e16c5ebe5.jpg)
+![project structure](https://raw.githubusercontent.com/Sndolgov/graduationproject/master/technologies.jpg)
 
 Система голосования, для того чтобы выбрать в каком ресторане взять обед.
 

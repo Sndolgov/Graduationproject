@@ -12,7 +12,6 @@ public class DateUtil {
 
     public static Date of(int year, int month, int date) {
         Calendar calendar = new GregorianCalendar();
-        SimpleDateFormat format1 = new SimpleDateFormat("dd-MM-yyyy");
         calendar.set(year, month - 1, date, 0, 0, 0);
         return calendar.getTime();
     }

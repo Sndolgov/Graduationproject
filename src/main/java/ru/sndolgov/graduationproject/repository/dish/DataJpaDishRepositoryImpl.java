@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import ru.sndolgov.graduationproject.model.Dish;
-import ru.sndolgov.graduationproject.model.Menu;
 import ru.sndolgov.graduationproject.repository.restaurant.CrudRestaurantRepository;
 
 import java.util.List;

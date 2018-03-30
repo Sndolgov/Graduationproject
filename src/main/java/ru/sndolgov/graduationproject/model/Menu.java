@@ -1,5 +1,6 @@
 package ru.sndolgov.graduationproject.model;
 
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.validator.constraints.SafeHtml;
@@ -10,11 +11,13 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Date;
 import java.util.List;
+import org.hibernate.annotations.Cache;
+
 
 /**
  * Created by Сергей on 07.02.2018.
  */
-
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Entity
 @Table(name = "menu", uniqueConstraints = {@UniqueConstraint(columnNames = {"restaurant_id","date"}, name = "restaurant_date_idx")})
 public class Menu extends AbstractBaseEntity{
@@ -35,6 +38,8 @@ public class Menu extends AbstractBaseEntity{
     @NotNull(groups = View.Persist.class)
     private Restaurant restaurant;
 
+
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 
     @ManyToMany(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
     @JoinTable(name="menuconsist",
