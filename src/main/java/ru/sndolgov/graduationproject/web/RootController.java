@@ -1,5 +1,7 @@
 package ru.sndolgov.graduationproject.web;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -14,19 +16,29 @@ import org.springframework.web.bind.support.SessionStatus;
 import ru.sndolgov.graduationproject.AuthorizedUser;
 import ru.sndolgov.graduationproject.ChangeableRestaurant;
 import ru.sndolgov.graduationproject.model.Restaurant;
+import ru.sndolgov.graduationproject.model.User;
 import ru.sndolgov.graduationproject.service.restaurant.RestaurantService;
+import ru.sndolgov.graduationproject.service.user.UserService;
 import ru.sndolgov.graduationproject.to.UserTo;
 import ru.sndolgov.graduationproject.util.UserUtil;
-import ru.sndolgov.graduationproject.web.user.AbstractUserController;
+
 import javax.validation.Valid;
 
+import static ru.sndolgov.graduationproject.util.ValidationUtil.assureIdConsistent;
+import static ru.sndolgov.graduationproject.util.ValidationUtil.checkNew;
 import static ru.sndolgov.graduationproject.web.ExceptionInfoHandler.EXCEPTION_DUPLICATE_EMAIL;
 
 @Controller
-public class RootController extends AbstractUserController {
+public class RootController {
+
+    protected final Logger log = LoggerFactory.getLogger(getClass());
+
 
     @Autowired
-    RestaurantService restaurantService;
+    private RestaurantService restaurantService;
+
+    @Autowired
+    private UserService service;
 
     @GetMapping("/")
     public String root() {
@@ -76,7 +88,9 @@ public class RootController extends AbstractUserController {
             return "profile";
         }
         try {
-            super.update(userTo, authorizedUser.getId());
+            log.info("update {} with id={}", userTo, authorizedUser.getId());
+            assureIdConsistent(userTo, authorizedUser.getId());
+            service.update(userTo);
             authorizedUser.update(userTo);
             status.setComplete();
             return "redirect:voting";
@@ -100,7 +114,10 @@ public class RootController extends AbstractUserController {
             return "profile";
         }
         try {
-            super.create(UserUtil.createNewFromTo(userTo));
+            User user = UserUtil.createNewFromTo(userTo);
+            log.info("create {}", user);
+            checkNew(user);
+            service.create(user);
             status.setComplete();
             return "redirect:login?message=app.registered&username=" + userTo.getEmail();
         } catch (DataIntegrityViolationException ex) {
