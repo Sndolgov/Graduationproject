@@ -1,11 +1,6 @@
 var ajaxUrl = "ajax/admin/users/";
 var datatableApi;
 
-
-
-
-
-// $(document).ready(function () {
 $(function () {
     datatableApi = $('#datatable').DataTable(extendsOpts({
         "columns": [
