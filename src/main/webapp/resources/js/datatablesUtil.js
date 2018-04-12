@@ -118,13 +118,12 @@ function closeNoty() {
 }
 
 
-
 function failNoty(jqXHR) {
     closeNoty();
     // https://stackoverflow.com/questions/48229776
     var errorInfo = JSON.parse(jqXHR.responseText);
     failedNote = new Noty({
-        text: "<span class='glyphicon glyphicon-exclamation-sign'></span> &nbsp;" + errorInfo.typeMessage + "<br>" + errorInfo.details.join("<br>"),
+        text: "<span class='glyphicon glyphicon-exclamation-sign'></span> &nbsp;" + "<br>" + errorInfo.details.join("<br>"),
         type: "error",
         layout: "bottomRight"
     }).show();

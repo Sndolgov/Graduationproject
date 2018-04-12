@@ -27,9 +27,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-import static ru.sndolgov.graduationproject.util.exception.ErrorType.APP_ERROR;
-import static ru.sndolgov.graduationproject.util.exception.ErrorType.DATA_ERROR;
-import static ru.sndolgov.graduationproject.util.exception.ErrorType.VALIDATION_ERROR;
 
 
 @RestControllerAdvice(annotations = RestController.class)
@@ -61,7 +58,7 @@ public class ExceptionInfoHandler {
 
     @ExceptionHandler(ApplicationException.class)
     public ResponseEntity<ErrorInfo> applicationError(HttpServletRequest req, ApplicationException appEx) {
-        ErrorInfo errorInfo = logAndGetErrorInfo(req, appEx, false, appEx.getType(), messageUtil.getMessage(appEx));
+        ErrorInfo errorInfo = logAndGetErrorInfo(req, appEx, false, messageUtil.getMessage(appEx));
         return new ResponseEntity<>(errorInfo, appEx.getHttpStatus());
     }
 
@@ -75,10 +72,10 @@ public class ExceptionInfoHandler {
                     .filter(it -> lowerCaseMsg.contains(it.getKey()))
                     .findAny();
             if (entry.isPresent()) {
-                return logAndGetErrorInfo(req, e, false, DATA_ERROR, messageUtil.getMessage(entry.get().getValue()));
+                return logAndGetErrorInfo(req, e, false, messageUtil.getMessage(entry.get().getValue()));
             }
         }
-        return logAndGetErrorInfo(req, e, true, DATA_ERROR);
+        return logAndGetErrorInfo(req, e, true);
     }
 
     @ResponseStatus(value = HttpStatus.UNPROCESSABLE_ENTITY)  // 422
@@ -91,24 +88,23 @@ public class ExceptionInfoHandler {
                 .map(fe -> messageUtil.getMessage(fe))
                 .toArray(String[]::new);
 
-        return logAndGetErrorInfo(req, e, false, VALIDATION_ERROR, details);
+        return logAndGetErrorInfo(req, e, false, details);
     }
 
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(Exception.class)
     public ErrorInfo handleError(HttpServletRequest req, Exception e) {
-        return logAndGetErrorInfo(req, e, true, APP_ERROR);
+        return logAndGetErrorInfo(req, e, true);
     }
 
-    private ErrorInfo logAndGetErrorInfo(HttpServletRequest req, Exception e, boolean logException, ErrorType errorType, String... details) {
+    private ErrorInfo logAndGetErrorInfo(HttpServletRequest req, Exception e, boolean logException, String... details) {
         Throwable rootCause = ValidationUtil.getRootCause(e);
         if (logException) {
-            log.error(errorType + " at request " + req.getRequestURL(), rootCause);
+            log.error(" at request " + req.getRequestURL(), rootCause);
         } else {
-            log.warn("{} at request  {}: {}", errorType, req.getRequestURL(), rootCause.toString());
+            log.warn("{} at request  {}: {}", req.getRequestURL(), rootCause.toString());
         }
-        return new ErrorInfo(req.getRequestURL(), errorType,
-                messageUtil.getMessage(errorType.getErrorCode()),
+        return new ErrorInfo(req.getRequestURL(),
                 details.length != 0 ? details : new String[]{rootCause.toString()});
     }
 }
