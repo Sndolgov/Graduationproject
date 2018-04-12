@@ -17,11 +17,11 @@ public class RestaurantTestData {
     public static final Restaurant RESTAURANT1 = new Restaurant(RESTAURANT1_ID, "Restaurant1", true);
     public static final Restaurant RESTAURANT2 = new Restaurant(RESTAURANT2_ID, "Restaurant2", true);
 
-    public static Restaurant getCreated(){
+    public static Restaurant getCreatedRestaurant(){
         return new Restaurant(null, "NewRestaurant", true);
     }
 
-    public static Restaurant getUpdated(){
+    public static Restaurant getUpdatedRestaurant(){
         return new Restaurant(RESTAURANT1_ID, "UpdatedRestaurant", true);
     }
 

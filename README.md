@@ -1,4 +1,5 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/33064c36334d461a8bcd6a59f8bc0d1d)](https://www.codacy.com/app/Sndolgov/graduationproject?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Sndolgov/graduationproject&amp;utm_campaign=Badge_Grade)
+[![Dependency Status](https://www.versioneye.com/user/projects/5acf76020fb24f3a0d6b49c7/badge.svg?style=flat-square)](https://www.versioneye.com/user/projects/5acf76020fb24f3a0d6b49c7)
 
 Java Enterprise Online Project 
 ===============================

@@ -42,7 +42,7 @@ public class RestaurantServiceTest extends AbstractServiceTest {
 
     @Test
     public void create() throws Exception {
-        Restaurant newRestaurant = RestaurantTestData.getCreated();
+        Restaurant newRestaurant = getCreatedRestaurant();
         Restaurant created = service.create(newRestaurant);
         newRestaurant.setId(created.getId());
         assertMatch(service.getAll(), newRestaurant, RESTAURANT1, RESTAURANT2);
@@ -50,7 +50,7 @@ public class RestaurantServiceTest extends AbstractServiceTest {
 
     @Test
     public void update() throws Exception {
-        Restaurant updated = RestaurantTestData.getUpdated();
+        Restaurant updated = getUpdatedRestaurant();
         service.update(updated);
         assertMatch(service.get(RESTAURANT1_ID), updated);
     }

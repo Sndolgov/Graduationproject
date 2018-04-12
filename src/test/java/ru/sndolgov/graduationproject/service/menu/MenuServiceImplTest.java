@@ -42,7 +42,7 @@ public class MenuServiceImplTest extends AbstractServiceTest {
 
     @Test
     public void creat() throws Exception {
-        Menu newMenu = MenuTestData.getCreated();
+        Menu newMenu = getCreatedMenu();
         Menu created = service.create(newMenu, RESTAURANT1_ID);
         newMenu.setId(created.getId());
         assertMatch(service.getAll(RESTAURANT1_ID), MENU3, newMenu, MENU2, MENU1);
@@ -50,14 +50,14 @@ public class MenuServiceImplTest extends AbstractServiceTest {
 
     @Test(expected = DataAccessException.class)
     public void creatDuplicateDate() throws Exception {
-        Menu newMenu = MenuTestData.getCreated();
+        Menu newMenu = getCreatedMenu();
         newMenu.setDate(MENU1.getDate());
         service.create(newMenu, RESTAURANT1_ID);
     }
 
     @Test
     public void update() throws Exception {
-        Menu updated = MenuTestData.getUpdated();
+        Menu updated = MenuTestData.getUpdatedMenu();
         service.update(updated, RESTAURANT1_ID);
         assertMatch(service.getAll(RESTAURANT1_ID), MENU3, updated, MENU2);
     }
@@ -72,8 +72,8 @@ public class MenuServiceImplTest extends AbstractServiceTest {
 
     @Test(expected = NotFoundException.class)
     public void updateNotFound() throws Exception {
-        Menu updated = MenuTestData.getUpdated();
-        Menu menu = service.update(updated, RESTAURANT2_ID);
+        Menu updated = getUpdatedMenu();
+        service.update(updated, RESTAURANT2_ID);
     }
 
     @Test

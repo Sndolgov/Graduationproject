@@ -25,11 +25,11 @@ public class MenuTestData {
     public static final Menu MENU5 = new Menu(MENU5_ID, "Menu of Second restaurant", DateUtil.of(2017, 12, 27));
     public static final Menu MENU6 = new Menu(MENU6_ID, "Menu of Second restaurant", DateUtil.getDateToday());
 
-    public static Menu getCreated() {
+    public static Menu getCreatedMenu() {
         return new Menu(null, "NewMenu", DateUtil.of(2018, 2, 12));
     }
 
-    public static Menu getUpdated() {
+    public static Menu getUpdatedMenu() {
         return new Menu(MENU1_ID, "UpdatedMenu", DateUtil.of(2018, 2, 12));
     }
 
