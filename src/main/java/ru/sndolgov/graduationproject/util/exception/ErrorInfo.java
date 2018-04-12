@@ -1,11 +1,15 @@
 package ru.sndolgov.graduationproject.util.exception;
 
 public class ErrorInfo {
+    private final String url;
+    private final ErrorType type;
+    private final String typeMessage;
+    private final String[] details;
 
     public ErrorInfo(CharSequence url, ErrorType type, String typeMessage, String... details) {
-        String url1 = url.toString();
-        ErrorType type1 = type;
-        String typeMessage1 = typeMessage;
-        String[] details1 = details;
+        this.url = url.toString();
+        this.type = type;
+        this.typeMessage = typeMessage;
+        this.details = details;
     }
 }
