@@ -20,7 +20,7 @@
         <tomcat.version>9.0.2</tomcat.version>
 
         <!--Spring-->
-        <spring.version>5.0.1.RELEASE</spring.version>
+        <spring.version>5.0.2.RELEASE</spring.version>
         <spring-data-jpa.version>2.0.2.RELEASE</spring-data-jpa.version>
         <spring-security.version>5.0.0.RELEASE</spring-security.version>
 
@@ -38,7 +38,7 @@
 
         <!-- Hibernate -->
         <hibernate.version>5.2.12.Final</hibernate.version>
-        <hibernate-validator.version>6.0.5.Final</hibernate-validator.version>
+        <hibernate-validator.version>6.0.7.Final</hibernate-validator.version>
         <javax-el.version>3.0.1-b08</javax-el.version>
         <jsoup.version>1.11.2</jsoup.version>
 
@@ -135,7 +135,7 @@
         <dependency>
             <groupId>javax.cache</groupId>
             <artifactId>cache-api</artifactId>
-            <version>1.0.0</version>
+            <version>1.1.0</version>
         </dependency>
         <dependency>
             <groupId>org.ehcache</groupId>
@@ -306,7 +306,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.1</version>
+                <version>3.7.0</version>
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
