@@ -16,24 +16,24 @@
 
         <a class="btn btn-primary" onclick="addM()">
             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-            <spring:message code="common.add"/>
+            Добавить
         </a>
 
-        <a class="btn btn-primary" onclick="get(${restaurant.id})" style="1background: green;">
+        <a class="btn btn-primary" onclick="get(${restaurant.id})" style="background: green;">
             <%--<a class="btn btn-primary" onclick="getDish('100008')" style="background: green;">--%>
             <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-            <spring:message code="dish.dishes"/>
+            Блюда
         </a>
 
         <table class="table table-striped display" id="datatable">
             <thead>
             <tr>
-                <th><spring:message code="menu.description"/></th>
-                <th><spring:message code="dish.dishes"/></th>
-                <th><spring:message code="dish.price"/></th>
-                <th><spring:message code="menu.totalValue"/></th>
-                <th><spring:message code="menu.voices"/></th>
-                <th><spring:message code="menu.date"/></th>
+                <th>Название меню</th>
+                <th>Блюда</th>
+                <th>Цена блюда</th>
+                <th>Итого</th>
+                <th>Голоса</th>
+                <th>Дата меню</th>
                 <th></th>
                 <th></th>
 
@@ -60,32 +60,31 @@
 
                     <div class="form-group">
                         <label for="description" class="control-label col-xs-3">
-                            <spring:message code="menu.description"/></label>
+                            Название меню</label>
 
                         <div class="col-xs-9">
                             <input type="text" class="form-control" id="description" name="menuDescription"
-                                   placeholder="<spring:message code="menu.description"/>">
+                                   placeholder="Название меню">
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="date" class="control-label col-xs-3"><spring:message code="menu.date"/></label>
+                        <label for="date" class="control-label col-xs-3">Дата меню</label>
 
                         <div class="col-xs-9">
                             <input class="form-control" id="date" name="date"
-                                   placeholder="<spring:message code="menu.date"/>">
+                                   placeholder="Дата меню">
                         </div>
                     </div>
 
                     <div class="form-group" id="dishes">
-                        <label for="datatableM" class="control-label col-xs-3"><spring:message
-                                code="dish.dishes"/></label>
+                        <label for="datatableM" class="control-label col-xs-3">Блюда</label>
 
                         <div class="col-xs-9">
                             <table class="table table-striped display" id="datatableM">
                                 <thead>
                                 <tr>
-                                    <th><h5><spring:message code="dish.included"/></h5></th>
+                                    <th><h5>Блюда включены</h5></th>
                                     <th></th>
                                     <th></th>
                                 </tr>
@@ -96,23 +95,25 @@
 
                     <div class="form-group" id="addNew">
                         <label for="descriptionD" class="control-label col-xs-3">
-                            <spring:message code="dish.add"/></label>
+                            Добавить новое блюдо</label>
 
                         <div class="col-xs-4">
                             <input type="text" class="form-control" id="nameD" name="description"
-                                   placeholder="<spring:message code="dish.description"/>">
+                                   placeholder="Название блюда">
                         </div>
 
                         <div class="col-xs-3">
                             <input type="number" class="form-control" id="price" name="price"
-                                   placeholder="<spring:message code="dish.price"/>">
+                                   placeholder="Цена блюда">
                         </div>
 
-                        <button type="button" onclick="addNew(document.getElementById('id').value, ${restaurant.id})" class="btn btn-primary" style="background: none; border-style: none" >
-                            <span class="glyphicon glyphicon-plus" aria-hidden="true"  style="color: blue"></span>
+                        <button type="button" onclick="addNew(document.getElementById('id').value, ${restaurant.id})"
+                                class="btn btn-primary" style="background: none; border-style: none">
+                            <span class="glyphicon glyphicon-plus" aria-hidden="true" style="color: blue"></span>
                         </button>
 
-                        <button type="button" onclick="clearForm()" class="btn btn-primary" style="background: none; border-style: none">
+                        <button type="button" onclick="clearForm()" class="btn btn-primary"
+                                style="background: none; border-style: none">
                             <span class="glyphicon glyphicon-remove" aria-hidden="true" style="color: red"></span>
                         </button>
 
@@ -150,8 +151,8 @@
                             <table class="table table-striped display" id="datatableD">
                                 <thead>
                                 <tr>
-                                    <th><spring:message code="dish.dishes"/></th>
-                                    <th><spring:message code="dish.price"/></th>
+                                    <th>Блюда</th>
+                                    <th>Цена блюда</th>
                                     <th></th>
                                     <th></th>
                                 </tr>
@@ -165,25 +166,27 @@
 
                     <div class="form-group">
                         <label for="descriptionD" class="control-label col-xs-2">
-                            <spring:message code="dish.dishes"/></label>
+                            Блюда</label>
 
                         <div class="col-xs-4">
                             <input type="text" class="form-control" id="descriptionD" name="description"
-                                   placeholder="<spring:message code="dish.description"/>">
+                                   placeholder="Название блюда">
                         </div>
 
                         <div class="col-xs-4">
                             <input type="number" class="form-control" name="price"
-                                   placeholder="<spring:message code="dish.price"/>">
+                                   placeholder="Цена блюда">
                         </div>
 
-                            <button type="button" onclick="update(${restaurant.id})" class="btn btn-primary" style="background: none; border-style: none" >
-                                <span class="glyphicon glyphicon-plus" aria-hidden="true"  style="color: blue"></span>
-                            </button>
+                        <button type="button" onclick="update(${restaurant.id})" class="btn btn-primary"
+                                style="background: none; border-style: none">
+                            <span class="glyphicon glyphicon-plus" aria-hidden="true" style="color: blue"></span>
+                        </button>
 
-                            <button type="button" onclick="resert()" class="btn btn-primary" style="background: none; border-style: none">
-                                <span class="glyphicon glyphicon-remove" aria-hidden="true" style="color: red"></span>
-                            </button>
+                        <button type="button" onclick="resert()" class="btn btn-primary"
+                                style="background: none; border-style: none">
+                            <span class="glyphicon glyphicon-remove" aria-hidden="true" style="color: red"></span>
+                        </button>
                     </div>
 
                     <br>
@@ -192,7 +195,7 @@
                     <div class="form-group">
                         <div class="col-xs-offset-8 col-xs-9">
                             <button type="button" onclick="ok()" class="btn btn-primary">
-                                <spring:message code="common.close"/>
+                                Закрыть
                             </button>
                         </div>
                     </div>
@@ -208,9 +211,9 @@
 </body>
 <jsp:include page="fragments/i18n.jsp"/>
 <script type="text/javascript">
-    i18n["addTitle"] = '<spring:message code="menu.add"/>';
-    i18n["editTitle"] = '<spring:message code="menu.edit"/>';
-    i18n["editTitle2"] = '<spring:message code="dish.edit"/>';
+    i18n["addTitle"] = 'Добавление меню';
+    i18n["editTitle"] = 'Редактирование меню';
+    i18n["editTitle2"] = 'Редактирование блюд';
 
 </script>
 </html>

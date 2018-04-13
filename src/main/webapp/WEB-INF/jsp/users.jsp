@@ -12,20 +12,20 @@
 
 <div class="jumbotron">
     <div class="container">
-        <h3><spring:message code="user.title"/></h3>
+        <h3>Пользователи</h3>
         <br/>
         <a class="btn btn-primary" onclick="add()">
             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-            <spring:message code="common.add"/>
+            Добавить
         </a>
         <table class="table table-striped display" id="datatable">
             <thead>
             <tr>
-                <th><spring:message code="user.name"/></th>
-                <th><spring:message code="user.email"/></th>
-                <th><spring:message code="user.roles"/></th>
-                <th><spring:message code="common.active"/></th>
-                <th><spring:message code="user.registered"/></th>
+                <th>Имя</th>
+                <th>Почта</th>
+                <th>Роли</th>
+                <th>Активный</th>
+                <th>Зарегистрирован</th>
                 <th></th>
                 <th></th>
             </tr>
@@ -46,26 +46,26 @@
                     <input type="hidden" id="id" name="id">
 
                     <div class="form-group">
-                        <label for="name" class="control-label col-xs-3"><spring:message code="user.name"/></label>
+                        <label for="name" class="control-label col-xs-3">Имя</label>
 
                         <div class="col-xs-9">
-                            <input type="text" class="form-control" id="name" name="name" placeholder="<spring:message code="user.name"/>">
+                            <input type="text" class="form-control" id="name" name="name" placeholder="Имя">
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="email" class="control-label col-xs-3"><spring:message code="user.email"/></label>
+                        <label for="email" class="control-label col-xs-3">Почта</label>
 
                         <div class="col-xs-9">
-                            <input type="email" class="form-control" id="email" name="email" placeholder="<spring:message code="user.email"/>">
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Почта">
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="password" class="control-label col-xs-3"><spring:message code="user.password"/></label>
+                        <label for="password" class="control-label col-xs-3">Пароль</label>
 
                         <div class="col-xs-9">
-                            <input type="password" class="form-control" id="password" name="password" placeholder="<spring:message code="user.password"/>">
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Пароль"/>
                         </div>
                     </div>
 
@@ -85,7 +85,7 @@
 </body>
 <jsp:include page="fragments/i18n.jsp"/>
 <script type="text/javascript">
-    i18n["addTitle"] = '<spring:message code="user.add"/>';
-    i18n["editTitle"] = '<spring:message code="user.edit"/>';
+    i18n["addTitle"] = 'Добавление пользователя';
+    i18n["editTitle"] = 'Редактирование пользователя';
 </script>
 </html>

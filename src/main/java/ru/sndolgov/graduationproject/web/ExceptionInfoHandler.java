@@ -18,15 +18,10 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import ru.sndolgov.graduationproject.util.ValidationUtil;
 import ru.sndolgov.graduationproject.util.exception.ApplicationException;
 import ru.sndolgov.graduationproject.util.exception.ErrorInfo;
-import ru.sndolgov.graduationproject.util.exception.ErrorType;
 
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
-
+import java.util.*;
 
 
 @RestControllerAdvice(annotations = RestController.class)
@@ -34,11 +29,11 @@ import java.util.Optional;
 public class ExceptionInfoHandler {
     private static Logger log = LoggerFactory.getLogger(ExceptionInfoHandler.class);
 
-    public static final String EXCEPTION_DUPLICATE_EMAIL = "exception.user.duplicateEmail";
-    public static final String EXCEPTION_DUPLICATE_VOICE = "exception.menu.voice";
-    public static final String EXCEPTION_DUPLICATE_NAME = "exception.restaurant.name";
-    public static final String EXCEPTION_DUPLICATE_DATE = "exception.menu.date";
-    public static final String EXCEPTION_DUPLICATE_DESCRIPTION = "exception.dish.description";
+    public static final String EXCEPTION_DUPLICATE_EMAIL = "Пользователь с такой почтой уже есть в приложении";
+    public static final String EXCEPTION_DUPLICATE_VOICE = "Вы уже проголосовали сегодня";
+    public static final String EXCEPTION_DUPLICATE_NAME = "Ресторан с таким именем уже есть в приложении";
+    public static final String EXCEPTION_DUPLICATE_DATE = "Меню с такой датой уже есть у ресторана";
+    public static final String EXCEPTION_DUPLICATE_DESCRIPTION = "У ресторана уже есть блюдо с таким названием";
 
 
 
@@ -58,7 +53,10 @@ public class ExceptionInfoHandler {
 
     @ExceptionHandler(ApplicationException.class)
     public ResponseEntity<ErrorInfo> applicationError(HttpServletRequest req, ApplicationException appEx) {
-        ErrorInfo errorInfo = logAndGetErrorInfo(req, appEx, false, messageUtil.getMessage(appEx));
+        String[] details = Arrays.stream(appEx.getArgs())
+                .map(arg -> messageUtil.getMessage(appEx.getMsgCode()+" {0}", arg))
+                .toArray(String[]::new);
+        ErrorInfo errorInfo = logAndGetErrorInfo(req, appEx, false, details);
         return new ResponseEntity<>(errorInfo, appEx.getHttpStatus());
     }
 
@@ -72,7 +70,7 @@ public class ExceptionInfoHandler {
                     .filter(it -> lowerCaseMsg.contains(it.getKey()))
                     .findAny();
             if (entry.isPresent()) {
-                return logAndGetErrorInfo(req, e, false, messageUtil.getMessage(entry.get().getValue()));
+                return logAndGetErrorInfo(req, e, false, entry.get().getValue());
             }
         }
         return logAndGetErrorInfo(req, e, true);
@@ -85,7 +83,7 @@ public class ExceptionInfoHandler {
                 ((BindException) e).getBindingResult() : ((MethodArgumentNotValidException) e).getBindingResult();
 
         String[] details = result.getFieldErrors().stream()
-                .map(fe -> messageUtil.getMessage(fe))
+                .map(fe -> messageUtil.getMessage(fe.getField()+" {0}", fe.getDefaultMessage()))
                 .toArray(String[]::new);
 
         return logAndGetErrorInfo(req, e, false, details);

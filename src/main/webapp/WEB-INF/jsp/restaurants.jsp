@@ -11,18 +11,18 @@
 <script type="text/javascript" src="resources/js/restaurantDatatables.js" defer></script>
 <div class="jumbotron">
     <div class="container">
-        <h3><spring:message code='restaurant.menutoday'/></h3>
+        <h3>Список рестаранов</h3>
 
         <a class="btn btn-primary" onclick="add()">
             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-            <spring:message code="common.add"/>
+            Добавить
         </a>
 
         <table class="table table-striped display" id="datatable">
             <thead>
             <tr>
-                <th><spring:message code="restaurant.name"/></th>
-                <th><spring:message code="common.active"/></th>
+                <th>Название ресторана</th>
+                <th>Активный</th>
                 <th></th>
                 <th></th>
                 <th></th>
@@ -44,12 +44,11 @@
                     <input type="hidden" id="id" name="id">
 
                     <div class="form-group">
-                        <label for="name" class="control-label col-xs-4"><spring:message
-                                code="restaurant.name"/></label>
+                        <label for="name" class="control-label col-xs-4">Название ресторана</label>
 
                         <div class="col-xs-7">
                             <input type="text" class="form-control" id="name" name="name"
-                                   placeholder="<spring:message code="restaurant.name"/>">
+                                   placeholder="Название ресторана">
                         </div>
                     </div>
 
@@ -57,7 +56,7 @@
                         <label for="name" class="control-label col-xs-4"></label>
 
                         <div class="col-xs-7">
-                                <a class="btn btn-info" href id="menu"> <spring:message code="menu.edit"/></a>
+                                <a class="btn btn-info" href id="menu"> Редактирование меню</a>
 
                         </div>
                     </div>
@@ -79,6 +78,6 @@
 </body>
 <jsp:include page="fragments/i18n.jsp"/>
 <script type="text/javascript">
-    i18n["addTitle"] = '<spring:message code="restaurant.add"/>';
+    i18n["addTitle"] = 'Добавление ресторана';
 </script>
 </html>

@@ -4,8 +4,8 @@
 
 <script type="text/javascript">
     var i18n = [];
-    <c:forEach var='key' items='<%=new String[]{"common.deleted", "common.saved",
-    "common.enabled", "common.disabled", "common.search", "voice.saved", "voice.deleted", "voice.change"}%>'>
-    i18n['${key}'] = '<spring:message code="${key}"/>';
+    <c:forEach var='key' items='<%=new String[]{"Запись удалена", "Запись сохранена",
+    "Запись активирована", "Запись деактивирована", "Искать", "Голос учтен", "Предыдущий голос отменен"}%>'>
+    i18n['${key}'] = "${key}";
     </c:forEach>
 </script>

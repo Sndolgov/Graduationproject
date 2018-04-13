@@ -2,6 +2,8 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="graduation" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 
 <html>
 <jsp:include page="fragments/headTag.jsp"/>
@@ -11,20 +13,20 @@
 
 <div class="jumbotron">
     <div class="container">
-        <%--@elvariable id="userTo" type="ru.javawebinar.topjava.to.UserTo"--%>
-        <h2>${userTo.name} <spring:message code="${register ? 'app.register' : 'app.profile'}"/></h2>
 
-        <form:form modelAttribute="userTo" class="form-horizontal" method="post" action="${register ? 'register' : 'profile'}"
+        <h2>${userTo.name} ${register ? 'Регистрирация' : 'профиль'} </h2>
+
+        <form:form modelAttribute="userTo" class="form-horizontal" method="post"
+                   action="${register ? 'register' : 'profile'}"
                    charset="utf-8" accept-charset="UTF-8">
 
-            <spring:message code="user.name" var="userName"/>
-            <graduation:inputField label='${userName}' name="name"/>
 
-            <spring:message code="user.email" var="userEmail"/>
-            <graduation:inputField label='${userEmail}' name="email"/>
+            <graduation:inputField label='Имя' name="name"/>
 
-            <spring:message code="user.password" var="userPassword"/>
-            <graduation:inputField label='${userPassword}' name="password" inputType="password"/>
+
+            <graduation:inputField label='Почта' name="email"/>
+
+            <graduation:inputField label='Пароль' name="password" inputType="password"/>
 
             <div class="form-group">
                 <div class="col-xs-offset-2 col-xs-10">

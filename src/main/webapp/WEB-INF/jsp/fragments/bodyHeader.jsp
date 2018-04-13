@@ -5,20 +5,20 @@
 
 <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
-        <a href="voting" class="navbar-brand"><spring:message code="app.title"/></a>
+        <a href="voting" class="navbar-brand">Голосование за ресторан</a>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
                 <li>
                     <sec:authorize access="isAuthenticated()">
                         <form:form class="navbar-form" action="logout" method="post">
                             <sec:authorize access="hasRole('ROLE_ADMIN')">
-                                <a class="btn btn-info" href="restaurants"><spring:message code="restaurant.title"/></a>
+                                <a class="btn btn-info" href="restaurants">Список рестаранов</a>
                             </sec:authorize>
                             <sec:authorize access="hasRole('ROLE_ADMIN')">
-                                <a class="btn btn-info" href="users"><spring:message code="user.title"/></a>
+                                <a class="btn btn-info" href="users">Пользователи</a>
                             </sec:authorize>
                             <a class="btn btn-info" href="profile"><sec:authentication
-                                    property="principal.userTo.name"/> <spring:message code="app.profile"/></a>
+                                    property="principal.userTo.name"/> Профиль</a>
                             <button class="btn btn-primary" type="submit">
                                 <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
                             </button>

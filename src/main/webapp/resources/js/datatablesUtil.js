@@ -26,7 +26,7 @@ function extendsOpts(opts) {
             "paging": false,
             "info": true,
             "language": {
-                "search": i18n["common.search"]
+                "search": "Искать"
             },
             "initComplete": makeEditable
         }
@@ -49,7 +49,7 @@ function add() {
 }
 
 function updateRow(id) {
-    $("#modalTitle").html(i18n["editTitle"]);
+    $("#modalTitle").html("Редактирование пользователя");
     $.get(ajaxUrl + id, function (data) {
             $.each(data, function (key, value) {
                 form.find("input[name='" + key + "']").val(value);
@@ -76,7 +76,7 @@ function deleteRow(id) {
         type: "DELETE"
     }).done(function () {
         updateTable();
-        successNoty("common.deleted");
+        successNoty("Запись удалена");
     });
 }
 
@@ -89,7 +89,7 @@ function save() {
     }).done(function () {
         $("#editRow").modal("hide");
         updateTable();
-        successNoty("common.saved");
+        successNoty("Запись сохранена");
     });
 }
 
@@ -103,7 +103,7 @@ function enable(chkbox, id) {
         data: "enabled=" + enabled
     }).done(function () {
         chkbox.closest("tr").toggleClass("disabled");
-        successNoty(enabled ? "common.enabled" : "common.disabled");
+        successNoty(enabled ? "Запись активирована" : "Запись деактивирована");
     }).fail(function () {
         $(chkbox).prop("checked", !enabled);
     });

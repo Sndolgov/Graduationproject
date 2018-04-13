@@ -7,32 +7,22 @@ import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Component;
 import ru.sndolgov.graduationproject.util.exception.ApplicationException;
 
+import java.text.MessageFormat;
 import java.util.Locale;
 
 @Component
 public class MessageUtil {
-    public static final Locale RU_LOCALE = new Locale("ru");
 
-    private final MessageSource messageSource;
-
-    @Autowired
-    public MessageUtil(MessageSource messageSource) {
-        this.messageSource = messageSource;
+    public String getMessage(String code, String args){
+        return MessageFormat.format(code, args);
     }
 
-    public String getMessage(String code, Locale locale, String... args) {
-        return messageSource.getMessage(code, args, locale);
-    }
 
-    public String getMessage(String code, String... args) {
-        return getMessage(code, LocaleContextHolder.getLocale(), args);
-    }
-
-    public String getMessage(ApplicationException appEx) {
-        return getMessage(appEx.getMsgCode(), appEx.getArgs());
-    }
-
-    public String getMessage(MessageSourceResolvable resolvable) {
-        return messageSource.getMessage(resolvable, LocaleContextHolder.getLocale());
+    public String toString(String [] details){
+        StringBuilder msg = new StringBuilder();
+        for(String detail: details){
+            msg.append(detail).append("\n");
+        }
+        return msg.toString();
     }
 }

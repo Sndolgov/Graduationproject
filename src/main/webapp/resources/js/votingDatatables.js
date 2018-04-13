@@ -16,7 +16,7 @@ function deleteFromRow(id) {
         })
             .done(function () {
                 updateTable();
-                successNoty("voice.deleted");
+                successNoty("Предыдущий голос отменен");
             });
     }
 }
@@ -32,7 +32,7 @@ function editInRow(id) {
             type: "PUT"
         }).done(function () {
             updateTable();
-            successNoty("voice.saved");
+            successNoty("Голос учтен");
         });
     }, 500)
 }

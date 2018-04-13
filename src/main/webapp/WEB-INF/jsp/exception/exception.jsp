@@ -11,7 +11,6 @@
 <div class="jumbotron">
     <div class="container text-center">
         <br>
-        <h3>${typeMessage}</h3>
         <h2>${message}</h2>
     </div>
 </div>

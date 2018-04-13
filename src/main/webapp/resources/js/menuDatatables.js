@@ -63,7 +63,7 @@ function enable(chkbox, id, parentId) {
         data: "enabled=" + enabled
     }).done(function () {
         chkbox.closest("tr").toggleClass("disabled");
-        successNoty(enabled ? "common.enabled" : "common.disabled");
+        successNoty(enabled ? "Запись активирована" : "Запись деактивирована");
         updateTable();
     }).fail(function () {
         $(chkbox).prop("checked", !enabled);

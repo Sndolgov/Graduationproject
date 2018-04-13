@@ -17,17 +17,17 @@
         </c:if>
         <c:if test="${not empty param.message}">
             <div class="message">
-                <spring:message code="${param.message}"/>
+                ${param.message}"
             </div>
         </c:if>
         <br/>
         <p>
-            <a class="btn btn-lg btn-success" href="register"><spring:message code="app.register"/> &raquo;</a>
-            <button type="submit" class="btn btn-lg btn-primary" onclick="setCredentials('user@yandex.ru', 'password')">
-                <spring:message code="app.enter"/> User
-            </button>
+            <a class="btn btn-lg btn-success" href="register">Регистрирация &raquo;</a>
+            <buttonF type="submit" class="btn btn-lg btn-primary" onclick="setCredentials('user@yandex.ru', 'password')">
+                Войти как User
+            </buttonF>
             <button type="submit" class="btn btn-lg btn-primary" onclick="setCredentials('admin@gmail.com', 'admin')">
-                <spring:message code="app.enter"/> Admin
+                Войти как Admin
             </button>
         </p>
         <br/>
@@ -56,14 +56,15 @@
 </div>
 <div class="container">
     <div class="lead">
-        &nbsp;&nbsp;&nbsp;<a href="https://github.com/JavaOPs/topjava">Java Enterprise проект</a> с
-        регистрацией/авторизацией и интерфейсом на основе ролей (USER, ADMIN).
-        Администратор может создавать/редактировать/удалять пользователей, а пользователи - управлять своим
-        профилем и данными (день, еда, калории) через UI (по AJAX) и по REST интерфейсу с базовой авторизацией.
-        Возможна фильтрация данных по датам и времени, при этом цвет записи таблицы еды зависит от того, превышает ли
-        сумма
-        калорий за день норму (редактируе9мый параметр в профиле пользователя).
-        Весь REST интерфейс покрывается JUnit тестами, используя Spring MVC Test и Spring Security Test.
+        &nbsp;&nbsp;&nbsp;<a href="https://github.com/Sndolgov/graduationproject">Java Enterprise проект</a> 2 типа пользователей: администратор и постоянные пользователи
+        Администратор может добавить ресторан и его обеденное меню дня (обычно 2-5 блюд, только c названием и ценой)
+        Меню меняется каждый день (администраторы делают обновления)
+        Пользователи могут проголосовать, в каком ресторане они хотят пообедать.
+        Пользователь может отдать только один голос.
+        Если пользователь снова проголосовал в тот же день:
+        Если до 11:00 мы предполагаем, что он передумал.
+        Если это после 11:00, то уже слишком поздно, голосование не может быть изменено.
+        Каждый ресторан предлагает новое меню каждый день.
     </div>
 </div>
 <jsp:include page="fragments/footer.jsp"/>

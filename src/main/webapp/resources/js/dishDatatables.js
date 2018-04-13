@@ -25,7 +25,7 @@ function update(id) {
     }).done(function () {
         resert();
         getRows(id);
-        successNoty("common.saved");
+        successNoty("Запись сохранена");
     });
 }
 
@@ -37,7 +37,7 @@ function addNew(menuId, id) {
     }).done(function () {
         clearForm();
         updateTableM(menuId, id);
-        successNoty("common.saved");
+        successNoty("Запись сохранена");
     });
 }
 
@@ -74,7 +74,7 @@ function rowDelete(id, parentId) {
     }).done(function () {
         formD.find(":input").val("");
         get(parentId);
-        successNoty("common.deleted");
+        successNoty("Запись удалена");
     });
 }
 

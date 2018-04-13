@@ -11,17 +11,17 @@
 <script type="text/javascript" src="resources/js/votingDatatables.js" defer></script>
 <div class="jumbotron">
     <div class="container">
-        <h3><spring:message code='restaurant.menutoday'/></h3>
+        <h3>Меню ресторанов на сегодня</h3>
 
         <table class="table table-striped display" id="datatable">
             <thead>
             <tr>
-                <th><spring:message code="restaurant.name"/></th>
-                <th><spring:message code="menu.description"/></th>
-                <th><spring:message code="dish.dishes"/></th>
-                <th><spring:message code="dish.price"/></th>
-                <th><spring:message code="menu.totalValue"/></th>
-                <th><spring:message code="menu.voices"/></th>
+                <th>Название ресторана</th>
+                <th>Название меню</th>
+                <th>Блюда</th>
+                <th>Цена блюда</th>
+                <th>Итого</th>
+                <th>Голоса</th>
 
                 <th></th>
             </tr>
@@ -34,7 +34,4 @@
 <jsp:include page="fragments/footer.jsp"/>
 </body>
 <jsp:include page="fragments/i18n.jsp"/>
-<script type="text/javascript">
-    i18n["addTitle"] = '<spring:message code="restaurant.add"/>';
-</script>
 </html>
