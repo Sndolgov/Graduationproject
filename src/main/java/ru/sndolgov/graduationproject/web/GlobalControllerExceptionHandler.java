@@ -8,9 +8,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
 import ru.sndolgov.graduationproject.util.ValidationUtil;
 import ru.sndolgov.graduationproject.util.exception.ApplicationException;
-
 import javax.servlet.http.HttpServletRequest;
-import java.text.MessageFormat;
 import java.util.Arrays;
 
 @ControllerAdvice

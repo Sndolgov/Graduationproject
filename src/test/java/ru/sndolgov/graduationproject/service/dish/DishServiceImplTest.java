@@ -7,7 +7,6 @@ import ru.sndolgov.graduationproject.model.Dish;
 import ru.sndolgov.graduationproject.service.AbstractServiceTest;
 import ru.sndolgov.graduationproject.util.exception.NotFoundException;
 import static ru.sndolgov.graduationproject.DishTestData.*;
-import static ru.sndolgov.graduationproject.DishTestData.assertMatch;
 import static ru.sndolgov.graduationproject.RestaurantTestData.RESTAURANT1_ID;
 import static ru.sndolgov.graduationproject.RestaurantTestData.RESTAURANT2_ID;
 

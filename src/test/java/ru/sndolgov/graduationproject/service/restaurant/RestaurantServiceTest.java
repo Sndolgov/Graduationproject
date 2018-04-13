@@ -4,7 +4,6 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import ru.sndolgov.graduationproject.DishTestData;
-import ru.sndolgov.graduationproject.RestaurantTestData;
 import ru.sndolgov.graduationproject.model.Restaurant;
 import ru.sndolgov.graduationproject.repository.JpaUtil;
 import ru.sndolgov.graduationproject.service.AbstractServiceTest;
